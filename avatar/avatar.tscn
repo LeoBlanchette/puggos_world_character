@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://c4bj48um6sbj6"]
+[gd_scene load_steps=140 format=3 uid="uid://c4bj48um6sbj6"]
 
 [ext_resource type="Script" path="res://addons/puggos_world_character/avatar/avatar.gd" id="1_mbnbw"]
 [ext_resource type="Animation" uid="uid://gj2nhi7mkyfx" path="res://addons/puggos_world_character/character/animations/Combat_Idle.res" id="2_i4kw0"]
@@ -111,6 +111,7 @@
 [ext_resource type="Animation" uid="uid://bfa4ipxby4o7q" path="res://addons/puggos_world_character/character/animations/Strafe_Right_Rifle.res" id="108_leyot"]
 [ext_resource type="Animation" uid="uid://bmk8p6firhw3g" path="res://addons/puggos_world_character/character/animations/Take_Damage.res" id="109_biadf"]
 [ext_resource type="Animation" uid="uid://b6bg25sxp5oad" path="res://addons/puggos_world_character/character/animations/Unwrap_Ramen.res" id="110_aynjl"]
+[ext_resource type="Script" path="res://addons/puggos_world_character/avatar/character_animation_tree.gd" id="112_kq3qg"]
 
 [sub_resource type="Animation" id="Animation_h5qpj"]
 resource_name = "Armature|mixamo_com|Layer0"
@@ -297,6 +298,54 @@ _data = {
 "Unwrap_Ramen": ExtResource("110_aynjl")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u42dr"]
+animation = &"Character/Sneak_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v4er2"]
+animation = &"Character/Sneak_WalkCycle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhpo1"]
+animation = &"Character/Sneak_WalkCycle_Back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jensk"]
+animation = &"Character/SneakStrafe_Right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vcht7"]
+animation = &"Character/SneakStrafe_Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v05nm"]
+animation = &"Character/Sneak_WalkCycle_ForwardRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o551r"]
+animation = &"Character/Sneak_WalkCycle_ForwardLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ign5"]
+animation = &"Character/Sneak_WalkCycle_BackRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hxj7u"]
+animation = &"Character/Sneak_WalkCycle_BackLeft"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_nb84o"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_u42dr")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_v4er2")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_xhpo1")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_jensk")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_vcht7")
+blend_point_4/pos = Vector2(-1, 0)
+blend_point_5/node = SubResource("AnimationNodeAnimation_v05nm")
+blend_point_5/pos = Vector2(1, 1)
+blend_point_6/node = SubResource("AnimationNodeAnimation_o551r")
+blend_point_6/pos = Vector2(-1, 1)
+blend_point_7/node = SubResource("AnimationNodeAnimation_8ign5")
+blend_point_7/pos = Vector2(1, -1)
+blend_point_8/node = SubResource("AnimationNodeAnimation_hxj7u")
+blend_point_8/pos = Vector2(-1, -1)
+snap = Vector2(0.01, 0.1)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yt2gn"]
 animation = &"Character/Idle_1"
 
@@ -347,46 +396,86 @@ blend_point_8/pos = Vector2(-1, -1)
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ankl"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mm00u"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"is_crouching"
+advance_expression = "state != CROUCHED"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d8jig"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"is_crouching"
+advance_expression = "state == CROUCHED"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mjldh"]
+states/Crouching/node = SubResource("AnimationNodeBlendSpace2D_nb84o")
+states/Crouching/position = Vector2(427, 219)
 states/Walking/node = SubResource("AnimationNodeBlendSpace2D_n10sn")
 states/Walking/position = Vector2(427, 100)
-transitions = ["Start", "Walking", SubResource("AnimationNodeStateMachineTransition_8ankl")]
+transitions = ["Start", "Walking", SubResource("AnimationNodeStateMachineTransition_8ankl"), "Crouching", "Walking", SubResource("AnimationNodeStateMachineTransition_mm00u"), "Walking", "Crouching", SubResource("AnimationNodeStateMachineTransition_d8jig")]
 
 [node name="Avatar" type="Node3D" node_paths=PackedStringArray("animation_player", "animation_tree")]
 script = ExtResource("1_mbnbw")
 animation_player = NodePath("Character/AnimationPlayer")
-animation_tree = NodePath("Character/AnimationTree")
+animation_tree = NodePath("Character/CharacterAnimationTree")
 movement_lerp_speed = 4.0
 
 [node name="Character" parent="." instance=ExtResource("2_qgfac")]
 
 [node name="Skeleton3D" parent="Character/Armature" index="0"]
+bones/0/position = Vector3(-0.120547, 0.00186166, 0.152961)
 bones/0/rotation = Quaternion(-0.704713, 0, 0, 0.709492)
-bones/1/rotation = Quaternion(0.507844, 1.65803e-14, 1.23808e-14, 0.861449)
+bones/1/rotation = Quaternion(-0.816629, 4.35746e-08, 6.16537e-08, 0.577163)
+bones/2/rotation = Quaternion(1, -1.18447e-17, -7.54979e-08, -1.11759e-07)
+bones/3/position = Vector3(0.120547, 0.00186166, 0.152961)
 bones/3/rotation = Quaternion(-0.704713, 0, 0, 0.709492)
-bones/4/rotation = Quaternion(0.507844, 1.65803e-14, 1.23808e-14, 0.861449)
-bones/8/rotation = Quaternion(0.00409953, 0, 0, 0.999992)
-bones/10/rotation = Quaternion(0.00359548, 1.19209e-07, 4.28615e-10, 0.999994)
-bones/11/rotation = Quaternion(0.00512855, 2.34846e-08, 2.47324e-08, 0.999987)
-bones/12/rotation = Quaternion(0.583939, -0.397949, 0.586009, 0.396541)
-bones/13/rotation = Quaternion(-0.190585, -0.00105579, 0.0116607, 0.981601)
-bones/14/rotation = Quaternion(-0.00223352, -4.16533e-05, -0.0420428, 0.999113)
-bones/19/rotation = Quaternion(-6.30458e-05, 9.48892e-07, 0.00223618, 0.999997)
-bones/20/rotation = Quaternion(0.165023, -0.677707, -0.160723, 0.698319)
-bones/21/rotation = Quaternion(-9.47407e-05, 9.71038e-07, 0.00336283, 0.999994)
-bones/22/rotation = Quaternion(0.165023, -0.677707, -0.160723, 0.698319)
-bones/23/rotation = Quaternion(-9.47407e-05, 9.71038e-07, 0.00336283, 0.999994)
-bones/24/rotation = Quaternion(-0.583939, -0.397949, 0.586009, -0.396541)
-bones/25/rotation = Quaternion(-0.190585, 0.00105579, -0.0116607, 0.981601)
-bones/33/rotation = Quaternion(-9.47399e-05, -9.83394e-07, -0.00336289, 0.999994)
-bones/34/rotation = Quaternion(0.165023, 0.677707, 0.160723, 0.698319)
-bones/35/rotation = Quaternion(-9.47385e-05, -1.10354e-06, -0.00336284, 0.999994)
-bones/36/rotation = Quaternion(-0.00748135, 0.0223848, 0.999677, 0.0094003)
-bones/37/rotation = Quaternion(-0.040224, 0.0171399, -0.00173917, 0.999042)
-bones/38/rotation = Quaternion(-0.0162725, 0.9642, 0.263789, 0.021667)
-bones/40/rotation = Quaternion(0.00748135, 0.0223848, 0.999677, -0.0094003)
-bones/41/rotation = Quaternion(-0.040224, -0.0171397, 0.00173916, 0.999042)
-bones/42/rotation = Quaternion(0.0162725, 0.9642, 0.263789, -0.0216669)
+bones/4/position = Vector3(-2.85682e-09, 0.161536, -0.00109176)
+bones/4/rotation = Quaternion(-0.721609, 5.22673e-08, 5.44799e-08, 0.692301)
+bones/5/rotation = Quaternion(1, -1.70987e-16, -7.54979e-08, -1.04308e-07)
+bones/6/position = Vector3(-3.79817e-18, 0.72891, -0.000320669)
+bones/6/rotation = Quaternion(-2.8196e-08, -0.00519598, -2.05416e-10, 0.999987)
+bones/7/rotation = Quaternion(0.0225716, -5.18648e-05, 0.00369257, 0.999738)
+bones/8/rotation = Quaternion(0.0249831, -0.00907956, 0.00704466, 0.999622)
+bones/9/rotation = Quaternion(-0.0346653, -0.0128077, -0.0242811, 0.999022)
+bones/10/rotation = Quaternion(0.0302654, -0.0125123, -0.108894, 0.993514)
+bones/11/rotation = Quaternion(0.00400271, 0.00775057, 0.0571203, 0.998329)
+bones/12/rotation = Quaternion(0.601455, -0.357985, 0.615371, 0.362515)
+bones/13/rotation = Quaternion(0.287681, -0.426543, 0.180782, 0.838223)
+bones/14/rotation = Quaternion(0.00431013, 0.00293571, -0.397517, 0.91758)
+bones/15/rotation = Quaternion(-0.21108, 0.108247, 0.0492805, 0.970206)
+bones/16/position = Vector3(0.0438187, 0.0267054, 0.0369255)
+bones/16/rotation = Quaternion(-0.0733102, 0.639536, 0.581954, -0.496939)
+bones/17/rotation = Quaternion(0.199294, 0.459286, 0.360411, 0.787046)
+bones/18/position = Vector3(-1.36481e-05, 0.0896975, -0.00767391)
+bones/18/rotation = Quaternion(0.180919, -0.679787, -0.144643, 0.695872)
+bones/19/rotation = Quaternion(0.0261237, 0.00413579, 0.00194339, 0.999648)
+bones/20/position = Vector3(-0.0715746, 0.093437, -0.00579486)
+bones/20/rotation = Quaternion(0.181705, -0.679589, -0.145408, 0.6957)
+bones/21/rotation = Quaternion(0.0260856, 0.00416615, 0.00306914, 0.999646)
+bones/22/rotation = Quaternion(0.181705, -0.679589, -0.145408, 0.6957)
+bones/23/rotation = Quaternion(0.0260857, 0.00416613, 0.00306911, 0.999646)
+bones/24/rotation = Quaternion(-0.566838, -0.439253, 0.558819, -0.416501)
+bones/25/rotation = Quaternion(0.475799, 0.0162247, 0.0943757, 0.874326)
+bones/26/rotation = Quaternion(0.000427668, -0.00145299, 0.276101, 0.961127)
+bones/27/rotation = Quaternion(-0.0376799, -0.0481877, 0.000788191, 0.998127)
+bones/28/position = Vector3(-0.0438188, 0.0267054, 0.0369255)
+bones/28/rotation = Quaternion(0.0733102, 0.639536, 0.581954, 0.496939)
+bones/29/rotation = Quaternion(0.199294, -0.459286, -0.360411, 0.787046)
+bones/30/rotation = Quaternion(0.247333, 0.663061, 0.231783, 0.667423)
+bones/31/rotation = Quaternion(0.0143915, 0.00472114, 0.111686, 0.993628)
+bones/32/rotation = Quaternion(0.248103, 0.662781, 0.232512, 0.667161)
+bones/33/rotation = Quaternion(0.0144068, 0.00471403, 0.0173475, 0.999735)
+bones/34/rotation = Quaternion(0.248103, 0.662781, 0.232512, 0.667161)
+bones/35/rotation = Quaternion(0.0143641, 0.00470871, 0.110566, 0.993754)
+bones/36/rotation = Quaternion(-0.00360926, 0.307394, 0.951563, 0.00487956)
+bones/37/rotation = Quaternion(-0.232933, 0.016681, -0.0100712, 0.972297)
+bones/38/rotation = Quaternion(-0.0131072, 0.996508, 0.0778892, 0.0270914)
+bones/39/rotation = Quaternion(-0.5745, 1.94636e-06, -6.50205e-06, 0.818505)
+bones/40/rotation = Quaternion(0.0113813, 0.0950709, 0.99537, -0.00839944)
+bones/41/rotation = Quaternion(-0.288527, -0.0164227, 0.0124749, 0.95725)
+bones/42/rotation = Quaternion(0.017565, 0.972261, 0.23188, -0.0251334)
+bones/43/rotation = Quaternion(-0.690576, -1.58183e-06, 5.74163e-06, 0.72326)
 
 [node name="AnimationPlayer" parent="Character" index="1"]
 libraries = {
@@ -394,9 +483,12 @@ libraries = {
 "Character": SubResource("AnimationLibrary_vo0a0")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="Character"]
+[node name="CharacterAnimationTree" type="AnimationTree" parent="Character"]
 tree_root = SubResource("AnimationNodeStateMachine_mjldh")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/is_crouching = true
+parameters/Crouching/blend_position = Vector2(-0.00222719, 0.00983608)
 parameters/Walking/blend_position = Vector2(0, 1)
+script = ExtResource("112_kq3qg")
 
 [editable path="Character"]
