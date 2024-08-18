@@ -1,6 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi4llpyjyygm1"]
+[gd_scene load_steps=8 format=3 uid="uid://bi4llpyjyygm1"]
 
+[ext_resource type="Script" path="res://addons/puggos_world_character/avatar_testing.gd" id="1_03tt1"]
 [ext_resource type="PackedScene" uid="uid://c4bj48um6sbj6" path="res://addons/puggos_world_character/avatar/avatar.tscn" id="1_f6u2y"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_udw23"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_astje"]
+albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
 
 [sub_resource type="Environment" id="Environment_pacol"]
 
@@ -8,17 +14,26 @@
 
 [sub_resource type="Compositor" id="Compositor_77nba"]
 
-[node name="AvatarTesting" type="Node3D"]
+[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar")]
+script = ExtResource("1_03tt1")
+avatar = NodePath("Avatar")
 
 [node name="Avatar" parent="." instance=ExtResource("1_f6u2y")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0129, 1.70224)
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_udw23")
+surface_material_override/0 = SubResource("StandardMaterial3D_astje")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pacol")
 camera_attributes = SubResource("CameraAttributesPractical_hjgnd")
 compositor = SubResource("Compositor_77nba")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 1, 2)
+[node name="CameraMount" type="Node3D" parent="."]
+transform = Transform3D(0.995562, 0, 0.0941083, 0, 1, 0, -0.0941083, 0, 0.995562, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraMount"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0129, 1.70224)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraMount"]
+transform = Transform3D(0.694117, 0.528773, -0.488467, -0.041936, 0.707107, 0.705862, 0.71864, -0.469467, 0.51299, 0.118613, 1, -1.99648)
