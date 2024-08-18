@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi4llpyjyygm1"]
+
+[ext_resource type="PackedScene" uid="uid://c4bj48um6sbj6" path="res://addons/puggos_world_character/avatar/avatar.tscn" id="1_f6u2y"]
+
+[node name="AvatarTesting" type="Node3D"]
+
+[node name="Avatar" parent="." instance=ExtResource("1_f6u2y")]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4bj48um6sbj6"]
+
+[ext_resource type="Script" path="res://addons/puggos_world_character/avatar/avatar.gd" id="1_mbnbw"]
+[ext_resource type="PackedScene" uid="uid://l2tpk6ukl3o" path="res://addons/puggos_world_character/character/gltf/Character.gltf" id="2_qgfac"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mjldh"]
+
+[node name="Avatar" type="Node3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_mbnbw")
+animation_player = NodePath("Character/AnimationPlayer")
+
+[node name="Character" parent="." instance=ExtResource("2_qgfac")]
+
+[node name="Skeleton3D" parent="Character/Armature" index="0"]
+bones/2/rotation = Quaternion(1, 5.3275e-16, -7.54979e-08, -1.04308e-07)
+bones/5/rotation = Quaternion(1, 5.3275e-16, -7.54979e-08, -1.04308e-07)
+bones/16/rotation = Quaternion(-0.0733102, 0.639536, 0.581954, -0.496939)
+bones/24/rotation = Quaternion(-0.583939, -0.397949, 0.586009, -0.396541)
+bones/38/rotation = Quaternion(-0.0162944, 0.9642, 0.263786, 0.0216755)
+bones/39/rotation = Quaternion(-0.506541, -2.67145e-07, -7.69114e-07, 0.862216)
+bones/40/rotation = Quaternion(0.00748158, 0.0223848, 0.999677, -0.00940303)
+bones/42/rotation = Quaternion(0.0162944, 0.9642, 0.263786, -0.0216752)
+bones/43/rotation = Quaternion(-0.506541, 3.98464e-07, 8.4414e-07, 0.862216)
+
+[node name="AnimationTree" type="AnimationTree" parent="Character"]
+tree_root = SubResource("AnimationNodeStateMachine_mjldh")
+anim_player = NodePath("../AnimationPlayer")
+
+[editable path="Character"]
