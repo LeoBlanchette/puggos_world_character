@@ -1,26 +1,379 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4bj48um6sbj6"]
+[gd_scene load_steps=118 format=3 uid="uid://c4bj48um6sbj6"]
 
 [ext_resource type="Script" path="res://addons/puggos_world_character/avatar/avatar.gd" id="1_mbnbw"]
+[ext_resource type="Animation" uid="uid://gj2nhi7mkyfx" path="res://addons/puggos_world_character/character/animations/Combat_Idle.res" id="2_i4kw0"]
 [ext_resource type="PackedScene" uid="uid://l2tpk6ukl3o" path="res://addons/puggos_world_character/character/gltf/Character.gltf" id="2_qgfac"]
+[ext_resource type="Animation" uid="uid://veyw600k278d" path="res://addons/puggos_world_character/character/animations/Combat_Idle_Knife.res" id="3_e756o"]
+[ext_resource type="Animation" uid="uid://t7ha080esrsf" path="res://addons/puggos_world_character/character/animations/Combat_Idle_Pistol.res" id="4_ssb77"]
+[ext_resource type="Animation" uid="uid://bg7odo8i8le2b" path="res://addons/puggos_world_character/character/animations/Combat_Idle_Rifle.res" id="5_v3loe"]
+[ext_resource type="Animation" uid="uid://c51ji5umxrioo" path="res://addons/puggos_world_character/character/animations/Craft.res" id="6_oxoan"]
+[ext_resource type="Animation" uid="uid://lktmln5quvq2" path="res://addons/puggos_world_character/character/animations/Eat.res" id="7_vgnjm"]
+[ext_resource type="Animation" uid="uid://c6p4cxt2brso2" path="res://addons/puggos_world_character/character/animations/Fall_Idle.res" id="8_dsdqf"]
+[ext_resource type="Animation" uid="uid://4ldlt78pks3x" path="res://addons/puggos_world_character/character/animations/Idle.res" id="9_cj6kx"]
+[ext_resource type="Animation" uid="uid://bbeg65pc0mqvy" path="res://addons/puggos_world_character/character/animations/Idle_1.res" id="10_5qfpg"]
+[ext_resource type="Animation" uid="uid://ch0oioura3w4h" path="res://addons/puggos_world_character/character/animations/Idle_1_Knife.res" id="11_1ocke"]
+[ext_resource type="Animation" uid="uid://bg3c2um33s640" path="res://addons/puggos_world_character/character/animations/Idle_1_Pistol.res" id="12_ux0np"]
+[ext_resource type="Animation" uid="uid://d0o0hkt4s1vyk" path="res://addons/puggos_world_character/character/animations/Idle_1_Rifle.res" id="13_h0j18"]
+[ext_resource type="Animation" uid="uid://jffxgjdg104b" path="res://addons/puggos_world_character/character/animations/Idle_2.res" id="14_kvp6i"]
+[ext_resource type="Animation" uid="uid://cmu16ecnoxs14" path="res://addons/puggos_world_character/character/animations/Idle_2_Knife.res" id="15_2e3op"]
+[ext_resource type="Animation" uid="uid://b1cd2uaitiqa4" path="res://addons/puggos_world_character/character/animations/Idle_2_Pistol.res" id="16_6d3nx"]
+[ext_resource type="Animation" uid="uid://bdgiv8n6fsedt" path="res://addons/puggos_world_character/character/animations/Idle_2_Rifle.res" id="17_jtdv2"]
+[ext_resource type="Animation" uid="uid://di8e3p4rsmlx8" path="res://addons/puggos_world_character/character/animations/Idle_3.res" id="18_ufeo3"]
+[ext_resource type="Animation" uid="uid://b38q3emgnjrhg" path="res://addons/puggos_world_character/character/animations/Idle_3_Injured_Rifle.res" id="19_1j5kn"]
+[ext_resource type="Animation" uid="uid://bx07m1rs31kkb" path="res://addons/puggos_world_character/character/animations/Idle_3_Knife.res" id="20_ktyp2"]
+[ext_resource type="Animation" uid="uid://bfggkkfi2wmwr" path="res://addons/puggos_world_character/character/animations/Idle_3_pistol.res" id="21_8ky4e"]
+[ext_resource type="Animation" uid="uid://byh4foibbyopw" path="res://addons/puggos_world_character/character/animations/Idle_4.res" id="22_dv6ka"]
+[ext_resource type="Animation" uid="uid://clgsc6jeq3uyv" path="res://addons/puggos_world_character/character/animations/Idle_To_Sneak.res" id="23_wh1ju"]
+[ext_resource type="Animation" uid="uid://d4kdutf5jahu7" path="res://addons/puggos_world_character/character/animations/Idle_To_Sneak_Knife.res" id="24_v3n5x"]
+[ext_resource type="Animation" uid="uid://cunl3exakcdbg" path="res://addons/puggos_world_character/character/animations/Idle_To_Sneak_Pistol.res" id="25_uvy6q"]
+[ext_resource type="Animation" uid="uid://hlfnrjrypggs" path="res://addons/puggos_world_character/character/animations/Idle_To_Sneak_Rifle.res" id="26_rudk2"]
+[ext_resource type="Animation" uid="uid://c1215svor3k43" path="res://addons/puggos_world_character/character/animations/Jump.res" id="27_m671l"]
+[ext_resource type="Animation" uid="uid://buwsn8vv21rje" path="res://addons/puggos_world_character/character/animations/Kick_Left.res" id="28_j12q0"]
+[ext_resource type="Animation" uid="uid://2tbh2fsgmh2p" path="res://addons/puggos_world_character/character/animations/Kick_Right.res" id="29_1jguf"]
+[ext_resource type="Animation" uid="uid://ckbw1owgl8dlm" path="res://addons/puggos_world_character/character/animations/Knife_Criss-Cross_Jab.res" id="30_1fgv4"]
+[ext_resource type="Animation" uid="uid://4f5l65rq7a4d" path="res://addons/puggos_world_character/character/animations/Knife_Criss-Cross_Slice_Heavy.res" id="31_rupd0"]
+[ext_resource type="Animation" uid="uid://b88uxg7oemvc2" path="res://addons/puggos_world_character/character/animations/Knife_Criss-Cross_Slice_Light.res" id="32_bckwf"]
+[ext_resource type="Animation" uid="uid://cs57njsatbhbu" path="res://addons/puggos_world_character/character/animations/Knife_DoubleJab.res" id="33_84agr"]
+[ext_resource type="Animation" uid="uid://g5aoe7vfhjyg" path="res://addons/puggos_world_character/character/animations/Knife_LeftSlash.res" id="34_mvvey"]
+[ext_resource type="Animation" uid="uid://c0auk8wq2bdn0" path="res://addons/puggos_world_character/character/animations/Knife_RightSlash.res" id="35_5pxto"]
+[ext_resource type="Animation" uid="uid://dw1od54nopb73" path="res://addons/puggos_world_character/character/animations/Knife_Stab.res" id="36_p5fmm"]
+[ext_resource type="Animation" uid="uid://ccysiqwwg7ye5" path="res://addons/puggos_world_character/character/animations/Land.res" id="37_br0be"]
+[ext_resource type="Animation" uid="uid://cqje1txn03tr" path="res://addons/puggos_world_character/character/animations/Limp.res" id="38_qcx26"]
+[ext_resource type="Animation" uid="uid://cisgosqwp2xg" path="res://addons/puggos_world_character/character/animations/Open_Soda_Can.res" id="39_d6wlp"]
+[ext_resource type="Animation" uid="uid://c22cq3xt15wym" path="res://addons/puggos_world_character/character/animations/Punch-Left_Cross.res" id="40_s85f0"]
+[ext_resource type="Animation" uid="uid://2bgxhf1743fl" path="res://addons/puggos_world_character/character/animations/Punch-Right_Cross.res" id="41_gsamb"]
+[ext_resource type="Animation" uid="uid://humdkfyagmis" path="res://addons/puggos_world_character/character/animations/Repair.res" id="42_5sc5v"]
+[ext_resource type="Animation" uid="uid://ddyyasaqy75g6" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle.res" id="43_efmo5"]
+[ext_resource type="Animation" uid="uid://b78p5sfwkomxw" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_Backward.res" id="44_hilhs"]
+[ext_resource type="Animation" uid="uid://b0a0rghj5g3w" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardLeft.res" id="45_kauuf"]
+[ext_resource type="Animation" uid="uid://ccjo3b3pxxhk8" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardLeft_Knife.res" id="46_4nrqj"]
+[ext_resource type="Animation" uid="uid://c15yn6av1eh62" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardLeft_Pistol.res" id="47_e6xyo"]
+[ext_resource type="Animation" uid="uid://kpi3ytfsvbv4" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardLeft_Rifle.res" id="48_hcn0b"]
+[ext_resource type="Animation" uid="uid://dudafrkbrgaiw" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardRight.res" id="49_fvhj5"]
+[ext_resource type="Animation" uid="uid://ccvkl6hsv4sto" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardRight_Knife.res" id="50_5bpic"]
+[ext_resource type="Animation" uid="uid://dysp5o11pvngp" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardRight_Pistol.res" id="51_5e045"]
+[ext_resource type="Animation" uid="uid://cr08todc1ktvo" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_BackwardRight_Rifle.res" id="52_fmc4h"]
+[ext_resource type="Animation" uid="uid://mk1rejpvte51" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_Backward_Knife.res" id="53_4f7a3"]
+[ext_resource type="Animation" uid="uid://clyeagpt8sica" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_Backward_Pistol.res" id="54_d1swg"]
+[ext_resource type="Animation" uid="uid://du3pl50nwguf4" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_Backward_Rifle.res" id="55_sdl5f"]
+[ext_resource type="Animation" uid="uid://coh25q8vn73dd" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardLeft.res" id="56_vxjmu"]
+[ext_resource type="Animation" uid="uid://dht4mu2hyolu8" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardLeft_Knife.res" id="57_q75ge"]
+[ext_resource type="Animation" uid="uid://bksmov4w6cuyd" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardLeft_Pistol.res" id="58_1nm3y"]
+[ext_resource type="Animation" uid="uid://ks8sip8fwos3" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardLeft_Rifle.res" id="59_t7uw3"]
+[ext_resource type="Animation" uid="uid://6bu3qd2s0uwv" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardRight.res" id="60_qu4bt"]
+[ext_resource type="Animation" uid="uid://r2ghqrxwu6uv" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardRight_Knife.res" id="61_wi078"]
+[ext_resource type="Animation" uid="uid://bwy2nyf4be0rj" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardRight_Pistol.res" id="62_jpyh5"]
+[ext_resource type="Animation" uid="uid://bvtlka6qg53rc" path="res://addons/puggos_world_character/character/animations/SimpleWalkCycle_ForwardRight_Rifle.res" id="63_rjb2w"]
+[ext_resource type="Animation" uid="uid://b7ucxhq35jfhv" path="res://addons/puggos_world_character/character/animations/Sleeping.res" id="64_7epan"]
+[ext_resource type="Animation" uid="uid://bct5ho18up577" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Left.res" id="65_8f6nd"]
+[ext_resource type="Animation" uid="uid://gidgylk4rqtt" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Left_Knife.res" id="66_w4uhw"]
+[ext_resource type="Animation" uid="uid://bwvekxcc5msle" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Left_Pistol.res" id="67_xf25t"]
+[ext_resource type="Animation" uid="uid://v1xf7g4wgexw" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Left_Rifle.res" id="68_qx64c"]
+[ext_resource type="Animation" uid="uid://cksvo074pdbsa" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Right.res" id="69_jnclt"]
+[ext_resource type="Animation" uid="uid://buldxxkbjifel" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Right_Knife.res" id="70_67ssk"]
+[ext_resource type="Animation" uid="uid://bdts6bhagcxnq" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Right_Pistol.res" id="71_uf27g"]
+[ext_resource type="Animation" uid="uid://d1364nsrssjoy" path="res://addons/puggos_world_character/character/animations/SneakStrafe_Right_Rifle.res" id="72_0qcyk"]
+[ext_resource type="Animation" uid="uid://ct3b24ia77prl" path="res://addons/puggos_world_character/character/animations/Sneak_Idle.res" id="73_2cycr"]
+[ext_resource type="Animation" uid="uid://bvntonxwda6db" path="res://addons/puggos_world_character/character/animations/Sneak_Idle_Knife.res" id="74_u0o7y"]
+[ext_resource type="Animation" uid="uid://qyskye4ngdst" path="res://addons/puggos_world_character/character/animations/Sneak_Idle_Pistol.res" id="75_w3iqh"]
+[ext_resource type="Animation" uid="uid://7e15vkjckrfe" path="res://addons/puggos_world_character/character/animations/Sneak_Idle_Rifle.res" id="76_703x7"]
+[ext_resource type="Animation" uid="uid://bo13m4edwgee4" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle.res" id="77_01h30"]
+[ext_resource type="Animation" uid="uid://b04mmcws3v1ia" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Back.res" id="78_nu5rv"]
+[ext_resource type="Animation" uid="uid://dsit58x0yac1n" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackLeft.res" id="79_b83qf"]
+[ext_resource type="Animation" uid="uid://ssmgb670rf5v" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackLeft_Knife.res" id="80_e8krb"]
+[ext_resource type="Animation" uid="uid://cy27uxqmqlmx5" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackLeft_Pistol.res" id="81_hr1yy"]
+[ext_resource type="Animation" uid="uid://c70p7pp8n2hxo" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackLeft_Rifle.res" id="82_5kxau"]
+[ext_resource type="Animation" uid="uid://c5hr7wcv2dnck" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackRight.res" id="83_0ac6i"]
+[ext_resource type="Animation" uid="uid://bfftnva16jhxl" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackRight_Knife.res" id="84_em2i2"]
+[ext_resource type="Animation" uid="uid://b3xhvntak6rgu" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackRight_Pistol.res" id="85_xija8"]
+[ext_resource type="Animation" uid="uid://ckd2h5jmli7yw" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_BackRight_Rifle.res" id="86_p55g5"]
+[ext_resource type="Animation" uid="uid://crgqtcsf05pde" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Back_Knife.res" id="87_fljq2"]
+[ext_resource type="Animation" uid="uid://vb05ewamccjf" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Back_Pistol.res" id="88_btopo"]
+[ext_resource type="Animation" uid="uid://cmbjpjobsi5w5" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Back_Rifle.res" id="89_ni3ud"]
+[ext_resource type="Animation" uid="uid://blaydon3oes76" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardLeft.res" id="90_5o6ik"]
+[ext_resource type="Animation" uid="uid://cn88y8ubyw6p8" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardLeft_Knife.res" id="91_l88pg"]
+[ext_resource type="Animation" uid="uid://bpt0jqi2v6qk2" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardLeft_Pistol.res" id="92_dp76q"]
+[ext_resource type="Animation" uid="uid://1qt4vpltsjs2" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardLeft_Rifle.res" id="93_kvec4"]
+[ext_resource type="Animation" uid="uid://5lq1ved6eg4l" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardRight.res" id="94_wi3f5"]
+[ext_resource type="Animation" uid="uid://135fh7g4663m" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardRight_Knife.res" id="95_gokyw"]
+[ext_resource type="Animation" uid="uid://b3eb551xxnpj3" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardRight_Pistol.res" id="96_nruxw"]
+[ext_resource type="Animation" uid="uid://cqedppulo2wi6" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_ForwardRight_Rifle.res" id="97_bnfp8"]
+[ext_resource type="Animation" uid="uid://bu7egh57aisoe" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Knife.res" id="98_p4w6g"]
+[ext_resource type="Animation" uid="uid://dpg4a5wy031sn" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Pistol.res" id="99_ncfyv"]
+[ext_resource type="Animation" uid="uid://ci6l5vg120rvo" path="res://addons/puggos_world_character/character/animations/Sneak_WalkCycle_Rifle.res" id="100_nek5v"]
+[ext_resource type="Animation" uid="uid://c6ly63p5321v1" path="res://addons/puggos_world_character/character/animations/Strafe_Left.res" id="101_pb7i6"]
+[ext_resource type="Animation" uid="uid://dkngrias2nabt" path="res://addons/puggos_world_character/character/animations/Strafe_Left_Knife.res" id="102_wq3ar"]
+[ext_resource type="Animation" uid="uid://ceyo8281wuswm" path="res://addons/puggos_world_character/character/animations/Strafe_Left_Pistol.res" id="103_lfpl0"]
+[ext_resource type="Animation" uid="uid://rqe44l4h8863" path="res://addons/puggos_world_character/character/animations/Strafe_Left_Rifle.res" id="104_e10xk"]
+[ext_resource type="Animation" uid="uid://ck1g6n6jdq465" path="res://addons/puggos_world_character/character/animations/Strafe_Right.res" id="105_5csuu"]
+[ext_resource type="Animation" uid="uid://d3wscrl7fsap4" path="res://addons/puggos_world_character/character/animations/Strafe_Right_Knife.res" id="106_6a2r1"]
+[ext_resource type="Animation" uid="uid://2f0x0sj1aksb" path="res://addons/puggos_world_character/character/animations/Strafe_Right_Pistol.res" id="107_ox4pu"]
+[ext_resource type="Animation" uid="uid://bfa4ipxby4o7q" path="res://addons/puggos_world_character/character/animations/Strafe_Right_Rifle.res" id="108_leyot"]
+[ext_resource type="Animation" uid="uid://bmk8p6firhw3g" path="res://addons/puggos_world_character/character/animations/Take_Damage.res" id="109_biadf"]
+[ext_resource type="Animation" uid="uid://b6bg25sxp5oad" path="res://addons/puggos_world_character/character/animations/Unwrap_Ramen.res" id="110_aynjl"]
+
+[sub_resource type="Animation" id="Animation_h5qpj"]
+resource_name = "Armature|mixamo_com|Layer0"
+length = 0.0333333
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Ankle_IK_R")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1, -5.3275e-16, 7.54979e-08, 1.04308e-07)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D:Ankle_IK_L")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -1, -5.3275e-16, 7.54979e-08, 1.04308e-07)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D:Thumb_1_R")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.0733102, -0.639536, -0.581954, 0.496939)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Armature/Skeleton3D:Arm_1_L")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0.583939, 0.397949, -0.586009, 0.396541)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Armature/Skeleton3D:Leg_3_R")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, -0.0162944, 0.9642, 0.263786, 0.0216755)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("Armature/Skeleton3D:Leg_4_R")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -0.506541, -2.67143e-07, -7.69112e-07, 0.862216)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("Armature/Skeleton3D:Leg_1_L")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, -0.00748158, -0.0223848, -0.999677, 0.00940303)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("Armature/Skeleton3D:Leg_3_L")
+tracks/7/interp = 0
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, -0.0162944, -0.9642, -0.263786, 0.0216752)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("Armature/Skeleton3D:Leg_4_L")
+tracks/8/interp = 0
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, -0.506541, 3.98464e-07, 8.4414e-07, 0.862216)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m24w2"]
+_data = {
+"Armature|mixamo_com|Layer0": SubResource("Animation_h5qpj")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vo0a0"]
+_data = {
+"Combat_Idle": ExtResource("2_i4kw0"),
+"Combat_Idle_Knife": ExtResource("3_e756o"),
+"Combat_Idle_Pistol": ExtResource("4_ssb77"),
+"Combat_Idle_Rifle": ExtResource("5_v3loe"),
+"Craft": ExtResource("6_oxoan"),
+"Eat": ExtResource("7_vgnjm"),
+"Fall_Idle": ExtResource("8_dsdqf"),
+"Idle": ExtResource("9_cj6kx"),
+"Idle_1": ExtResource("10_5qfpg"),
+"Idle_1_Knife": ExtResource("11_1ocke"),
+"Idle_1_Pistol": ExtResource("12_ux0np"),
+"Idle_1_Rifle": ExtResource("13_h0j18"),
+"Idle_2": ExtResource("14_kvp6i"),
+"Idle_2_Knife": ExtResource("15_2e3op"),
+"Idle_2_Pistol": ExtResource("16_6d3nx"),
+"Idle_2_Rifle": ExtResource("17_jtdv2"),
+"Idle_3": ExtResource("18_ufeo3"),
+"Idle_3_Injured_Rifle": ExtResource("19_1j5kn"),
+"Idle_3_Knife": ExtResource("20_ktyp2"),
+"Idle_3_pistol": ExtResource("21_8ky4e"),
+"Idle_4": ExtResource("22_dv6ka"),
+"Idle_To_Sneak": ExtResource("23_wh1ju"),
+"Idle_To_Sneak_Knife": ExtResource("24_v3n5x"),
+"Idle_To_Sneak_Pistol": ExtResource("25_uvy6q"),
+"Idle_To_Sneak_Rifle": ExtResource("26_rudk2"),
+"Jump": ExtResource("27_m671l"),
+"Kick_Left": ExtResource("28_j12q0"),
+"Kick_Right": ExtResource("29_1jguf"),
+"Knife_Criss-Cross_Jab": ExtResource("30_1fgv4"),
+"Knife_Criss-Cross_Slice_Heavy": ExtResource("31_rupd0"),
+"Knife_Criss-Cross_Slice_Light": ExtResource("32_bckwf"),
+"Knife_DoubleJab": ExtResource("33_84agr"),
+"Knife_LeftSlash": ExtResource("34_mvvey"),
+"Knife_RightSlash": ExtResource("35_5pxto"),
+"Knife_Stab": ExtResource("36_p5fmm"),
+"Land": ExtResource("37_br0be"),
+"Limp": ExtResource("38_qcx26"),
+"Open_Soda_Can": ExtResource("39_d6wlp"),
+"Punch-Left_Cross": ExtResource("40_s85f0"),
+"Punch-Right_Cross": ExtResource("41_gsamb"),
+"Repair": ExtResource("42_5sc5v"),
+"SimpleWalkCycle": ExtResource("43_efmo5"),
+"SimpleWalkCycle_Backward": ExtResource("44_hilhs"),
+"SimpleWalkCycle_BackwardLeft": ExtResource("45_kauuf"),
+"SimpleWalkCycle_BackwardLeft_Knife": ExtResource("46_4nrqj"),
+"SimpleWalkCycle_BackwardLeft_Pistol": ExtResource("47_e6xyo"),
+"SimpleWalkCycle_BackwardLeft_Rifle": ExtResource("48_hcn0b"),
+"SimpleWalkCycle_BackwardRight": ExtResource("49_fvhj5"),
+"SimpleWalkCycle_BackwardRight_Knife": ExtResource("50_5bpic"),
+"SimpleWalkCycle_BackwardRight_Pistol": ExtResource("51_5e045"),
+"SimpleWalkCycle_BackwardRight_Rifle": ExtResource("52_fmc4h"),
+"SimpleWalkCycle_Backward_Knife": ExtResource("53_4f7a3"),
+"SimpleWalkCycle_Backward_Pistol": ExtResource("54_d1swg"),
+"SimpleWalkCycle_Backward_Rifle": ExtResource("55_sdl5f"),
+"SimpleWalkCycle_ForwardLeft": ExtResource("56_vxjmu"),
+"SimpleWalkCycle_ForwardLeft_Knife": ExtResource("57_q75ge"),
+"SimpleWalkCycle_ForwardLeft_Pistol": ExtResource("58_1nm3y"),
+"SimpleWalkCycle_ForwardLeft_Rifle": ExtResource("59_t7uw3"),
+"SimpleWalkCycle_ForwardRight": ExtResource("60_qu4bt"),
+"SimpleWalkCycle_ForwardRight_Knife": ExtResource("61_wi078"),
+"SimpleWalkCycle_ForwardRight_Pistol": ExtResource("62_jpyh5"),
+"SimpleWalkCycle_ForwardRight_Rifle": ExtResource("63_rjb2w"),
+"Sleeping": ExtResource("64_7epan"),
+"SneakStrafe_Left": ExtResource("65_8f6nd"),
+"SneakStrafe_Left_Knife": ExtResource("66_w4uhw"),
+"SneakStrafe_Left_Pistol": ExtResource("67_xf25t"),
+"SneakStrafe_Left_Rifle": ExtResource("68_qx64c"),
+"SneakStrafe_Right": ExtResource("69_jnclt"),
+"SneakStrafe_Right_Knife": ExtResource("70_67ssk"),
+"SneakStrafe_Right_Pistol": ExtResource("71_uf27g"),
+"SneakStrafe_Right_Rifle": ExtResource("72_0qcyk"),
+"Sneak_Idle": ExtResource("73_2cycr"),
+"Sneak_Idle_Knife": ExtResource("74_u0o7y"),
+"Sneak_Idle_Pistol": ExtResource("75_w3iqh"),
+"Sneak_Idle_Rifle": ExtResource("76_703x7"),
+"Sneak_WalkCycle": ExtResource("77_01h30"),
+"Sneak_WalkCycle_Back": ExtResource("78_nu5rv"),
+"Sneak_WalkCycle_BackLeft": ExtResource("79_b83qf"),
+"Sneak_WalkCycle_BackLeft_Knife": ExtResource("80_e8krb"),
+"Sneak_WalkCycle_BackLeft_Pistol": ExtResource("81_hr1yy"),
+"Sneak_WalkCycle_BackLeft_Rifle": ExtResource("82_5kxau"),
+"Sneak_WalkCycle_BackRight": ExtResource("83_0ac6i"),
+"Sneak_WalkCycle_BackRight_Knife": ExtResource("84_em2i2"),
+"Sneak_WalkCycle_BackRight_Pistol": ExtResource("85_xija8"),
+"Sneak_WalkCycle_BackRight_Rifle": ExtResource("86_p55g5"),
+"Sneak_WalkCycle_Back_Knife": ExtResource("87_fljq2"),
+"Sneak_WalkCycle_Back_Pistol": ExtResource("88_btopo"),
+"Sneak_WalkCycle_Back_Rifle": ExtResource("89_ni3ud"),
+"Sneak_WalkCycle_ForwardLeft": ExtResource("90_5o6ik"),
+"Sneak_WalkCycle_ForwardLeft_Knife": ExtResource("91_l88pg"),
+"Sneak_WalkCycle_ForwardLeft_Pistol": ExtResource("92_dp76q"),
+"Sneak_WalkCycle_ForwardLeft_Rifle": ExtResource("93_kvec4"),
+"Sneak_WalkCycle_ForwardRight": ExtResource("94_wi3f5"),
+"Sneak_WalkCycle_ForwardRight_Knife": ExtResource("95_gokyw"),
+"Sneak_WalkCycle_ForwardRight_Pistol": ExtResource("96_nruxw"),
+"Sneak_WalkCycle_ForwardRight_Rifle": ExtResource("97_bnfp8"),
+"Sneak_WalkCycle_Knife": ExtResource("98_p4w6g"),
+"Sneak_WalkCycle_Pistol": ExtResource("99_ncfyv"),
+"Sneak_WalkCycle_Rifle": ExtResource("100_nek5v"),
+"Strafe_Left": ExtResource("101_pb7i6"),
+"Strafe_Left_Knife": ExtResource("102_wq3ar"),
+"Strafe_Left_Pistol": ExtResource("103_lfpl0"),
+"Strafe_Left_Rifle": ExtResource("104_e10xk"),
+"Strafe_Right": ExtResource("105_5csuu"),
+"Strafe_Right_Knife": ExtResource("106_6a2r1"),
+"Strafe_Right_Pistol": ExtResource("107_ox4pu"),
+"Strafe_Right_Rifle": ExtResource("108_leyot"),
+"Take_Damage": ExtResource("109_biadf"),
+"Unwrap_Ramen": ExtResource("110_aynjl")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xp5ii"]
+animation = &"Character/Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_klnnw"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mjldh"]
+states/Character_Idle/node = SubResource("AnimationNodeAnimation_xp5ii")
+states/Character_Idle/position = Vector2(459, 100)
+transitions = ["Start", "Character_Idle", SubResource("AnimationNodeStateMachineTransition_klnnw")]
 
-[node name="Avatar" type="Node3D" node_paths=PackedStringArray("animation_player")]
+[node name="Avatar" type="Node3D" node_paths=PackedStringArray("animation_player", "animation_tree")]
 script = ExtResource("1_mbnbw")
 animation_player = NodePath("Character/AnimationPlayer")
+animation_tree = NodePath("Character/AnimationTree")
 
 [node name="Character" parent="." instance=ExtResource("2_qgfac")]
 
 [node name="Skeleton3D" parent="Character/Armature" index="0"]
+bones/0/position = Vector3(-0.120547, 0.00186166, 0.152961)
+bones/0/rotation = Quaternion(-0.704713, 0, 0, 0.709492)
+bones/1/rotation = Quaternion(-0.771837, 4.80031e-08, 5.82721e-08, 0.63582)
 bones/2/rotation = Quaternion(1, 5.3275e-16, -7.54979e-08, -1.04308e-07)
-bones/5/rotation = Quaternion(1, 5.3275e-16, -7.54979e-08, -1.04308e-07)
-bones/16/rotation = Quaternion(-0.0733102, 0.639536, 0.581954, -0.496939)
+bones/3/position = Vector3(0.120547, 0.00186166, 0.152961)
+bones/3/rotation = Quaternion(-0.704713, 0, 0, 0.709492)
+bones/4/position = Vector3(-1.90583e-08, 0.161536, -0.00109175)
+bones/4/rotation = Quaternion(-0.840553, 3.73477e-08, 6.33055e-08, 0.54173)
+bones/5/rotation = Quaternion(1, 3.07271e-10, -6.84586e-08, -8.73115e-08)
+bones/6/position = Vector3(0, 0.733138, -0.000833507)
+bones/6/rotation = Quaternion(-2.83189e-08, 0, 0, 1)
+bones/7/rotation = Quaternion(-0.00610822, 0.0663392, 0.000485369, 0.997778)
+bones/8/rotation = Quaternion(0.0469117, -2.34266e-06, -0.000303921, 0.998899)
+bones/9/rotation = Quaternion(0.000538597, 0.000660095, -0.000207399, 1)
+bones/10/rotation = Quaternion(-0.0372593, -0.000450601, -0.00548525, 0.999291)
+bones/11/rotation = Quaternion(-0.0357633, -0.000498539, -0.00548108, 0.999345)
+bones/12/rotation = Quaternion(0.583939, -0.397949, 0.586009, 0.396541)
+bones/13/rotation = Quaternion(0.381602, -0.175578, 0.0422129, 0.906516)
+bones/14/rotation = Quaternion(0.00462806, 0.00260135, -0.364056, 0.931362)
+bones/15/rotation = Quaternion(-0.228524, -0.0135832, 0.00972004, 0.973395)
+bones/16/position = Vector3(0.0438188, 0.0267055, 0.0369256)
+bones/16/rotation = Quaternion(-0.13498, 0.468125, 0.704223, -0.516439)
+bones/17/rotation = Quaternion(0.174938, 0.581533, 0.177457, 0.774419)
+bones/18/position = Vector3(-1.36659e-05, 0.0896974, -0.00767384)
+bones/18/rotation = Quaternion(0.119661, -0.692166, -0.119237, 0.70169)
+bones/19/rotation = Quaternion(-0.0018534, -0.00825583, 0.0637463, 0.99793)
+bones/20/position = Vector3(-0.0715746, 0.093437, -0.00579475)
+bones/20/rotation = Quaternion(0.0717122, -0.707683, -0.0462636, 0.701357)
+bones/21/rotation = Quaternion(0.016581, -0.015052, 0.151924, 0.988139)
+bones/22/rotation = Quaternion(0.155325, -0.67896, -0.157743, 0.700004)
+bones/23/rotation = Quaternion(-0.0049274, -0.000783858, 0.012493, 0.99991)
 bones/24/rotation = Quaternion(-0.583939, -0.397949, 0.586009, -0.396541)
-bones/38/rotation = Quaternion(-0.0162944, 0.9642, 0.263786, 0.0216755)
-bones/39/rotation = Quaternion(-0.506541, -2.67145e-07, -7.69114e-07, 0.862216)
-bones/40/rotation = Quaternion(0.00748158, 0.0223848, 0.999677, -0.00940303)
-bones/42/rotation = Quaternion(0.0162944, 0.9642, 0.263786, -0.0216752)
-bones/43/rotation = Quaternion(-0.506541, 3.98464e-07, 8.4414e-07, 0.862216)
+bones/25/rotation = Quaternion(0.384187, 0.235246, -0.059957, 0.890766)
+bones/26/rotation = Quaternion(0.000519178, -0.00148719, 0.279419, 0.960168)
+bones/27/rotation = Quaternion(-0.335204, 0.0245671, -0.0779091, 0.938597)
+bones/28/position = Vector3(-0.0438188, 0.0267054, 0.0369255)
+bones/28/rotation = Quaternion(0.07614, 0.632964, 0.586506, 0.499569)
+bones/29/rotation = Quaternion(0.199003, -0.464665, -0.354571, 0.786616)
+bones/30/rotation = Quaternion(0.135701, 0.686642, 0.128986, 0.702475)
+bones/31/rotation = Quaternion(0.00250782, 0.00268386, -0.0452423, 0.998969)
+bones/32/rotation = Quaternion(0.136493, 0.686489, 0.129758, 0.702329)
+bones/33/rotation = Quaternion(0.00247917, 0.00267961, -0.0463679, 0.998918)
+bones/34/rotation = Quaternion(0.136493, 0.686489, 0.129758, 0.702329)
+bones/35/rotation = Quaternion(0.00247918, 0.00267947, -0.0463679, 0.998918)
+bones/36/rotation = Quaternion(-0.0104586, 0.0882563, 0.996005, 0.00868175)
+bones/37/rotation = Quaternion(-0.25427, 0.0165889, -0.0109938, 0.966929)
+bones/38/rotation = Quaternion(-0.0179161, 0.9654, 0.258615, 0.0282699)
+bones/39/rotation = Quaternion(-0.633689, 2.38892e-06, -7.56332e-06, 0.773588)
+bones/40/rotation = Quaternion(0.047778, 0.100936, 0.991026, -0.0734603)
+bones/41/rotation = Quaternion(-0.123529, -0.017022, 0.00534099, 0.992181)
+bones/42/rotation = Quaternion(0.0624208, 0.971869, 0.220364, 0.0549046)
+bones/43/rotation = Quaternion(-0.540055, -2.09416e-05, 6.16792e-05, 0.841629)
+
+[node name="AnimationPlayer" parent="Character" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_m24w2"),
+"Character": SubResource("AnimationLibrary_vo0a0")
+}
 
 [node name="AnimationTree" type="AnimationTree" parent="Character"]
 tree_root = SubResource("AnimationNodeStateMachine_mjldh")
