@@ -11,3 +11,11 @@ Run res://addons/avatar_testing.tscn in play mode to preview character.
 Note that this avatar is used simultaneously in the game [as well as the SDK](https://github.com/LeoBlanchette/puggos_world_sdk), so that users may preview changes.
 
 More documentation will be written as things mature.
+
+Add this to your input map:
+
+- move_forward (w)
+- move_backward (s)
+- move_left (a)
+- move_right (d)
+- move_crouch (c)
