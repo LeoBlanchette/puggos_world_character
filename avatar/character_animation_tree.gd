@@ -146,7 +146,8 @@ func set_motion_state():
 			
 	match altered_motion_state:
 		AlteredMotionState.DEFAULT:
-			set_to_default()
+			#set_to_default()
+			pass
 		AlteredMotionState.RANGED_PISTOL:
 			set("parameters/AlteredMotionStates/transition_request", "ranged_pistol")
 		AlteredMotionState.RANGED_RIFLE:
@@ -156,10 +157,12 @@ func set_motion_state():
 		AlteredMotionState.ONE_HANDED_SHARP:
 			set("parameters/AlteredMotionStates/transition_request", "one_handed_sharp")
 		_:
-			set_to_default()
+			pass
+			#set_to_default()
 
 
 func set_to_default():
+	print("DEFAULT")
 	set("parameters/WalkSneakTransition/transition_request", "walk")
 	set("parameters/DefaultRunTransition/transition_request", "default")
 
@@ -167,11 +170,12 @@ func set_to_sneak():
 	set("parameters/WalkSneakTransition/transition_request", "sneak")
 	set("parameters/DefaultRunTransition/transition_request", "default")
 
-func set_to_run():
+func set_to_run():	
 	set("parameters/WalkSneakTransition/transition_request", "walk")
 	set("parameters/DefaultRunTransition/transition_request", "run")
 
 func set_general_motion_state(motion_state:String)->void:
+	
 	if BaseMotionState.has(motion_state):
 		base_motion_state = BaseMotionState.get(motion_state)
 	if AlteredMotionState.has(motion_state):
