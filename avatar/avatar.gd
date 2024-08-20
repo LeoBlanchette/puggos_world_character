@@ -17,6 +17,12 @@ var movement:Vector2:
 #region 
 
 #region motion states
+var motion_state:String:
+	set(value):	
+		animation_tree.motion_state = value
+	get():
+		return animation_tree.motion_state
+		
 var is_moving:bool:
 	set(value):
 		animation_tree.is_moving = value
