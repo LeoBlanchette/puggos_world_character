@@ -46,6 +46,8 @@ layout_mode = 2
 
 [node name="LabelMotionSttes" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Game-specific locomotion blends a part of core gameplay."
+mouse_filter = 0
 text = "Motion States
 "
 
@@ -66,6 +68,8 @@ popup/item_4/id = 4
 
 [node name="LabelActions" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Game-specific actions that are a part of core gameplay."
+mouse_filter = 0
 text = "Actions"
 
 [node name="OptionButtonActions" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
@@ -84,6 +88,42 @@ popup/item_4/text = "Kick Left"
 popup/item_4/id = 4
 popup/item_5/text = "Eat Ramen"
 popup/item_5/id = 5
+
+[node name="LabelOneShots" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Non-looping animations such as custom combat actions or emotes."
+mouse_filter = 0
+text = "Misc / One-shots"
+
+[node name="OptionButtonOneShots" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "NONE"
+
+[node name="LabelMiscLoops" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Misc loops, moddable. Animation loops specific to custom actions assigned."
+mouse_filter = 0
+text = "Misc / Loops"
+
+[node name="OptionButtonMiscLoops" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "NONE"
+
+[node name="LabelPersonalities" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "\"Personalities\" are the idle animations that show a character's personality. They engage when a character is idle."
+mouse_filter = 0
+text = "Personalities"
+
+[node name="OptionButtonPersonalities" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "NONE"
 
 [node name="Avatar" parent="." instance=ExtResource("1_f6u2y")]
 
@@ -113,3 +153,6 @@ mesh = SubResource("BoxMesh_mh7bm")
 
 [connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMotionStates" to="." method="_on_option_button_motion_states_item_selected"]
 [connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonActions" to="." method="_on_option_button_actions_item_selected"]
+[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonOneShots" to="." method="_on_option_button_one_shots_item_selected"]
+[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMiscLoops" to="." method="_on_option_button_misc_loops_item_selected"]
+[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonPersonalities" to="." method="_on_option_button_personalities_item_selected"]

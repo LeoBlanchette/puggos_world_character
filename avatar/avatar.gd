@@ -1,4 +1,5 @@
 extends Node3D
+
 ## This Avatar class acts as a relay to sub-functionality, the main ones being the
 ## character animation and character appearance. The Avatar class / object as a 
 ## whole is meant to be agnostic to it's parent system, with the main controlling

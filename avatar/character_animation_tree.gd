@@ -2,6 +2,7 @@ extends AnimationTree
 
 
 class_name CharacterAnimationTree
+@export var animation_player: AnimationPlayer
 
 enum BaseMotionState{
 	DEFAULT,
@@ -16,6 +17,7 @@ enum AlteredMotionState{
 	TWO_HANDED_BLUDGEON,
 	ONE_HANDED_SHARP,
 }
+
 
 var motion_state:String:
 	set(value):
@@ -82,6 +84,9 @@ var is_running:bool = false:
 		set_motion_base_state()
 #region 
 
+func _ready() -> void:
+	motion_state = "DEFAULT"
+
 func update_movement_blend_positions(delta:float):
 	movement_lerp_time += movement_lerp_speed * delta	
 	movement_lerp_time = clamp(movement_lerp_time, 0, 1)
@@ -134,6 +139,7 @@ func set_motion_base_state():
 ## General function for setting the base motion state according to the two the 
 ## two main base motion enums: BaseMotionState and AlteredMotionState
 func set_motion_state():
+	set_to_altered_motion(false)
 	match base_motion_state:
 		BaseMotionState.DEFAULT:
 			set_to_default()
@@ -143,11 +149,10 @@ func set_motion_state():
 			set_to_run()
 		_:
 			pass
-			
+	
 	match altered_motion_state:
 		AlteredMotionState.DEFAULT:
-			#set_to_default()
-			pass
+			set_to_altered_motion(true)
 		AlteredMotionState.RANGED_PISTOL:
 			set("parameters/AlteredMotionStates/transition_request", "ranged_pistol")
 		AlteredMotionState.RANGED_RIFLE:
@@ -159,6 +164,12 @@ func set_motion_state():
 		_:
 			pass
 			#set_to_default()
+
+func set_to_altered_motion(altered:bool)->void:
+	if altered:
+		set("parameters/AlteredMotionBlend/blend_amount", 0)
+	else:
+		set("parameters/AlteredMotionBlend/blend_amount", 1)
 
 func set_to_default():
 	print("DEFAULT")

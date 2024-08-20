@@ -36,7 +36,6 @@ func _physics_process(delta: float) -> void:
 	avatar.is_running = is_running
 	avatar.movement = blend_position
 
-
 func _on_option_button_motion_states_item_selected(index: int) -> void:
 	match index:
 		0: # Default
@@ -66,3 +65,15 @@ func _on_option_button_actions_item_selected(index: int) -> void:
 			avatar.motion_state = "DEFAULT"
 		_: # NONE
 			avatar.motion_state = "DEFAULT"
+
+
+func _on_option_button_one_shots_item_selected(index: int) -> void:
+	print(index)
+
+
+func _on_option_button_misc_loops_item_selected(index: int) -> void:
+	print(index)
+
+
+func _on_option_button_personalities_item_selected(index: int) -> void:
+	print(index)
