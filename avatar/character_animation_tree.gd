@@ -160,7 +160,6 @@ func set_motion_state():
 			pass
 			#set_to_default()
 
-
 func set_to_default():
 	print("DEFAULT")
 	set("parameters/WalkSneakTransition/transition_request", "walk")
@@ -175,7 +174,6 @@ func set_to_run():
 	set("parameters/DefaultRunTransition/transition_request", "run")
 
 func set_general_motion_state(motion_state:String)->void:
-	
 	if BaseMotionState.has(motion_state):
 		base_motion_state = BaseMotionState.get(motion_state)
 	if AlteredMotionState.has(motion_state):
