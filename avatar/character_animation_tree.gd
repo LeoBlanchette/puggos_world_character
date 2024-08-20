@@ -8,6 +8,7 @@ enum BaseMotionState{
 	SNEAK,
 	RUN,
 }
+
 enum AlteredMotionState{
 	DEFAULT,
 	RANGED_PISTOL,
@@ -15,6 +16,13 @@ enum AlteredMotionState{
 	TWO_HANDED_BLUDGEON,
 	ONE_HANDED_SHARP,
 }
+
+var motion_state:String:
+	set(value):
+		motion_state = value
+		set_general_motion_state(value)
+	get():
+		return motion_state
 
 var base_motion_state:BaseMotionState = BaseMotionState.DEFAULT:
 	set(value):
@@ -138,17 +146,18 @@ func set_motion_state():
 			
 	match altered_motion_state:
 		AlteredMotionState.DEFAULT:
-			pass
+			set_to_default()
 		AlteredMotionState.RANGED_PISTOL:
-			pass
+			set("parameters/AlteredMotionStates/transition_request", "ranged_pistol")
 		AlteredMotionState.RANGED_RIFLE:
-			pass
+			set("parameters/AlteredMotionStates/transition_request", "ranged_rifle")
 		AlteredMotionState.TWO_HANDED_BLUDGEON:
-			pass
+			set("parameters/AlteredMotionStates/transition_request", "two_handed_bludgeon")
 		AlteredMotionState.ONE_HANDED_SHARP:
-			pass
+			set("parameters/AlteredMotionStates/transition_request", "one_handed_sharp")
 		_:
-			pass
+			set_to_default()
+
 
 func set_to_default():
 	set("parameters/WalkSneakTransition/transition_request", "walk")
@@ -161,3 +170,9 @@ func set_to_sneak():
 func set_to_run():
 	set("parameters/WalkSneakTransition/transition_request", "walk")
 	set("parameters/DefaultRunTransition/transition_request", "run")
+
+func set_general_motion_state(motion_state:String)->void:
+	if BaseMotionState.has(motion_state):
+		base_motion_state = BaseMotionState.get(motion_state)
+	if AlteredMotionState.has(motion_state):
+		altered_motion_state = AlteredMotionState.get(motion_state)

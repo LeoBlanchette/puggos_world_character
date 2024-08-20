@@ -39,29 +39,29 @@ func _physics_process(delta: float) -> void:
 func _on_option_button_motion_states_item_selected(index: int) -> void:
 	match index:
 		0: # Default
-			pass
+			avatar.motion_state = "DEFAULT"
 		1: # Object: One Handed Slash
-			pass
-		2: # Object: Two Handed Slash
-			pass
+			avatar.motion_state = "ONE_HANDED_SHARP"
+		2: # Object: Two Handed BLUDGEON
+			avatar.motion_state = "TWO_HANDED_BLUDGEON"
 		3: # Object: One Handed Ranged
-			pass
+			avatar.motion_state = "RANGED_PISTOL"
 		4: # Object: Two Handed Ranged
-			pass
+			avatar.motion_state = "RANGED_RIFLE"
 		_: # Default
-			pass
+			avatar.motion_state = "DEFAULT"
 
 func _on_option_button_actions_item_selected(index: int) -> void:
 	match index:
 		0: # NONE
-			pass
+			avatar.motion_state = "DEFAULT"
 		1: # Punch Right
-			pass
+			avatar.motion_state = "DEFAULT"
 		2: # Punch Left
-			pass
+			avatar.motion_state = "DEFAULT"
 		3: # Kick Right
-			pass
+			avatar.motion_state = "DEFAULT"
 		4: # Kick Left
-			pass
+			avatar.motion_state = "DEFAULT"
 		_: # NONE
-			pass
+			avatar.motion_state = "DEFAULT"
