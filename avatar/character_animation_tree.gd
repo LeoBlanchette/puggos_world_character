@@ -91,6 +91,7 @@ func update_movement_blend_positions(delta:float):
 	movement_lerp_time += movement_lerp_speed * delta	
 	movement_lerp_time = clamp(movement_lerp_time, 0, 1)
 	
+	
 	# DEFAULT MOTION
 	set("parameters/MovementDefault/blend_position", movement_last_value.lerp(movement, movement_lerp_time))
 	set("parameters/MovementDefaultSneak/blend_position", movement_last_value.lerp(movement, movement_lerp_time))
