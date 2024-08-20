@@ -17,6 +17,74 @@ size = Vector3(10, 0.5, 10)
 script = ExtResource("1_03tt1")
 avatar = NodePath("Avatar")
 
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Menu"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LabelMotionSttes" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Motion States
+"
+
+[node name="OptionButtonMotionStates" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+selected = 0
+item_count = 5
+popup/item_0/text = "Default"
+popup/item_1/text = "Object: One Handed Slash"
+popup/item_1/id = 1
+popup/item_2/text = "Object: Two Handed Slash"
+popup/item_2/id = 2
+popup/item_3/text = "Object: One Handed Ranged"
+popup/item_3/id = 3
+popup/item_4/text = "Object: Two Handed Ranged"
+popup/item_4/id = 4
+
+[node name="LabelActions" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Actions"
+
+[node name="OptionButtonActions" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "NONE"
+popup/item_0/id = 1
+popup/item_1/text = "Punch Right"
+popup/item_1/id = 1
+popup/item_2/text = "Punch Left"
+popup/item_2/id = 2
+popup/item_3/text = "Kick Right"
+popup/item_3/id = 3
+popup/item_4/text = "Kick Left"
+popup/item_4/id = 4
+popup/item_5/text = "Eat Ramen"
+popup/item_5/id = 5
+
 [node name="Avatar" parent="." instance=ExtResource("1_f6u2y")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -42,3 +110,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_mh7bm")
+
+[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMotionStates" to="." method="_on_option_button_motion_states_item_selected"]
+[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonActions" to="." method="_on_option_button_actions_item_selected"]

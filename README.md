@@ -19,3 +19,5 @@ Add this to your input map:
 - move_left (a)
 - move_right (d)
 - move_crouch (c)
+- tab (tab)
+- shift (shift)
