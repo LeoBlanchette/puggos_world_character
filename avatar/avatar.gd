@@ -9,6 +9,10 @@ class_name Avatar
 
 @export var animation_tree: CharacterAnimationTree
 
+var animations:Array[String]:
+	get():
+		return animation_tree.animations
+
 #region movement control
 var movement:Vector2:
 	set(value):
@@ -52,7 +56,17 @@ var is_running:bool:
 
 func _physics_process(delta: float) -> void:
 	animation_tree.update_movement_blend_positions(delta)
-	
+
+func play_animation(animation_name:String)->void:
+	if animation_tree.has_animation("Character/%s"%animation_name):
+		animation_tree.active = false
+		var animation:Animation = animation_tree.animation_player.get_animation("Character/%s"%animation_name)
+		var length:float = animation.length		
+		animation_tree.animation_player.play("Character/%s"%animation_name)
+		
+		await get_tree().create_timer(length).timeout
+		animation_tree.active = true
+		
 func do_punch_right():
 	pass
 func do_punch_left():

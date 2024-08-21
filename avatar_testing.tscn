@@ -13,9 +13,11 @@
 [sub_resource type="BoxMesh" id="BoxMesh_mh7bm"]
 size = Vector3(10, 0.5, 10)
 
-[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar")]
+[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar", "option_button_one_shots", "option_button_misc_loops")]
 script = ExtResource("1_03tt1")
 avatar = NodePath("Avatar")
+option_button_one_shots = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonOneShots")
+option_button_misc_loops = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMiscLoops")
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3

@@ -7,6 +7,22 @@ var is_combat_mode:bool = false
 var is_moving:bool = false
 var is_running:bool = false
 
+#region UI/Menu options
+@export var option_button_one_shots: OptionButton
+@export var option_button_misc_loops: OptionButton 
+
+#region 
+
+func _ready() -> void:
+	populate_test_animations()
+
+func populate_test_animations():
+	for animation:String in avatar.animations:
+		if animation.to_lower().contains("oneshot"):
+			option_button_one_shots.add_item(animation)
+		if animation.to_lower().contains("loop"):
+			option_button_misc_loops.add_item(animation)
+
 func _physics_process(delta: float) -> void:
 	blend_position = Vector2.ZERO
 	is_running = false
@@ -68,12 +84,12 @@ func _on_option_button_actions_item_selected(index: int) -> void:
 
 
 func _on_option_button_one_shots_item_selected(index: int) -> void:
-	print(index)
-
-
+	var text:String = option_button_one_shots.get_item_text(index)
+	avatar.play_animation(text)
+	
 func _on_option_button_misc_loops_item_selected(index: int) -> void:
-	print(index)
-
-
+	var text:String = option_button_misc_loops.get_item_text(index)
+	avatar.play_animation(text)
+	
 func _on_option_button_personalities_item_selected(index: int) -> void:
 	print(index)

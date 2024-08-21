@@ -18,6 +18,7 @@ enum AlteredMotionState{
 	ONE_HANDED_SHARP,
 }
 
+var animations:Array[String] = []
 
 var motion_state:String:
 	set(value):
@@ -86,6 +87,12 @@ var is_running:bool = false:
 
 func _ready() -> void:
 	motion_state = "DEFAULT"
+	populate_animation_list()
+	
+func populate_animation_list()->void:
+	var lib: AnimationLibrary  = animation_player.get_animation_library("Character")
+	for animation:String in lib.get_animation_list():
+		animations.append(animation)
 
 func update_movement_blend_positions(delta:float):
 	movement_lerp_time += movement_lerp_speed * delta	
@@ -164,7 +171,7 @@ func set_motion_state():
 			set("parameters/AlteredMotionStates/transition_request", "one_handed_sharp")
 		_:
 			pass
-			#set_to_default()
+
 
 func set_to_altered_motion(altered:bool)->void:
 	if altered:
@@ -173,7 +180,6 @@ func set_to_altered_motion(altered:bool)->void:
 		set("parameters/AlteredMotionBlend/blend_amount", 1)
 
 func set_to_default():
-	print("DEFAULT")
 	set("parameters/WalkSneakTransition/transition_request", "walk")
 	set("parameters/DefaultRunTransition/transition_request", "default")
 
