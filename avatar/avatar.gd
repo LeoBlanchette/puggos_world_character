@@ -19,7 +19,7 @@ var movement:Vector2:
 		animation_tree.movement = value
 	get():
 		return animation_tree.movement
-#region 
+#endregion 
 
 #region motion states
 var motion_state:String:
@@ -52,29 +52,22 @@ var is_running:bool:
 		animation_tree.is_running = value
 	get():
 		return animation_tree.is_running
-#region 
+#endregion 
+
+#region
+## This applies to secondary animations layered on top of primary core animations.
+## Limits animation to a particular body region so that the avatar can mutitask,
+## such as eating while running.
+var affected_body_region:AnimationMerger.BodyRegion:
+	set(value):
+		affected_body_region = value
+		animation_tree.animation_merger.body_region = value
+	get():
+		return animation_tree.animation_merger.body_region
+#endregion
 
 func _physics_process(delta: float) -> void:
 	animation_tree.update_movement_blend_positions(delta)
 
 func play_animation(animation_name:String)->void:
-	if animation_tree.has_animation("Character/%s"%animation_name):
-		animation_tree.active = false
-		var animation:Animation = animation_tree.animation_player.get_animation("Character/%s"%animation_name)
-		var length:float = animation.length		
-		animation_tree.animation_player.play("Character/%s"%animation_name)
-		
-		await get_tree().create_timer(length).timeout
-		animation_tree.active = true
-		
-func do_punch_right():
-	pass
-func do_punch_left():
-	pass
-func do_kick_right():
-	pass
-func do_kick_left():
-	pass
-
-
-		
+	animation_tree.play_animation(animation_name)

@@ -1,6 +1,5 @@
 extends AnimationTree
 
-
 class_name CharacterAnimationTree
 @export var animation_player: AnimationPlayer
 
@@ -19,6 +18,9 @@ enum AlteredMotionState{
 }
 
 var animations:Array[String] = []
+
+@export var animation:AnimationNode
+@export var animation_merger: AnimationMerger
 
 var motion_state:String:
 	set(value):
@@ -88,6 +90,8 @@ var is_running:bool = false:
 func _ready() -> void:
 	motion_state = "DEFAULT"
 	populate_animation_list()
+	var test = get("parameters/CustomAnimation/animation")
+	print(test)
 	
 func populate_animation_list()->void:
 	var lib: AnimationLibrary  = animation_player.get_animation_library("Character")
@@ -196,3 +200,13 @@ func set_general_motion_state(motion_state:String)->void:
 		base_motion_state = BaseMotionState.get(motion_state)
 	if AlteredMotionState.has(motion_state):
 		altered_motion_state = AlteredMotionState.get(motion_state)
+
+func play_animation(animation_name:String)->void:
+	if has_animation("Character/%s"%animation_name):
+		
+		var animation:Animation = get_animation("Character/%s"%animation_name)
+		var length:float = animation.length		
+		animation_player.play("Character/%s"%animation_name)
+		
+		await get_tree().create_timer(length).timeout
+		animation_merger.body_region = AnimationMerger.BodyRegion.NONE

@@ -10,7 +10,7 @@ var is_running:bool = false
 #region UI/Menu options
 @export var option_button_one_shots: OptionButton
 @export var option_button_misc_loops: OptionButton 
-
+@export var option_button_personalities: OptionButton 
 #region 
 
 func _ready() -> void:
@@ -18,9 +18,11 @@ func _ready() -> void:
 
 func populate_test_animations():
 	for animation:String in avatar.animations:
-		if animation.to_lower().contains("oneshot"):
+		if animation.to_lower().contains("oneshot_"):
 			option_button_one_shots.add_item(animation)
-		if animation.to_lower().contains("loop"):
+		if animation.to_lower().contains("loop_"):
+			option_button_misc_loops.add_item(animation)
+		if animation.to_lower().contains("personality_"):
 			option_button_misc_loops.add_item(animation)
 
 func _physics_process(delta: float) -> void:
@@ -67,22 +69,6 @@ func _on_option_button_motion_states_item_selected(index: int) -> void:
 		_: # Default
 			avatar.motion_state = "DEFAULT"
 
-func _on_option_button_actions_item_selected(index: int) -> void:
-	match index:
-		0: # NONE
-			avatar.motion_state = "DEFAULT"
-		1: # Punch Right
-			avatar.motion_state = "DEFAULT"
-		2: # Punch Left
-			avatar.motion_state = "DEFAULT"
-		3: # Kick Right
-			avatar.motion_state = "DEFAULT"
-		4: # Kick Left
-			avatar.motion_state = "DEFAULT"
-		_: # NONE
-			avatar.motion_state = "DEFAULT"
-
-
 func _on_option_button_one_shots_item_selected(index: int) -> void:
 	var text:String = option_button_one_shots.get_item_text(index)
 	avatar.play_animation(text)
@@ -92,4 +78,23 @@ func _on_option_button_misc_loops_item_selected(index: int) -> void:
 	avatar.play_animation(text)
 	
 func _on_option_button_personalities_item_selected(index: int) -> void:
-	print(index)
+	var text:String = option_button_personalities.get_item_text(index)
+	avatar.play_animation(text)
+
+
+func _on_option_button_affected_regions_item_selected(index: int) -> void:
+	var affected_region:AnimationMerger.BodyRegion
+	match index:
+		0:
+			affected_region = AnimationMerger.BodyRegion.NONE
+		1: 
+			affected_region = AnimationMerger.BodyRegion.FULL
+		2: 
+			affected_region = AnimationMerger.BodyRegion.HEAD
+		3: 
+			affected_region = AnimationMerger.BodyRegion.TORSO
+		4: 
+			affected_region = AnimationMerger.BodyRegion.LEGS
+		_:
+			affected_region = AnimationMerger.BodyRegion.NONE
+	avatar.affected_body_region = affected_region

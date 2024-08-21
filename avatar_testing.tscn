@@ -13,11 +13,12 @@
 [sub_resource type="BoxMesh" id="BoxMesh_mh7bm"]
 size = Vector3(10, 0.5, 10)
 
-[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar", "option_button_one_shots", "option_button_misc_loops")]
+[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar", "option_button_one_shots", "option_button_misc_loops", "option_button_personalities")]
 script = ExtResource("1_03tt1")
 avatar = NodePath("Avatar")
 option_button_one_shots = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonOneShots")
 option_button_misc_loops = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMiscLoops")
+option_button_personalities = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonPersonalities")
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
@@ -48,7 +49,7 @@ layout_mode = 2
 
 [node name="LabelMotionSttes" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Game-specific locomotion blends a part of core gameplay."
+tooltip_text = "Game-specific locomotion blends a part of core gameplay. Not meant for modding."
 mouse_filter = 0
 text = "Motion States
 "
@@ -68,28 +69,25 @@ popup/item_3/id = 3
 popup/item_4/text = "Object: Two Handed Ranged"
 popup/item_4/id = 4
 
-[node name="LabelActions" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelAffectedRegions" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-tooltip_text = "Game-specific actions that are a part of core gameplay."
+tooltip_text = "Actions animations can be isolated to body regions. "
 mouse_filter = 0
-text = "Actions"
+text = "Affected Regions"
 
-[node name="OptionButtonActions" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionButtonAffectedRegions" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 selected = 0
-item_count = 6
+item_count = 5
 popup/item_0/text = "NONE"
-popup/item_0/id = 1
-popup/item_1/text = "Punch Right"
+popup/item_1/text = "FULL BODY"
 popup/item_1/id = 1
-popup/item_2/text = "Punch Left"
+popup/item_2/text = "HEAD"
 popup/item_2/id = 2
-popup/item_3/text = "Kick Right"
+popup/item_3/text = "TORSO"
 popup/item_3/id = 3
-popup/item_4/text = "Kick Left"
+popup/item_4/text = "LEGS"
 popup/item_4/id = 4
-popup/item_5/text = "Eat Ramen"
-popup/item_5/id = 5
 
 [node name="LabelOneShots" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -154,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_mh7bm")
 
 [connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMotionStates" to="." method="_on_option_button_motion_states_item_selected"]
-[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonActions" to="." method="_on_option_button_actions_item_selected"]
+[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonAffectedRegions" to="." method="_on_option_button_affected_regions_item_selected"]
 [connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonOneShots" to="." method="_on_option_button_one_shots_item_selected"]
 [connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMiscLoops" to="." method="_on_option_button_misc_loops_item_selected"]
 [connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonPersonalities" to="." method="_on_option_button_personalities_item_selected"]
