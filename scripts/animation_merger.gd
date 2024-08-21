@@ -76,8 +76,6 @@ func set_temporary_track_index(animation:Animation):
 				temporary_track_index[bone_name] = i
 
 func set_affected_body_region(region:BodyRegion = BodyRegion.FULL):
-	if region == BodyRegion.NONE:
-		return
 	match region:
 		BodyRegion.NONE:
 			affected_body_region = []
