@@ -3,11 +3,12 @@ extends Node3D
 ## This Avatar class acts as a relay to sub-functionality, the main ones being the
 ## character animation and character appearance. The Avatar class / object as a 
 ## whole is meant to be agnostic to it's parent system, with the main controlling
-## devices being in the Avatar parent.
+## devices being in the Avatar parent (Character Controller).
 
 class_name Avatar
 
 @export var animation_tree: CharacterAnimationTree
+@export var character_appearance: CharacterAppearance
 
 var animations:Array[String]:
 	get():
@@ -64,10 +65,15 @@ var affected_body_region:AnimationMerger.BodyRegion:
 		animation_tree.animation_merger.body_region = value
 	get():
 		return animation_tree.animation_merger.body_region
-#endregion
 
-func _physics_process(delta: float) -> void:
-	animation_tree.update_movement_blend_positions(delta)
-
+## Plays a custom animation, not a base movement (builtin).
 func play_animation(animation_name:String)->void:
 	animation_tree.play_animation(animation_name)
+#endregion
+
+
+	
+#region appearance
+func equip(slot:String, path:String):
+	character_appearance.equip_slot(slot, path)
+#endregion

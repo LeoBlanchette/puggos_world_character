@@ -91,7 +91,9 @@ func _ready() -> void:
 	motion_state = "DEFAULT"
 	populate_animation_list()
 	var test = get("parameters/CustomAnimation/animation")
-	print(test)
+
+func _physics_process(delta: float) -> void:
+	update_movement_blend_positions(delta)
 	
 func populate_animation_list()->void:
 	var lib: AnimationLibrary  = animation_player.get_animation_library("Character")
