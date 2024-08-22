@@ -56,19 +56,10 @@ var is_running:bool:
 #endregion 
 
 #region
-## This applies to secondary animations layered on top of primary core animations.
-## Limits animation to a particular body region so that the avatar can mutitask,
-## such as eating while running.
-var affected_body_region:AnimationMerger.BodyRegion:
-	set(value):
-		affected_body_region = value
-		animation_tree.animation_merger.body_region = value
-	get():
-		return animation_tree.animation_merger.body_region
 
 ## Plays a custom animation, not a base movement (builtin).
-func play_animation(animation_name:String)->void:
-	animation_tree.play_animation(animation_name)
+func play_animation(animation_name:String, body_region:String = "NONE")->void:
+	animation_tree.play_animation(animation_name, body_region)
 #endregion
 
 

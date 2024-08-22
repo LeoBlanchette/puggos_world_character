@@ -6,6 +6,7 @@ var is_crouching:bool = false
 var is_combat_mode:bool = false
 var is_moving:bool = false
 var is_running:bool = false
+var affected_body_region:String = "NONE"
 
 #region UI/Menu options
 @export var option_button_one_shots: OptionButton
@@ -15,7 +16,6 @@ var is_running:bool = false
 
 func _ready() -> void:
 	populate_test_animations()
-
 func populate_test_animations():
 	for animation:String in avatar.animations:
 		if animation.to_lower().contains("oneshot_"):
@@ -71,11 +71,11 @@ func _on_option_button_motion_states_item_selected(index: int) -> void:
 
 func _on_option_button_one_shots_item_selected(index: int) -> void:
 	var text:String = option_button_one_shots.get_item_text(index)
-	avatar.play_animation(text)
+	avatar.play_animation(text, affected_body_region)
 	
 func _on_option_button_misc_loops_item_selected(index: int) -> void:
 	var text:String = option_button_misc_loops.get_item_text(index)
-	avatar.play_animation(text)
+	avatar.play_animation(text, affected_body_region)
 	
 func _on_option_button_personalities_item_selected(index: int) -> void:
 	var text:String = option_button_personalities.get_item_text(index)
@@ -83,18 +83,18 @@ func _on_option_button_personalities_item_selected(index: int) -> void:
 
 
 func _on_option_button_affected_regions_item_selected(index: int) -> void:
-	var affected_region:AnimationMerger.BodyRegion
+	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.NONE
 	match index:
 		0:
-			affected_region = AnimationMerger.BodyRegion.NONE
+			body_region = AnimationMerger.BodyRegion.NONE
 		1: 
-			affected_region = AnimationMerger.BodyRegion.FULL
+			body_region = AnimationMerger.BodyRegion.FULL
 		2: 
-			affected_region = AnimationMerger.BodyRegion.HEAD
+			body_region = AnimationMerger.BodyRegion.HEAD
 		3: 
-			affected_region = AnimationMerger.BodyRegion.TORSO
+			body_region = AnimationMerger.BodyRegion.TORSO
 		4: 
-			affected_region = AnimationMerger.BodyRegion.LEGS
+			body_region = AnimationMerger.BodyRegion.LEGS
 		_:
-			affected_region = AnimationMerger.BodyRegion.NONE
-	avatar.affected_body_region = affected_region
+			body_region = AnimationMerger.BodyRegion.NONE
+	affected_body_region = AnimationMerger.BodyRegion.keys()[body_region]

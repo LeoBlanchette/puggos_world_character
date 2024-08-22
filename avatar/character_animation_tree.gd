@@ -203,9 +203,10 @@ func set_general_motion_state(motion_state:String)->void:
 	if AlteredMotionState.has(motion_state):
 		altered_motion_state = AlteredMotionState.get(motion_state)
 
-func play_animation(animation_name:String)->void:
+func play_animation(animation_name:String, affected_body_region:String = "NONE")->void:
+	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.get(affected_body_region.to_upper())
 	if has_animation("Character/%s"%animation_name):
-		
+		animation_merger.body_region = body_region
 		var animation:Animation = get_animation("Character/%s"%animation_name)
 		var length:float = animation.length		
 		animation_player.play("Character/%s"%animation_name)
