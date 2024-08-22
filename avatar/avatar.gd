@@ -62,8 +62,6 @@ func play_animation(animation_name:String, body_region:String = "NONE")->void:
 	animation_tree.play_animation(animation_name, body_region)
 #endregion
 
-
-	
 #region appearance
 func equip(slot:String, path:String):
 	character_appearance.equip_slot(slot, path)

@@ -98,6 +98,8 @@ enum Equippable{
 	SLOT_34, #Hand Right
 }
 
+@export var character_mesh: MeshInstance3D 
+
 ## Main entry point for equiping visible items. 
 ## Provide Slot number and Path to resource.
 ## Path is obtained from character controller via ID and provided to character
@@ -112,10 +114,13 @@ func equip_slot(slot:String, path:String):
 		pre_slot_equiped.emit(equip_slot)
 	match equip_slot:
 		Equippable.SLOT_1:
+			equip_slot_texture(Equippable.SLOT_1, path)
 			slot_1_equipped.emit()
 		Equippable.SLOT_2:
+			equip_slot_texture(Equippable.SLOT_2, path)
 			slot_2_equipped.emit()
 		Equippable.SLOT_3:
+			equip_slot_texture(Equippable.SLOT_3, path)
 			slot_3_equipped.emit()
 		Equippable.SLOT_4:
 			slot_4_equipped.emit()
@@ -184,3 +189,25 @@ func equip_slot(slot:String, path:String):
 			
 	if slot_found:
 		post_slot_equiped.emit(equip_slot)
+
+## Equips a texture to the skin layers.
+func equip_slot_texture(slot:Equippable, path:String):
+	var material:StandardMaterial3D
+	var blank_texture_path:String = "res://addons/puggos_world_character/base_textures/_blank.png" 
+	var default_texture_path:String = "res://addons/puggos_world_character/test_objects/slot_1/tan.png"
+	match slot:
+		Equippable.SLOT_1:
+			material = character_mesh.get_surface_override_material(0)
+			if path.is_empty():
+				path = default_texture_path
+		Equippable.SLOT_2:
+			material = character_mesh.get_surface_override_material(0).next_pass
+			if path.is_empty():
+				path = blank_texture_path
+		Equippable.SLOT_3:
+			material = character_mesh.get_surface_override_material(0).next_pass.next_pass
+			if path.is_empty():
+				path = blank_texture_path
+				
+	var texture:Texture2D = load(path)
+	material.albedo_texture = texture

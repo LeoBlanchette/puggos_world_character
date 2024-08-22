@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dqkthq0lor5eh"]
+
+[ext_resource type="Material" uid="uid://cyi6kd1kgw5ky" path="res://addons/puggos_world_character/character/base_materials/slot_2_base_material.tres" id="1_vy3a5"]
+
+[resource]
+resource_local_to_scene = true
+next_pass = ExtResource("1_vy3a5")

@@ -55,6 +55,8 @@ func populate_test_appearance_objects():
 func create_slot_ui_entry(slot:int, path:String):
 	if path.ends_with(".import"):
 		return
+	if path.ends_with(".txt"):
+		return
 	##Create dropdown button entry in corresponding slot number
 	var dropdown:OptionButton = slot_options["SLOT_%s"%str(slot)]
 	dropdown.add_item(path)
@@ -321,10 +323,14 @@ func _on_slot_34_item_selected(index: int) -> void:
 	option_selected("SLOT_34", index)
 
 func option_selected(slot:String, index:int):
+
 	var test_objects_path:String = "res://addons/puggos_world_character/test_objects"
 	var option_button:OptionButton = slot_options[slot]
 	var item_text:String = option_button.get_item_text(index)
 	var item_path:String = "%s/%s/%s"%[test_objects_path, slot.to_lower(), item_text]
+	if item_text == "-":
+		avatar.equip(slot, "")
+		return
 	avatar.equip(slot, item_path)
 	
 #endregion
