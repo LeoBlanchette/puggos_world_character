@@ -108,9 +108,8 @@ func equip_slot(slot:String, path:String):
 	var slot_found:bool = false
 	if Equippable.has(slot):
 		slot_found = true
-		equip_slot = Equippable.get(slot)		
+		equip_slot = Equippable.get(slot)
 		pre_slot_equiped.emit(equip_slot)
-		
 	match equip_slot:
 		Equippable.SLOT_1:
 			slot_1_equipped.emit()

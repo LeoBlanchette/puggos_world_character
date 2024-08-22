@@ -29,6 +29,8 @@ func _ready():
 	_rotation = _anchor_node.transform.basis.get_rotation_quaternion().get_euler()
 
 func _process(delta: float):
+	if AvatarTestingUI.instance.ui_blocking:
+		return
 	if is_zoom_in:
 		_scroll_speed = -1 * ZOOM_SPEED
 	if is_zoom_out:
@@ -57,6 +59,8 @@ func _process_transformation(delta: float):
 	_anchor_node.transform.basis = Basis(Quaternion.from_euler(_rotation))
 
 func _input(event):
+	if AvatarTestingUI.instance.ui_blocking:
+		return
 	if event is InputEventScreenDrag:
 		_process_touch_rotation_event(event)
 	elif event is InputEventMouseMotion:

@@ -1,4 +1,7 @@
 extends Node3D
+class_name AvatarTestingUI
+
+static var instance:AvatarTestingUI
 
 @export var avatar:Avatar
 var blend_position:Vector2 
@@ -9,13 +12,69 @@ var is_running:bool = false
 var affected_body_region:String = "NONE"
 
 #region UI/Menu options
+var ui_blocking:bool = false
 @export var option_button_one_shots: OptionButton
 @export var option_button_misc_loops: OptionButton 
 @export var option_button_personalities: OptionButton 
+ 
+@export var v_box_container_motion: VBoxContainer
+@export var v_box_container_appearance: VBoxContainer
+var slot_options:Dictionary = {}
 #region 
 
 func _ready() -> void:
+	if instance == null:
+		instance = self
+	else:
+		queue_free()
 	populate_test_animations()
+	populate_slot_option_buttons()
+	populate_test_appearance_objects()
+	show_motion_options()
+
+func _exit_tree() -> void:
+	if instance != null:
+		instance = null
+
+func populate_slot_option_buttons():
+	for child in v_box_container_appearance.get_children():
+		if child.name.to_lower().contains("slot_"):
+			var option_button:OptionButton = child
+			slot_options[option_button.name.to_upper()] = option_button
+			option_button.add_item("-")
+			
+func populate_test_appearance_objects():	
+	var appearance_objects := "res://addons/puggos_world_character/test_objects"
+	for x in range(34):		
+		var folder:String = "%s/slot_%s/"%[appearance_objects, str(x+1)]
+		var objects:Array[String] = dir_contents(folder)
+		if not objects.is_empty():
+			for path:String in objects:
+				create_slot_ui_entry(x+1, path)
+		
+func create_slot_ui_entry(slot:int, path:String):
+	if path.ends_with(".import"):
+		return
+	##Create dropdown button entry in corresponding slot number
+	var dropdown:OptionButton = slot_options["SLOT_%s"%str(slot)]
+	dropdown.add_item(path)
+	
+func dir_contents(path)->Array[String]:
+	var paths:Array[String] = []
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				paths.append(file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	return paths
+	
 func populate_test_animations():
 	for animation:String in avatar.animations:
 		if animation.to_lower().contains("oneshot_"):
@@ -98,3 +157,174 @@ func _on_option_button_affected_regions_item_selected(index: int) -> void:
 		_:
 			body_region = AnimationMerger.BodyRegion.NONE
 	affected_body_region = AnimationMerger.BodyRegion.keys()[body_region]
+
+
+func _on_button_motion_test_pressed() -> void:
+	show_motion_options()
+
+
+func _on_button_appearance_test_pressed() -> void:
+	show_appearance_options()
+
+func show_motion_options():
+	v_box_container_appearance.hide()
+	v_box_container_motion.show()
+	
+func show_appearance_options():
+	v_box_container_motion.hide()
+	v_box_container_appearance.show()
+
+func _on_menu_mouse_entered() -> void:
+	ui_blocking = false
+
+
+func _on_menu_mouse_exited() -> void:
+	ui_blocking = true
+
+
+#region slot options
+
+
+func _on_slot_1_item_selected(index: int) -> void:
+	option_selected("SLOT_1", index)
+
+
+func _on_slot_2_item_selected(index: int) -> void:
+	option_selected("SLOT_2", index)
+
+
+func _on_slot_3_item_selected(index: int) -> void:
+	option_selected("SLOT_3", index)
+
+
+func _on_slot_4_item_selected(index: int) -> void:
+	option_selected("SLOT_4", index)
+
+
+func _on_slot_5_item_selected(index: int) -> void:
+	option_selected("SLOT_5", index)
+
+
+func _on_slot_6_item_selected(index: int) -> void:
+	option_selected("SLOT_6", index)
+
+
+func _on_slot_7_item_selected(index: int) -> void:
+	option_selected("SLOT_7", index)
+
+
+func _on_slot_8_item_selected(index: int) -> void:
+	option_selected("SLOT_8", index)
+
+
+func _on_slot_9_item_selected(index: int) -> void:
+	option_selected("SLOT_9", index)
+
+
+func _on_slot_10_item_selected(index: int) -> void:
+	option_selected("SLOT_10", index)
+
+
+func _on_slot_11_item_selected(index: int) -> void:
+	option_selected("SLOT_11", index)
+
+
+func _on_slot_12_item_selected(index: int) -> void:
+	option_selected("SLOT_12", index)
+
+
+func _on_slot_13_item_selected(index: int) -> void:
+	option_selected("SLOT_13", index)
+
+
+func _on_slot_14_item_selected(index: int) -> void:
+	option_selected("SLOT_14", index)
+
+
+func _on_slot_15_item_selected(index: int) -> void:
+	option_selected("SLOT_15", index)
+
+
+func _on_slot_16_item_selected(index: int) -> void:
+	option_selected("SLOT_16", index)
+
+
+func _on_slot_17_item_selected(index: int) -> void:
+	option_selected("SLOT_17", index)
+
+
+func _on_slot_18_item_selected(index: int) -> void:
+	option_selected("SLOT_18", index)
+
+
+func _on_slot_19_item_selected(index: int) -> void:
+	option_selected("SLOT_19", index)
+
+
+func _on_slot_20_item_selected(index: int) -> void:
+	option_selected("SLOT_20", index)
+
+
+func _on_slot_21_item_selected(index: int) -> void:
+	option_selected("SLOT_21", index)
+
+
+func _on_slot_22_item_selected(index: int) -> void:
+	option_selected("SLOT_22", index)
+
+
+func _on_slot_23_item_selected(index: int) -> void:
+	option_selected("SLOT_23", index)
+
+
+func _on_slot_24_item_selected(index: int) -> void:
+	option_selected("SLOT_24", index)
+
+
+func _on_slot_25_item_selected(index: int) -> void:
+	option_selected("SLOT_25", index)
+
+
+func _on_slot_26_item_selected(index: int) -> void:
+	option_selected("SLOT_26", index)
+
+
+func _on_slot_27_item_selected(index: int) -> void:
+	option_selected("SLOT_27", index)
+
+
+func _on_slot_28_item_selected(index: int) -> void:
+	option_selected("SLOT_28", index)
+
+
+func _on_slot_29_item_selected(index: int) -> void:
+	option_selected("SLOT_29", index)
+
+
+func _on_slot_30_item_selected(index: int) -> void:
+	option_selected("SLOT_30", index)
+
+
+func _on_slot_31_item_selected(index: int) -> void:
+	option_selected("SLOT_31", index)
+
+
+func _on_slot_32_item_selected(index: int) -> void:
+	option_selected("SLOT_32", index)
+
+
+func _on_slot_33_item_selected(index: int) -> void:
+	option_selected("SLOT_33", index)
+
+
+func _on_slot_34_item_selected(index: int) -> void:
+	option_selected("SLOT_34", index)
+
+func option_selected(slot:String, index:int):
+	var test_objects_path:String = "res://addons/puggos_world_character/test_objects"
+	var option_button:OptionButton = slot_options[slot]
+	var item_text:String = option_button.get_item_text(index)
+	var item_path:String = "%s/%s/%s"%[test_objects_path, slot.to_lower(), item_text]
+	avatar.equip(slot, item_path)
+	
+#endregion

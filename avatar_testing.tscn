@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi4llpyjyygm1"]
+[gd_scene load_steps=10 format=3 uid="uid://bi4llpyjyygm1"]
 
 [ext_resource type="Script" path="res://addons/puggos_world_character/avatar_testing.gd" id="1_03tt1"]
 [ext_resource type="PackedScene" uid="uid://c4bj48um6sbj6" path="res://addons/puggos_world_character/avatar/avatar.tscn" id="1_f6u2y"]
+[ext_resource type="ButtonGroup" uid="uid://dqfl5fvmbvtg1" path="res://addons/puggos_world_character/ui/testmode_options.tres" id="2_adlu5"]
 [ext_resource type="Script" path="res://addons/puggos_world_character/scripts/orbit_camera.gd" id="3_0vagn"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_5chkl"]
 
 [sub_resource type="Environment" id="Environment_pacol"]
 
@@ -13,12 +16,14 @@
 [sub_resource type="BoxMesh" id="BoxMesh_mh7bm"]
 size = Vector3(10, 0.5, 10)
 
-[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar", "option_button_one_shots", "option_button_misc_loops", "option_button_personalities")]
+[node name="AvatarTesting" type="Node3D" node_paths=PackedStringArray("avatar", "option_button_one_shots", "option_button_misc_loops", "option_button_personalities", "v_box_container_motion", "v_box_container_appearance")]
 script = ExtResource("1_03tt1")
 avatar = NodePath("Avatar")
-option_button_one_shots = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonOneShots")
-option_button_misc_loops = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMiscLoops")
-option_button_personalities = NodePath("Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonPersonalities")
+option_button_one_shots = NodePath("Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonOneShots")
+option_button_misc_loops = NodePath("Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonMiscLoops")
+option_button_personalities = NodePath("Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonPersonalities")
+v_box_container_motion = NodePath("Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion")
+v_box_container_appearance = NodePath("Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance")
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
@@ -30,34 +35,60 @@ grow_vertical = 2
 size_flags_horizontal = 0
 mouse_filter = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Menu"]
-custom_minimum_size = Vector2(200, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/ScrollContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="ButtonMotionTest" type="Button" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_adlu5")
+text = "Motion"
+
+[node name="ButtonAppearanceTest" type="Button" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_adlu5")
+text = "Appearance"
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PanelContainer/MarginContainer"]
+[node name="VBoxContainerMotion" type="VBoxContainer" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="LabelMotionSttes" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelMotionSttes" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 tooltip_text = "Game-specific locomotion blends a part of core gameplay. Not meant for modding."
 mouse_filter = 0
 text = "Motion States
 "
 
-[node name="OptionButtonMotionStates" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionButtonMotionStates" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 size_flags_vertical = 0
 selected = 0
+allow_reselect = true
 item_count = 5
 popup/item_0/text = "Default"
 popup/item_1/text = "Object: One Handed Sharp"
@@ -69,15 +100,16 @@ popup/item_3/id = 3
 popup/item_4/text = "Object: Two Handed Ranged"
 popup/item_4/id = 4
 
-[node name="LabelAffectedRegions" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelAffectedRegions" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 tooltip_text = "Actions animations can be isolated to body regions. "
 mouse_filter = 0
 text = "Affected Regions"
 
-[node name="OptionButtonAffectedRegions" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionButtonAffectedRegions" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 5
 popup/item_0/text = "NONE"
 popup/item_1/text = "FULL BODY"
@@ -89,41 +121,289 @@ popup/item_3/id = 3
 popup/item_4/text = "LEGS"
 popup/item_4/id = 4
 
-[node name="LabelOneShots" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelOneShots" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 tooltip_text = "Non-looping animations such as custom combat actions or emotes."
 mouse_filter = 0
 text = "Misc / One-shots"
 
-[node name="OptionButtonOneShots" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionButtonOneShots" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 1
 popup/item_0/text = "NONE"
 
-[node name="LabelMiscLoops" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelMiscLoops" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 tooltip_text = "Misc loops, moddable. Animation loops specific to custom actions assigned."
 mouse_filter = 0
 text = "Misc / Loops"
 
-[node name="OptionButtonMiscLoops" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionButtonMiscLoops" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 1
 popup/item_0/text = "NONE"
 
-[node name="LabelPersonalities" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LabelPersonalities" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 tooltip_text = "\"Personalities\" are the idle animations that show a character's personality. They engage when a character is idle."
 mouse_filter = 0
 text = "Personalities"
 
-[node name="OptionButtonPersonalities" type="OptionButton" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionButtonPersonalities" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion"]
 layout_mode = 2
 selected = 0
+allow_reselect = true
 item_count = 1
 popup/item_0/text = "NONE"
+
+[node name="VBoxContainerAppearance" type="VBoxContainer" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LabelSkin" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "Slot 1: Skin
+Slot 2: Embelishments
+Slot 3: Temporary Effects"
+mouse_filter = 0
+text = "Skin Overlays"
+
+[node name="Slot_1" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_1: Skin"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_2" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_2: Embelishments"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_3" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_3: Temporary Effects"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="LabelHead" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "Face, Mask, Hat / Helmet, Accessories / Misc"
+mouse_filter = 0
+text = "Head"
+
+[node name="Slot_4" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_4: Face"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_5" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_5: Mask"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_6" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_6: Hat / Helmet"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_7" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_7: Head Accessories / Misc"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="LabelTorso" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "Shirt, Jacket, Vest, Backpack, Accessories"
+mouse_filter = 0
+text = "Torso"
+
+[node name="Slot_8" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_8: Shirt (or torso layer 1)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_9" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_9: Jacket (or torso layer 2)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_10" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_10: Vest (or torso layer 3)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_11" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_11: Backpack"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_12" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_12: Accessories"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="LabelArms" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "Arm Amor (L/R), Glove (L/R), Accessory (L/R)"
+mouse_filter = 0
+text = "Arms"
+
+[node name="Slot_13" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_13: Arm Armor (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_14" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_14: Arm Armor (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_15" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_15: Glove (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_16" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_16: Glove (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_17" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_17: Arm Accessory (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_18" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_18: Arm Accessory (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="LabelLegs" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "Belt, Pants, Leg Armr (L/R), Footwear (L/R), Accessory (L/R)"
+mouse_filter = 0
+text = "Legs"
+
+[node name="Slot_19" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_19: Belt"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_20" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_20: Pants"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_21" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_21: Leg Armor (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_22" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_22: Leg Armor (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_23" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_23: Footwear (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_24" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_24: Footwear (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_25" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_25: Accessory (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_26" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_26: Accessory (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="LabelAnchorPoints" type="Label" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "Anchor points are item mounts, not a part of the weighted mesh / rig."
+mouse_filter = 0
+text = "Anchor Points"
+
+[node name="Slot_27" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_27: Back (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_28" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_28: Back (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_29" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_29: Hip (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_30" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_30: Hip (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_31" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_31: Chest (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_32" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_32: Chest (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_33" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_33: Hand (L)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
+
+[node name="Slot_34" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
+layout_mode = 2
+tooltip_text = "SLOT_34: Hand (R)"
+button_group = SubResource("ButtonGroup_5chkl")
+allow_reselect = true
 
 [node name="Avatar" parent="." instance=ExtResource("1_f6u2y")]
 
@@ -151,8 +431,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_mh7bm")
 
-[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMotionStates" to="." method="_on_option_button_motion_states_item_selected"]
-[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonAffectedRegions" to="." method="_on_option_button_affected_regions_item_selected"]
-[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonOneShots" to="." method="_on_option_button_one_shots_item_selected"]
-[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonMiscLoops" to="." method="_on_option_button_misc_loops_item_selected"]
-[connection signal="item_selected" from="Menu/PanelContainer/MarginContainer/VBoxContainer/OptionButtonPersonalities" to="." method="_on_option_button_personalities_item_selected"]
+[connection signal="mouse_entered" from="Menu" to="." method="_on_menu_mouse_entered"]
+[connection signal="mouse_exited" from="Menu" to="." method="_on_menu_mouse_exited"]
+[connection signal="pressed" from="Menu/ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/ButtonMotionTest" to="." method="_on_button_motion_test_pressed"]
+[connection signal="pressed" from="Menu/ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/ButtonAppearanceTest" to="." method="_on_button_appearance_test_pressed"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonMotionStates" to="." method="_on_option_button_motion_states_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonAffectedRegions" to="." method="_on_option_button_affected_regions_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonOneShots" to="." method="_on_option_button_one_shots_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonMiscLoops" to="." method="_on_option_button_misc_loops_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerMotion/OptionButtonPersonalities" to="." method="_on_option_button_personalities_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_1" to="." method="_on_slot_1_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_2" to="." method="_on_slot_2_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_3" to="." method="_on_slot_3_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_4" to="." method="_on_slot_4_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_5" to="." method="_on_slot_5_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_6" to="." method="_on_slot_6_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_7" to="." method="_on_slot_7_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_8" to="." method="_on_slot_8_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_9" to="." method="_on_slot_9_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_10" to="." method="_on_slot_10_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_11" to="." method="_on_slot_11_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_12" to="." method="_on_slot_12_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_13" to="." method="_on_slot_13_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_14" to="." method="_on_slot_14_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_15" to="." method="_on_slot_15_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_16" to="." method="_on_slot_16_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_17" to="." method="_on_slot_17_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_18" to="." method="_on_slot_18_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_19" to="." method="_on_slot_19_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_20" to="." method="_on_slot_20_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_21" to="." method="_on_slot_21_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_22" to="." method="_on_slot_22_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_23" to="." method="_on_slot_23_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_24" to="." method="_on_slot_24_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_25" to="." method="_on_slot_25_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_26" to="." method="_on_slot_26_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_27" to="." method="_on_slot_27_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_28" to="." method="_on_slot_28_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_29" to="." method="_on_slot_29_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_30" to="." method="_on_slot_30_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_31" to="." method="_on_slot_31_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_32" to="." method="_on_slot_32_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_33" to="." method="_on_slot_33_item_selected"]
+[connection signal="item_selected" from="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance/Slot_34" to="." method="_on_slot_34_item_selected"]
