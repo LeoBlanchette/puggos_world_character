@@ -293,7 +293,7 @@ allow_reselect = true
 
 [node name="Slot_18" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
 layout_mode = 2
-tooltip_text = "SLOT_18: Arm Accessory (L)"
+tooltip_text = "SLOT_18: Arm Accessory (R)"
 button_group = SubResource("ButtonGroup_5chkl")
 allow_reselect = true
 
