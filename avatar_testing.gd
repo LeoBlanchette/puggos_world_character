@@ -68,6 +68,9 @@ func populate_test_appearance_rigged_objects():
 			var objects:Array = HelperFunctions.get_all_files(folder, ext)
 			if not objects.is_empty():
 				for path:String in objects:
+					if "/misc/" in path:
+						continue
+					
 					path = path.replace(TEST_OBJECTS_PATH, "")
 					create_slot_ui_entry(x+1, path)
 

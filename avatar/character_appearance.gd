@@ -132,51 +132,73 @@ func equip_slot(slot:String, path:String):
 			equip_slot_texture(Equippable.SLOT_3, path)
 			slot_3_equipped.emit()
 		Equippable.SLOT_4:
-			equip_rigged_object(Equippable.SLOT_1, path)
+			equip_rigged_object(Equippable.SLOT_4, path)
 			slot_4_equipped.emit()
 		Equippable.SLOT_5:
+			equip_rigged_object(Equippable.SLOT_5, path)
 			slot_5_equipped.emit()
 		Equippable.SLOT_6:
+			equip_rigged_object(Equippable.SLOT_6, path)
 			slot_6_equipped.emit()
 		Equippable.SLOT_7:
+			equip_rigged_object(Equippable.SLOT_7, path)
 			slot_7_equipped.emit()
 		Equippable.SLOT_8:
+			equip_rigged_object(Equippable.SLOT_8, path)
 			slot_8_equipped.emit()
 		Equippable.SLOT_9:
+			equip_rigged_object(Equippable.SLOT_9, path)
 			slot_9_equipped.emit()
 		Equippable.SLOT_10:
+			equip_rigged_object(Equippable.SLOT_10, path)
 			slot_10_equipped.emit()
 		Equippable.SLOT_11:
+			equip_rigged_object(Equippable.SLOT_11, path)
 			slot_11_equipped.emit()
 		Equippable.SLOT_12:
+			equip_rigged_object(Equippable.SLOT_12, path)
 			slot_12_equipped.emit()
 		Equippable.SLOT_13:
+			equip_rigged_object(Equippable.SLOT_13, path)
 			slot_13_equipped.emit()
 		Equippable.SLOT_14:
+			equip_rigged_object(Equippable.SLOT_14, path)
 			slot_14_equipped.emit()
 		Equippable.SLOT_15:
+			equip_rigged_object(Equippable.SLOT_15, path)
 			slot_15_equipped.emit()
 		Equippable.SLOT_16:
+			equip_rigged_object(Equippable.SLOT_16, path)
 			slot_16_equipped.emit()
 		Equippable.SLOT_17:
+			equip_rigged_object(Equippable.SLOT_17, path)
 			slot_17_equipped.emit()
 		Equippable.SLOT_18:
+			equip_rigged_object(Equippable.SLOT_18, path)
 			slot_18_equipped.emit()
 		Equippable.SLOT_19:
+			equip_rigged_object(Equippable.SLOT_19, path)
 			slot_19_equipped.emit()
 		Equippable.SLOT_20:
+			equip_rigged_object(Equippable.SLOT_20, path)
 			slot_20_equipped.emit()
 		Equippable.SLOT_21:
+			equip_rigged_object(Equippable.SLOT_21, path)
 			slot_21_equipped.emit()
 		Equippable.SLOT_22:
+			equip_rigged_object(Equippable.SLOT_22, path)
 			slot_22_equipped.emit()
 		Equippable.SLOT_23:
+			equip_rigged_object(Equippable.SLOT_23, path)
 			slot_23_equipped.emit()
 		Equippable.SLOT_24:
+			equip_rigged_object(Equippable.SLOT_24, path)
 			slot_24_equipped.emit()
 		Equippable.SLOT_25:
+			equip_rigged_object(Equippable.SLOT_25, path)
 			slot_25_equipped.emit()
 		Equippable.SLOT_26:
+			equip_rigged_object(Equippable.SLOT_26, path)
 			slot_26_equipped.emit()
 		Equippable.SLOT_27:
 			slot_27_equipped.emit()
