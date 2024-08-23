@@ -22,6 +22,10 @@ var ui_blocking:bool = false
 var slot_options:Dictionary = {}
 #region 
 
+#region paths
+const TEST_OBJECTS_PATH:String = "res://addons/puggos_world_character/test_objects/"
+#endregion 
+
 func _ready() -> void:
 	if instance == null:
 		instance = self
@@ -29,8 +33,10 @@ func _ready() -> void:
 		queue_free()
 	populate_test_animations()
 	populate_slot_option_buttons()
-	populate_test_appearance_objects()
+	populate_test_appearance_skins()
+	populate_test_appearance_rigged_objects()
 	show_motion_options()
+
 
 func _exit_tree() -> void:
 	if instance != null:
@@ -42,16 +48,29 @@ func populate_slot_option_buttons():
 			var option_button:OptionButton = child
 			slot_options[option_button.name.to_upper()] = option_button
 			option_button.add_item("-")
-			
-func populate_test_appearance_objects():	
-	var appearance_objects := "res://addons/puggos_world_character/test_objects"
-	for x in range(34):		
-		var folder:String = "%s/slot_%s/"%[appearance_objects, str(x+1)]
-		var objects:Array[String] = dir_contents(folder)
+
+func populate_test_appearance_skins():
+	for x in range(3):
+		var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x+1)]
+		var objects:Array = HelperFunctions.get_all_files(folder, "png")
 		if not objects.is_empty():
 			for path:String in objects:
+				path = path.replace(TEST_OBJECTS_PATH, "")
 				create_slot_ui_entry(x+1, path)
-		
+
+func populate_test_appearance_rigged_objects():
+	var allowed_extensions:Array[String] = ["gltf", "glb"]
+	for ext:String in allowed_extensions:
+		for x in range(34):
+			if x < 2:
+				continue ## skip the skin texture slots.
+			var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x+1)]
+			var objects:Array = HelperFunctions.get_all_files(folder, ext)
+			if not objects.is_empty():
+				for path:String in objects:
+					path = path.replace(TEST_OBJECTS_PATH, "")
+					create_slot_ui_entry(x+1, path)
+
 func create_slot_ui_entry(slot:int, path:String):
 	if path.ends_with(".import"):
 		return
@@ -60,23 +79,7 @@ func create_slot_ui_entry(slot:int, path:String):
 	##Create dropdown button entry in corresponding slot number
 	var dropdown:OptionButton = slot_options["SLOT_%s"%str(slot)]
 	dropdown.add_item(path)
-	
-func dir_contents(path)->Array[String]:
-	var paths:Array[String] = []
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				pass
-			else:
-				paths.append(file_name)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-	return paths
-	
+
 func populate_test_animations():
 	for animation:String in avatar.animations:
 		if animation.to_lower().contains("oneshot_"):
@@ -322,15 +325,12 @@ func _on_slot_33_item_selected(index: int) -> void:
 func _on_slot_34_item_selected(index: int) -> void:
 	option_selected("SLOT_34", index)
 
-func option_selected(slot:String, index:int):
-
-	var test_objects_path:String = "res://addons/puggos_world_character/test_objects"
+func option_selected(slot:String, index:int):	
 	var option_button:OptionButton = slot_options[slot]
 	var item_text:String = option_button.get_item_text(index)
-	var item_path:String = "%s/%s/%s"%[test_objects_path, slot.to_lower(), item_text]
+	var item_path:String = "%s/%s"%[TEST_OBJECTS_PATH, item_text]
 	if item_text == "-":
 		avatar.equip(slot, "")
 		return
 	avatar.equip(slot, item_path)
-	
 #endregion

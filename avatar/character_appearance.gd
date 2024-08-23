@@ -98,7 +98,45 @@ enum Equippable{
 	SLOT_34, #Hand Right
 }
 
+#region slot variables
+var slot_1
+var slot_2
+var slot_3
+var slot_4
+var slot_5
+var slot_6
+var slot_7
+var slot_8
+var slot_9
+var slot_10
+var slot_11
+var slot_12
+var slot_13
+var slot_14
+var slot_15
+var slot_16
+var slot_17
+var slot_18
+var slot_19
+var slot_20
+var slot_21
+var slot_22
+var slot_23
+var slot_24
+var slot_25
+var slot_26
+var slot_27
+var slot_28
+var slot_29
+var slot_30
+var slot_31
+var slot_32
+var slot_33
+var slot_34
+#endregion
+
 @export var character_mesh: MeshInstance3D 
+@export var skeleton_3d: Skeleton3D 
 
 ## Main entry point for equiping visible items. 
 ## Provide Slot number and Path to resource.
@@ -123,6 +161,7 @@ func equip_slot(slot:String, path:String):
 			equip_slot_texture(Equippable.SLOT_3, path)
 			slot_3_equipped.emit()
 		Equippable.SLOT_4:
+			equip_rigged_object(Equippable.SLOT_1, path)
 			slot_4_equipped.emit()
 		Equippable.SLOT_5:
 			slot_5_equipped.emit()
@@ -211,3 +250,47 @@ func equip_slot_texture(slot:Equippable, path:String):
 				
 	var texture:Texture2D = load(path)
 	material.albedo_texture = texture
+
+## A general function to equip a rigged object. This object mouting is distinct 
+## from something like a sword or ax because it is rigged to the body and the 
+## after the mod is loaded, processed, and remapped to the body skeleton. 
+func equip_rigged_object(slot:Equippable, path:String):
+	# Construct a string that will map to the slot_ variables above.
+	var slot_var:String = Equippable.keys()[slot].to_lower()
+	# First, remove the old item before adding the new one.
+	if get(slot_var) != null:
+		get(slot_var).queue_free()
+	set(slot_var, null)
+	# If the path is empty, we've removed the item and we are done.
+	if path.is_empty():		
+		return
+		
+	# Get mod / resource and instantiate.
+	var ob:Resource = load(path)
+	var ob_instantiated:Node3D = ob.instantiate()
+	# Add the object to the skeleton and ensure it's position / rotation.
+	skeleton_3d.add_child(ob_instantiated)
+	ob_instantiated.position = Vector3.ZERO
+	ob_instantiated.rotation = Vector3.ZERO
+	
+	# Get the relevant mesh that must be a child of the imported object. 
+	# The path of the imported mesh must match Armature/Skeleton3D. 
+	var skel:Skeleton3D = ob_instantiated.get_node("Armature/Skeleton3D")
+	
+	# Get only the first child. Multiple meshes are not allowed.
+	var child = skel.get_child(0)
+	if not child is MeshInstance3D:
+		return
+	var mesh:MeshInstance3D = child
+	
+	# Reparent the mesh to the character skeleton.
+	mesh.reparent(skeleton_3d)
+	
+	# Map the skeleton to the character skeleton.
+	mesh.skeleton = skeleton_3d.get_path()
+	
+	# Set the variable to future tracking and management.
+	set(slot_var, mesh)
+	
+	# Cleanup. Remove the original instantiated object.
+	ob_instantiated.queue_free()
