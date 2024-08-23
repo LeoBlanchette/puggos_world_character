@@ -99,44 +99,15 @@ enum Equippable{
 }
 
 #region slot variables
-var slot_1
-var slot_2
-var slot_3
-var slot_4
-var slot_5
-var slot_6
-var slot_7
-var slot_8
-var slot_9
-var slot_10
-var slot_11
-var slot_12
-var slot_13
-var slot_14
-var slot_15
-var slot_16
-var slot_17
-var slot_18
-var slot_19
-var slot_20
-var slot_21
-var slot_22
-var slot_23
-var slot_24
-var slot_25
-var slot_26
-var slot_27
-var slot_28
-var slot_29
-var slot_30
-var slot_31
-var slot_32
-var slot_33
-var slot_34
+var slot_objects:Dictionary = {}
 #endregion
 
 @export var character_mesh: MeshInstance3D 
 @export var skeleton_3d: Skeleton3D 
+
+func _ready() -> void:
+	for x:int in range(34):
+		slot_objects["SLOT_%s"%str(x+1)] = null
 
 ## Main entry point for equiping visible items. 
 ## Provide Slot number and Path to resource.
@@ -256,11 +227,11 @@ func equip_slot_texture(slot:Equippable, path:String):
 ## after the mod is loaded, processed, and remapped to the body skeleton. 
 func equip_rigged_object(slot:Equippable, path:String):
 	# Construct a string that will map to the slot_ variables above.
-	var slot_var:String = Equippable.keys()[slot].to_lower()
+	var slot_var:String = Equippable.keys()[slot]
 	# First, remove the old item before adding the new one.
-	if get(slot_var) != null:
-		get(slot_var).queue_free()
-	set(slot_var, null)
+	if slot_objects[slot_var] != null:
+		slot_objects[slot_var].queue_free()
+	slot_objects[slot_var]=null
 	# If the path is empty, we've removed the item and we are done.
 	if path.is_empty():		
 		return
@@ -290,7 +261,7 @@ func equip_rigged_object(slot:Equippable, path:String):
 	mesh.skeleton = skeleton_3d.get_path()
 	
 	# Set the variable to future tracking and management.
-	set(slot_var, mesh)
+	slot_objects[slot_var]=mesh
 	
 	# Cleanup. Remove the original instantiated object.
 	ob_instantiated.queue_free()
