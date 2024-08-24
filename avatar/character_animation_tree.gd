@@ -210,6 +210,5 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE")
 		var animation:Animation = get_animation("Character/%s"%animation_name)
 		var length:float = animation.length		
 		animation_player.play("Character/%s"%animation_name)
-		
 		await get_tree().create_timer(length).timeout
 		animation_merger.body_region = AnimationMerger.BodyRegion.NONE

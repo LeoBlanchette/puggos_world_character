@@ -1,4 +1,6 @@
 extends Node3D
+## This is a testing scene script for the avatar. It is not meant to be 
+## used in game.
 class_name AvatarTestingUI
 
 static var instance:AvatarTestingUI
@@ -89,8 +91,8 @@ func populate_test_animations():
 			option_button_one_shots.add_item(animation)
 		if animation.to_lower().contains("loop_"):
 			option_button_misc_loops.add_item(animation)
-		if animation.to_lower().contains("personality_"):
-			option_button_misc_loops.add_item(animation)
+		if animation.to_lower().contains("personality_"):			
+			option_button_personalities.add_item(animation)
 
 func _physics_process(delta: float) -> void:
 	blend_position = Vector2.ZERO
@@ -146,7 +148,7 @@ func _on_option_button_misc_loops_item_selected(index: int) -> void:
 	
 func _on_option_button_personalities_item_selected(index: int) -> void:
 	var text:String = option_button_personalities.get_item_text(index)
-	avatar.play_animation(text)
+	avatar.play_animation(text, affected_body_region)
 
 
 func _on_option_button_affected_regions_item_selected(index: int) -> void:

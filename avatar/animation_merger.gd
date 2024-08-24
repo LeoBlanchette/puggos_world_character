@@ -24,7 +24,7 @@ enum BodyRegion{
 	FULL,
 	HEAD,
 	TORSO,
-	LEGS
+	LEGS,
 }
 ## currently affected body region
 var body_region:BodyRegion = BodyRegion.NONE:

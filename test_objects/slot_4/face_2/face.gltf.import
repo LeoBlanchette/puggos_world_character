@@ -35,7 +35,7 @@ _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "res://addons/puggos_world_character/test_objects/slot_4/face_3/materials/face.tres"
+"use_external/path": "res://addons/puggos_world_character/test_objects/slot_4/face_2/materials/face.tres"
 }
 }
 }
