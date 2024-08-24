@@ -215,7 +215,7 @@ allow_reselect = true
 
 [node name="Slot_7" type="OptionButton" parent="Menu/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainerAppearance"]
 layout_mode = 2
-tooltip_text = "SLOT_7: Head Accessories / Misc"
+tooltip_text = "SLOT_7: Hair / Decos"
 button_group = SubResource("ButtonGroup_5chkl")
 allow_reselect = true
 

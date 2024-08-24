@@ -60,7 +60,7 @@ enum Equippable{
 	SLOT_4,  #Face
 	SLOT_5,  #Mask
 	SLOT_6,  #Hat / Helmet
-	SLOT_7,  #Head Accessories / Misc
+	SLOT_7,  #Hair / Decos
 	
 	#TORSO
 	SLOT_8,  #Shirt (or torso layer 1)
