@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bsxywitpxwse1"
-path.s3tc="res://.godot/imported/placeholder.png-3b40269eb65366c4a4ddd4c1a8ca52fc.s3tc.ctex"
+path.s3tc="res://.godot/imported/placeholder.png-1d03b8c19be6fb08043ea305357635d4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/puggos_world_character/test_objects/slot_8/Football_Jersey/placeholder.png"
-dest_files=["res://.godot/imported/placeholder.png-3b40269eb65366c4a4ddd4c1a8ca52fc.s3tc.ctex"]
+source_file="res://addons/puggos_world_character/test_objects/slot_10/Football_Jersey/placeholder.png"
+dest_files=["res://.godot/imported/placeholder.png-1d03b8c19be6fb08043ea305357635d4.s3tc.ctex"]
 
 [params]
 

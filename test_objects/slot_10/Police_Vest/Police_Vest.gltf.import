@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dhggp6ipkrfs8"
-path="res://.godot/imported/Football_Jersey.gltf-c460bd0d1ca571ff186bb0722c3c24e0.scn"
+uid="uid://1qy7pkfdnfkw"
+path="res://.godot/imported/Police_Vest.gltf-ee5ad286ffb1bc3e36cf152945a3a8bf.scn"
 
 [deps]
 
-source_file="res://addons/puggos_world_character/test_objects/slot_8/Football_Jersey/Football_Jersey.gltf"
-dest_files=["res://.godot/imported/Football_Jersey.gltf-c460bd0d1ca571ff186bb0722c3c24e0.scn"]
+source_file="res://addons/puggos_world_character/test_objects/slot_10/Police_Vest/Police_Vest.gltf"
+dest_files=["res://.godot/imported/Police_Vest.gltf-ee5ad286ffb1bc3e36cf152945a3a8bf.scn"]
 
 [params]
 
@@ -33,9 +33,9 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"Material": {
+"Police_Uniform": {
 "use_external/enabled": true,
-"use_external/path": "res://addons/puggos_world_character/test_objects/misc/football_clothes_material/football_clothes_material.tres"
+"use_external/path": "res://addons/puggos_world_character/test_objects/slot_10/Police_Vest/Police_Vest.tres"
 }
 }
 }
