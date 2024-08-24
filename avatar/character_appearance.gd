@@ -63,9 +63,9 @@ enum Equippable{
 	SLOT_7,  #Hair / Decos
 	
 	#TORSO
-	SLOT_8,  #Shirt (or torso layer 1)
-	SLOT_9,  #Jacket (or torso layer 2)
-	SLOT_10, #Vest (or torso layer 3)
+	SLOT_8,  #Shirt (or torso layer 1) (in 3d, .01 offset)
+	SLOT_9,  #Jacket (or torso layer 2) (in 3d, .02 offset, or .05 if exclude vest.)
+	SLOT_10, #Vest (or torso layer 3) (in 3d, .05 offset)
 	SLOT_11, #Backpack
 	SLOT_12, #Accessories
 	
@@ -96,6 +96,9 @@ enum Equippable{
 	SLOT_32, #Chest Right
 	SLOT_33, #Hand Left
 	SLOT_34, #Hand Right
+	
+	#OTHER
+	SLOT_35,
 }
 
 #region slot variables
@@ -270,7 +273,12 @@ func equip_rigged_object(slot:Equippable, path:String):
 	# The path of the imported mesh must match Armature/Skeleton3D. 
 	var skel:Skeleton3D = ob_instantiated.get_node("Armature/Skeleton3D")
 	
+	if skel == null:
+		print("Object does not have a skeleton. Cannot be fit to rig.")
+		return
+	
 	# Get only the first child. Multiple meshes are not allowed.
+	
 	var child = skel.get_child(0)
 	if not child is MeshInstance3D:
 		return
