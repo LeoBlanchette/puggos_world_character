@@ -85,6 +85,8 @@ var is_running:bool = false:
 			return
 		is_running = value
 		set_motion_base_state()
+
+var animation_timer:SceneTreeTimer = null
 #region 
 
 func _ready() -> void:
@@ -204,11 +206,19 @@ func set_general_motion_state(motion_state:String)->void:
 		altered_motion_state = AlteredMotionState.get(motion_state)
 
 func play_animation(animation_name:String, affected_body_region:String = "NONE")->void:
+	stop_animation()
 	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.get(affected_body_region.to_upper())
 	if has_animation("Character/%s"%animation_name):
 		animation_merger.body_region = body_region
 		var animation:Animation = get_animation("Character/%s"%animation_name)
 		var length:float = animation.length		
 		animation_player.play("Character/%s"%animation_name)
-		await get_tree().create_timer(length).timeout
+		animation_timer = get_tree().create_timer(length)
+		await animation_timer.timeout
 		animation_merger.body_region = AnimationMerger.BodyRegion.NONE
+
+func stop_animation():
+	if animation_timer != null:
+		animation_timer.time_left = 0
+		animation_timer.timeout.emit()
+	animation_player.stop()
