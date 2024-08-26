@@ -144,11 +144,11 @@ func _on_option_button_one_shots_item_selected(index: int) -> void:
 	
 func _on_option_button_misc_loops_item_selected(index: int) -> void:
 	var text:String = option_button_misc_loops.get_item_text(index)
-	avatar.play_animation(text, affected_body_region)
+	avatar.play_animation(text, affected_body_region, true)
 	
 func _on_option_button_personalities_item_selected(index: int) -> void:
 	var text:String = option_button_personalities.get_item_text(index)
-	avatar.play_animation(text, affected_body_region)
+	avatar.play_animation(text, affected_body_region, true)
 
 
 func _on_option_button_affected_regions_item_selected(index: int) -> void:

@@ -58,8 +58,8 @@ var is_running:bool:
 #region
 
 ## Plays a custom animation, not a base movement (builtin).
-func play_animation(animation_name:String, body_region:String = "NONE")->void:
-	animation_tree.play_animation(animation_name, body_region)
+func play_animation(animation_name:String, body_region:String = "NONE", loop:bool = false)->void:
+	animation_tree.play_animation(animation_name, body_region, loop)
 #endregion
 
 #region appearance

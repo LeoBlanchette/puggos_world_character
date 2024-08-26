@@ -205,14 +205,21 @@ func set_general_motion_state(motion_state:String)->void:
 	if AlteredMotionState.has(motion_state):
 		altered_motion_state = AlteredMotionState.get(motion_state)
 
-func play_animation(animation_name:String, affected_body_region:String = "NONE")->void:
+func play_animation(animation_name:String, affected_body_region:String = "NONE", loop:bool = false)->void:
 	stop_animation()
 	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.get(affected_body_region.to_upper())
 	if has_animation("Character/%s"%animation_name):
 		animation_merger.body_region = body_region
 		var animation:Animation = get_animation("Character/%s"%animation_name)
+		#Set to loop if needed.
+		if loop:
+			animation.loop_mode = Animation.LOOP_LINEAR
+		else:
+			animation.loop_mode = Animation.LOOP_NONE
 		var length:float = animation.length		
 		animation_player.play("Character/%s"%animation_name)
+		if loop:
+			return
 		animation_timer = get_tree().create_timer(length)
 		await animation_timer.timeout
 		animation_merger.body_region = AnimationMerger.BodyRegion.NONE
@@ -222,3 +229,4 @@ func stop_animation():
 		animation_timer.time_left = 0
 		animation_timer.timeout.emit()
 	animation_player.stop()
+	animation_merger.body_region = AnimationMerger.BodyRegion.NONE
