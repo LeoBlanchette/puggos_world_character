@@ -56,13 +56,12 @@ var is_running:bool:
 #endregion 
 
 #region
-
 ## Plays a custom animation, not a base movement (builtin).
 func play_animation(animation_name:String, body_region:String = "NONE", loop:bool = false)->void:
 	animation_tree.play_animation(animation_name, body_region, loop)
 #endregion
 
 #region appearance
-func equip(slot:String, path:String):
-	character_appearance.equip_slot(slot, path)
+func equip(slot:String, path:String, meta=null):
+	character_appearance.equip_slot(slot, path, meta)
 #endregion

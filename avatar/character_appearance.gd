@@ -14,43 +14,46 @@ class_name  CharacterAppearance
 signal pre_slot_equiped(slot:Equippable)
 signal post_slot_equiped(slot:Equippable)
 
-signal slot_1_equipped
-signal slot_2_equipped
-signal slot_3_equipped
-signal slot_4_equipped
-signal slot_5_equipped
-signal slot_6_equipped
-signal slot_7_equipped
-signal slot_8_equipped
-signal slot_9_equipped
-signal slot_10_equipped
-signal slot_11_equipped
-signal slot_12_equipped
-signal slot_13_equipped
-signal slot_14_equipped
-signal slot_15_equipped
-signal slot_16_equipped
-signal slot_17_equipped
-signal slot_18_equipped
-signal slot_19_equipped
-signal slot_20_equipped
-signal slot_21_equipped
-signal slot_22_equipped
-signal slot_23_equipped
-signal slot_24_equipped
-signal slot_25_equipped
-signal slot_26_equipped
-signal slot_27_equipped
-signal slot_28_equipped
-signal slot_29_equipped
-signal slot_30_equipped
-signal slot_31_equipped
-signal slot_32_equipped
-signal slot_33_equipped
-signal slot_34_equipped
-signal no_slot_equipped
+signal slot_0_equipped(meta)
+signal slot_1_equipped(meta)
+signal slot_2_equipped(meta)
+signal slot_3_equipped(meta)
+signal slot_4_equipped(meta)
+signal slot_5_equipped(meta)
+signal slot_6_equipped(meta)
+signal slot_7_equipped(meta)
+signal slot_8_equipped(meta)
+signal slot_9_equipped(meta)
+signal slot_10_equipped(meta)
+signal slot_11_equipped(meta)
+signal slot_12_equipped(meta)
+signal slot_13_equipped(meta)
+signal slot_14_equipped(meta)
+signal slot_15_equipped(meta)
+signal slot_16_equipped(meta)
+signal slot_17_equipped(meta)
+signal slot_18_equipped(meta)
+signal slot_19_equipped(meta)
+signal slot_20_equipped(meta)
+signal slot_21_equipped(meta)
+signal slot_22_equipped(meta)
+signal slot_23_equipped(meta)
+signal slot_24_equipped(meta)
+signal slot_25_equipped(meta)
+signal slot_26_equipped(meta)
+signal slot_27_equipped(meta)
+signal slot_28_equipped(meta)
+signal slot_29_equipped(meta)
+signal slot_30_equipped(meta)
+signal slot_31_equipped(meta)
+signal slot_32_equipped(meta)
+signal slot_33_equipped(meta)
+signal no_slot_equipped(meta)
 
 enum Equippable{
+	#HAIR 
+	SLOT_0,
+	
 	#SKIN
 	SLOT_1,  #Skin base layer
 	SLOT_2,  #Skin Markings
@@ -99,6 +102,9 @@ enum Equippable{
 	
 	#OTHER
 	SLOT_35,
+	SLOT_37,
+	SLOT_38,
+	SLOT_39,
 }
 
 #region slot variables
@@ -108,15 +114,28 @@ var slot_objects:Dictionary = {}
 @export var character_mesh: MeshInstance3D 
 @export var skeleton_3d: Skeleton3D 
 
+@export var anchor_slot_27: Node3D #Back Left 
+@export var anchor_slot_28: Node3D #Back Right
+@export var anchor_slot_29: Node3D #Hip Left
+@export var anchor_slot_30: Node3D #Hip Right
+@export var anchor_slot_31: Node3D #Chest Left
+@export var anchor_slot_32: Node3D #Chest Right
+@export var anchor_slot_33: Node3D #Hand Left
+@export var anchor_slot_34: Node3D #Hand Right
+
+
 func _ready() -> void:
-	for x:int in range(34):
-		slot_objects["SLOT_%s"%str(x+1)] = null
+	for x:int in range(Equippable.keys().size()):
+		slot_objects["SLOT_%s"%str(x)] = null
+
 
 ## Main entry point for equiping visible items. 
-## Provide Slot number and Path to resource.
-## Path is obtained from character controller via ID and provided to character
+## Provide Slot number and Path to resource. Meta is optional arbitrary information you
+## may include for use in the signals above, such as providing / getting information
+## concerning an eqiupped item.
+## Path (res://...) is obtained from character controller via ID and provided to character
 ## avatar. Character avatar relays request to this function.
-func equip_slot(slot:String, path:String):	
+func equip_slot(slot:String, path:String, meta=null):	
 	slot = slot.to_upper()
 	var equip_slot:Equippable
 	var slot_found:bool = false
@@ -125,102 +144,103 @@ func equip_slot(slot:String, path:String):
 		equip_slot = Equippable.get(slot)
 		pre_slot_equiped.emit(equip_slot)
 	match equip_slot:
+		Equippable.SLOT_0:
+			equip_rigged_object(Equippable.SLOT_0, path)
+			slot_0_equipped.emit(meta)
 		Equippable.SLOT_1:
 			equip_slot_texture(Equippable.SLOT_1, path)
-			slot_1_equipped.emit()
+			slot_1_equipped.emit(meta)
 		Equippable.SLOT_2:
 			equip_slot_texture(Equippable.SLOT_2, path)
-			slot_2_equipped.emit()
+			slot_2_equipped.emit(meta)
 		Equippable.SLOT_3:
 			equip_slot_texture(Equippable.SLOT_3, path)
-			slot_3_equipped.emit()
+			slot_3_equipped.emit(meta)
 		Equippable.SLOT_4:
 			equip_rigged_object(Equippable.SLOT_4, path)
-			slot_4_equipped.emit()
+			slot_4_equipped.emit(meta)
 		Equippable.SLOT_5:
 			equip_rigged_object(Equippable.SLOT_5, path)
-			slot_5_equipped.emit()
+			slot_5_equipped.emit(meta)
 		Equippable.SLOT_6:
 			equip_rigged_object(Equippable.SLOT_6, path)
-			slot_6_equipped.emit()
+			slot_6_equipped.emit(meta)
 		Equippable.SLOT_7:
 			equip_rigged_object(Equippable.SLOT_7, path)
-			slot_7_equipped.emit()
+			slot_7_equipped.emit(meta)
 		Equippable.SLOT_8:
 			equip_rigged_object(Equippable.SLOT_8, path)
-			slot_8_equipped.emit()
+			slot_8_equipped.emit(meta)
 		Equippable.SLOT_9:
 			equip_rigged_object(Equippable.SLOT_9, path)
-			slot_9_equipped.emit()
+			slot_9_equipped.emit(meta)
 		Equippable.SLOT_10:
 			equip_rigged_object(Equippable.SLOT_10, path)
-			slot_10_equipped.emit()
+			slot_10_equipped.emit(meta)
 		Equippable.SLOT_11:
 			equip_rigged_object(Equippable.SLOT_11, path)
-			slot_11_equipped.emit()
+			slot_11_equipped.emit(meta)
 		Equippable.SLOT_12:
 			equip_rigged_object(Equippable.SLOT_12, path)
-			slot_12_equipped.emit()
+			slot_12_equipped.emit(meta)
 		Equippable.SLOT_13:
 			equip_rigged_object(Equippable.SLOT_13, path)
-			slot_13_equipped.emit()
+			slot_13_equipped.emit(meta)
 		Equippable.SLOT_14:
 			equip_rigged_object(Equippable.SLOT_14, path)
-			slot_14_equipped.emit()
+			slot_14_equipped.emit(meta)
 		Equippable.SLOT_15:
 			equip_rigged_object(Equippable.SLOT_15, path)
-			slot_15_equipped.emit()
+			slot_15_equipped.emit(meta)
 		Equippable.SLOT_16:
 			equip_rigged_object(Equippable.SLOT_16, path)
-			slot_16_equipped.emit()
+			slot_16_equipped.emit(meta)
 		Equippable.SLOT_17:
 			equip_rigged_object(Equippable.SLOT_17, path)
-			slot_17_equipped.emit()
+			slot_17_equipped.emit(meta)
 		Equippable.SLOT_18:
 			equip_rigged_object(Equippable.SLOT_18, path)
-			slot_18_equipped.emit()
+			slot_18_equipped.emit(meta)
 		Equippable.SLOT_19:
 			equip_rigged_object(Equippable.SLOT_19, path)
-			slot_19_equipped.emit()
+			slot_19_equipped.emit(meta)
 		Equippable.SLOT_20:
 			equip_rigged_object(Equippable.SLOT_20, path)
-			slot_20_equipped.emit()
+			slot_20_equipped.emit(meta)
 		Equippable.SLOT_21:
 			equip_rigged_object(Equippable.SLOT_21, path)
-			slot_21_equipped.emit()
+			slot_21_equipped.emit(meta)
 		Equippable.SLOT_22:
 			equip_rigged_object(Equippable.SLOT_22, path)
-			slot_22_equipped.emit()
+			slot_22_equipped.emit(meta)
 		Equippable.SLOT_23:
 			equip_rigged_object(Equippable.SLOT_23, path)
-			slot_23_equipped.emit()
+			slot_23_equipped.emit(meta)
 		Equippable.SLOT_24:
 			equip_rigged_object(Equippable.SLOT_24, path)
-			slot_24_equipped.emit()
+			slot_24_equipped.emit(meta)
 		Equippable.SLOT_25:
 			equip_rigged_object(Equippable.SLOT_25, path)
-			slot_25_equipped.emit()
+			slot_25_equipped.emit(meta)
 		Equippable.SLOT_26:
 			equip_rigged_object(Equippable.SLOT_26, path)
-			slot_26_equipped.emit()
+			slot_26_equipped.emit(meta)
 		Equippable.SLOT_27:
-			slot_27_equipped.emit()
+			slot_27_equipped.emit(meta)
 		Equippable.SLOT_28:
-			slot_28_equipped.emit()
+			slot_28_equipped.emit(meta)
 		Equippable.SLOT_29:
-			slot_29_equipped.emit()
+			slot_29_equipped.emit(meta)
 		Equippable.SLOT_30:
-			slot_30_equipped.emit()
+			slot_30_equipped.emit(meta)
 		Equippable.SLOT_31:
-			slot_31_equipped.emit()
+			slot_31_equipped.emit(meta)
 		Equippable.SLOT_32:
-			slot_32_equipped.emit()
+			slot_32_equipped.emit(meta)
 		Equippable.SLOT_33:
-			slot_33_equipped.emit()
-		Equippable.SLOT_34:
-			slot_34_equipped.emit()
+			slot_33_equipped.emit(meta)
 		_:
-			no_slot_equipped.emit()
+			no_slot_equipped.emit(meta)
 			
 	if slot_found:
 		post_slot_equiped.emit(equip_slot)

@@ -52,21 +52,21 @@ func populate_slot_option_buttons():
 			option_button.add_item("-")
 
 func populate_test_appearance_skins():
-	for x in range(3):
-		var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x+1)]
+	for x in [1,2,3]:
+		var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x)]
 		var objects:Array = HelperFunctions.get_all_files(folder, "png")
 		if not objects.is_empty():
 			for path:String in objects:
 				path = path.replace(TEST_OBJECTS_PATH, "")
-				create_slot_ui_entry(x+1, path)
+				create_slot_ui_entry(x, path)
 
 func populate_test_appearance_rigged_objects():
 	var allowed_extensions:Array[String] = ["gltf", "glb"]
 	for ext:String in allowed_extensions:
-		for x in range(34):
+		for x in CharacterAppearance.Equippable.keys().size():
 			if x < 2:
 				continue ## skip the skin texture slots.
-			var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x+1)]
+			var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x)]
 			var objects:Array = HelperFunctions.get_all_files(folder, ext)
 			if not objects.is_empty():
 				for path:String in objects:
@@ -74,7 +74,7 @@ func populate_test_appearance_rigged_objects():
 						continue
 					
 					path = path.replace(TEST_OBJECTS_PATH, "")
-					create_slot_ui_entry(x+1, path)
+					create_slot_ui_entry(x, path)
 
 func create_slot_ui_entry(slot:int, path:String):
 	if path.ends_with(".import"):
