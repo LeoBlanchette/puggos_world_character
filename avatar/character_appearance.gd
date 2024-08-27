@@ -11,8 +11,8 @@ extends Node3D
 ## level.
 class_name  CharacterAppearance
 
-signal pre_slot_equiped(slot:Equippable)
-signal post_slot_equiped(slot:Equippable)
+signal pre_slot_equiped(slot:Equippable, meta)
+signal post_slot_equiped(slot:Equippable, meta)
 
 signal slot_0_equipped(meta)
 signal slot_1_equipped(meta)
@@ -48,6 +48,7 @@ signal slot_30_equipped(meta)
 signal slot_31_equipped(meta)
 signal slot_32_equipped(meta)
 signal slot_33_equipped(meta)
+signal slot_34_equipped(meta)
 signal no_slot_equipped(meta)
 
 enum Equippable{
@@ -142,7 +143,7 @@ func equip_slot(slot:String, path:String, meta=null):
 	if Equippable.has(slot):
 		slot_found = true
 		equip_slot = Equippable.get(slot)
-		pre_slot_equiped.emit(equip_slot)
+		pre_slot_equiped.emit(equip_slot, meta)
 	match equip_slot:
 		Equippable.SLOT_0:
 			equip_rigged_object(Equippable.SLOT_0, path)
@@ -226,24 +227,34 @@ func equip_slot(slot:String, path:String, meta=null):
 			equip_rigged_object(Equippable.SLOT_26, path)
 			slot_26_equipped.emit(meta)
 		Equippable.SLOT_27:
+			equip_anchorable_object(Equippable.SLOT_27, path, anchor_slot_27)
 			slot_27_equipped.emit(meta)
 		Equippable.SLOT_28:
+			equip_anchorable_object(Equippable.SLOT_28, path, anchor_slot_28)
 			slot_28_equipped.emit(meta)
 		Equippable.SLOT_29:
+			equip_anchorable_object(Equippable.SLOT_29, path, anchor_slot_29)
 			slot_29_equipped.emit(meta)
 		Equippable.SLOT_30:
+			equip_anchorable_object(Equippable.SLOT_30, path, anchor_slot_30)
 			slot_30_equipped.emit(meta)
 		Equippable.SLOT_31:
+			equip_anchorable_object(Equippable.SLOT_31, path, anchor_slot_31)
 			slot_31_equipped.emit(meta)
 		Equippable.SLOT_32:
+			equip_anchorable_object(Equippable.SLOT_32, path, anchor_slot_32)
 			slot_32_equipped.emit(meta)
 		Equippable.SLOT_33:
+			equip_anchorable_object(Equippable.SLOT_33, path, anchor_slot_33)
 			slot_33_equipped.emit(meta)
+		Equippable.SLOT_34:
+			equip_anchorable_object(Equippable.SLOT_34, path, anchor_slot_34)
+			slot_34_equipped.emit(meta)
 		_:
 			no_slot_equipped.emit(meta)
 			
 	if slot_found:
-		post_slot_equiped.emit(equip_slot)
+		post_slot_equiped.emit(equip_slot, meta)
 
 ## Equips a texture to the skin layers.
 func equip_slot_texture(slot:Equippable, path:String):
@@ -315,3 +326,36 @@ func equip_rigged_object(slot:Equippable, path:String):
 	
 	# Cleanup. Remove the original instantiated object.
 	ob_instantiated.queue_free()
+
+
+func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
+	# Construct a string that will map to the slot_ variables above.
+	var slot_var:String = Equippable.keys()[slot]
+	# First, remove the old item before adding the new one.
+	if slot_objects[slot_var] != null:
+		slot_objects[slot_var].queue_free()
+	slot_objects[slot_var]=null
+	## Also remove existing item from anchor before adding new one or aborting.
+	clear_anchor(anchor) 
+	# If the path is empty, we've removed the item and we are done.
+	if path.is_empty():		
+		return
+		
+	# Get mod / resource and instantiate.
+	var ob:Resource = load(path)
+	var ob_instantiated:Node3D = ob.instantiate()
+	
+	if ob_instantiated == null:
+		return
+	
+	anchor.add_child(ob_instantiated)
+	
+	#ob_instantiated.position = Vector3.ZERO
+	#ob_instantiated.rotation_degrees = Vector3.ZERO
+	print(ob_instantiated.get_parent())
+	# Set the variable to future tracking and management.
+	slot_objects[slot_var]=ob_instantiated
+
+func clear_anchor(anchor:Node3D):
+	for child in anchor.get_children():
+		child.queue_free()
