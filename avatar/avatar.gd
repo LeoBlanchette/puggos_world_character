@@ -10,6 +10,7 @@ class_name Avatar
 @export var animation_tree: CharacterAnimationTree
 @export var character_appearance: CharacterAppearance
 
+
 var animations:Array[String]:
 	get():
 		return animation_tree.animations
