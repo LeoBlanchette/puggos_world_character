@@ -35,7 +35,7 @@ _subresources={
 "materials": {
 "Survivalist_Armor": {
 "use_external/enabled": true,
-"use_external/path": "res://addons/puggos_world_character/test_objects/slot_13/Survivalist_Arm_Greave_Left/survivalis_arm_greave.tres"
+"use_external/path": "res://addons/puggos_world_character/test_objects/slot_13/Survivalist_Arm_Greave_Left/survivalis_arm_greave_left.tres"
 }
 }
 }

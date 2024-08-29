@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cac0vas7i4wst" path="res://mods/puggos_world/sandbox/items/character/baseball_cap_blue/textures/Baseball_Cap.png" id="1_wuboe"]
 
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xirq5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7t52"]
@@ -13,4 +12,6 @@ resource_local_to_scene = true
 render_priority = 2
 next_pass = SubResource("StandardMaterial3D_b7t52")
 transparency = 1
+diffuse_mode = 3
+specular_mode = 1
 albedo_texture = ExtResource("1_wuboe")

@@ -5,3 +5,5 @@
 [resource]
 resource_local_to_scene = true
 next_pass = ExtResource("1_vy3a5")
+diffuse_mode = 3
+specular_mode = 1

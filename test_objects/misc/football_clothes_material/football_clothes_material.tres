@@ -12,4 +12,5 @@ resource_local_to_scene = true
 render_priority = 2
 next_pass = SubResource("StandardMaterial3D_b7t52")
 transparency = 1
+diffuse_mode = 3
 albedo_texture = ExtResource("1_y34jc")

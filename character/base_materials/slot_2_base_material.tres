@@ -8,4 +8,6 @@ resource_local_to_scene = true
 render_priority = 1
 next_pass = ExtResource("1_yew77")
 transparency = 1
+diffuse_mode = 3
+specular_mode = 1
 albedo_texture = ExtResource("1_30xv6")
