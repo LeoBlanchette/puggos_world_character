@@ -54,7 +54,7 @@ func populate_slot_option_buttons():
 func populate_test_appearance_skins():
 	for x in [1,2,3]:
 		var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x)]
-		var objects:Array = HelperFunctions.get_all_files(folder, "png")
+		var objects:Array = get_all_files(folder, "png")
 		if not objects.is_empty():
 			for path:String in objects:
 				path = path.replace(TEST_OBJECTS_PATH, "")
@@ -67,7 +67,7 @@ func populate_test_appearance_rigged_objects():
 			if x < 2:
 				continue ## skip the skin texture slots.
 			var folder:String = "%sslot_%s/"%[TEST_OBJECTS_PATH, str(x)]
-			var objects:Array = HelperFunctions.get_all_files(folder, ext)
+			var objects:Array = get_all_files(folder, ext)
 			if not objects.is_empty():
 				for path:String in objects:
 					if "/misc/" in path:
@@ -75,6 +75,24 @@ func populate_test_appearance_rigged_objects():
 					
 					path = path.replace(TEST_OBJECTS_PATH, "")
 					create_slot_ui_entry(x, path)
+
+func get_all_files(path: String, file_ext := "", files := []):
+	var dir = DirAccess.open(path)
+	if DirAccess.get_open_error() == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				files = get_all_files(dir.get_current_dir() +"/"+ file_name, file_ext, files)
+			else:
+				if file_ext and file_name.get_extension() != file_ext:
+					file_name = dir.get_next()
+					continue				
+				files.append(dir.get_current_dir() +"/"+ file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access %s." % path)
+	return files
 
 func create_slot_ui_entry(slot:int, path:String):
 	if path.ends_with(".import"):
