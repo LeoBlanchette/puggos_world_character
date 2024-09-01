@@ -261,22 +261,34 @@ func equip_slot_texture(slot:Equippable, path:String):
 	var material:StandardMaterial3D
 	var blank_texture_path:String = "res://addons/puggos_world_character/base_textures/_blank.png" 
 	var default_texture_path:String = "res://addons/puggos_world_character/test_objects/slot_1/tan.png"
+	var material_index:int = 0
 	match slot:
 		Equippable.SLOT_1:
-			material = character_mesh.get_surface_override_material(0)
+			material = get_material_override_template(false)
 			if path.is_empty():
 				path = default_texture_path
 		Equippable.SLOT_2:
-			material = character_mesh.get_surface_override_material(0).next_pass
+			material =  get_material_override_template(true)
+			material_index = 1
 			if path.is_empty():
 				path = blank_texture_path
 		Equippable.SLOT_3:
-			material = character_mesh.get_surface_override_material(0).next_pass.next_pass
+			material =  get_material_override_template(true)
+			material_index = 2
 			if path.is_empty():
 				path = blank_texture_path
 				
-	var texture:Texture2D = load(path)
+	var texture = load(path) as CompressedTexture2D	
 	material.albedo_texture = texture
+	character_mesh.set_surface_override_material(material_index, material)
+
+
+func get_material_override_template(transparency:bool=true)->StandardMaterial3D:
+	var material = StandardMaterial3D.new()
+	if transparency:
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	return material
+
 
 ## A general function to equip a rigged object. This object mouting is distinct 
 ## from something like a sword or ax because it is rigged to the body and the 
