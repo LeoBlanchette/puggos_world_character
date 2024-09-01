@@ -282,6 +282,8 @@ func equip_slot_texture(slot:Equippable, path:String):
 			new_material.next_pass.next_pass.albedo_texture = load(path) as CompressedTexture2D	
 	character_mesh.set_surface_override_material(0,new_material)
 
+## This generates a new material with the 2 extra nextpass layers with necessary 
+## transparencies and render priorities.
 func get_material_template()->StandardMaterial3D:
 	# Set up materials and nextpasses
 	var material:StandardMaterial3D = StandardMaterial3D.new()
