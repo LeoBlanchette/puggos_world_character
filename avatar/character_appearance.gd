@@ -258,35 +258,44 @@ func equip_slot(slot:String, path:String, meta=null):
 
 ## Equips a texture to the skin layers.
 func equip_slot_texture(slot:Equippable, path:String):
-	var material:StandardMaterial3D
+	var original_material:StandardMaterial3D = character_mesh.get_surface_override_material(0)
+	var new_material:StandardMaterial3D = get_material_template()
+	
+	new_material.albedo_texture = original_material.albedo_texture	
+	new_material.next_pass.albedo_texture = original_material.next_pass.albedo_texture 
+	new_material.next_pass.next_pass.albedo_texture = original_material.next_pass.next_pass.albedo_texture 
+	
 	var blank_texture_path:String = "res://addons/puggos_world_character/base_textures/_blank.png" 
 	var default_texture_path:String = "res://addons/puggos_world_character/test_objects/slot_1/tan.png"
-	var material_index:int = 0
 	match slot:
 		Equippable.SLOT_1:
-			material = get_material_override_template(false)
 			if path.is_empty():
 				path = default_texture_path
+			new_material.albedo_texture = load(path) as CompressedTexture2D	
 		Equippable.SLOT_2:
-			material =  get_material_override_template(true)
-			material_index = 1
 			if path.is_empty():
 				path = blank_texture_path
+			new_material.next_pass.albedo_texture = load(path) as CompressedTexture2D	
 		Equippable.SLOT_3:
-			material =  get_material_override_template(true)
-			material_index = 2
 			if path.is_empty():
 				path = blank_texture_path
-				
-	var texture = load(path) as CompressedTexture2D	
-	material.albedo_texture = texture
-	character_mesh.set_surface_override_material(material_index, material)
+			new_material.next_pass.next_pass.albedo_texture = load(path) as CompressedTexture2D	
+	character_mesh.set_surface_override_material(0,new_material)
 
-
-func get_material_override_template(transparency:bool=true)->StandardMaterial3D:
-	var material = StandardMaterial3D.new()
-	if transparency:
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+func get_material_template()->StandardMaterial3D:
+	# Set up materials and nextpasses
+	var material:StandardMaterial3D = StandardMaterial3D.new()
+	material.next_pass = StandardMaterial3D.new()
+	var material_layer_2:StandardMaterial3D = material.next_pass
+	material.next_pass.next_pass = StandardMaterial3D.new()
+	var material_layer_3:StandardMaterial3D = material.next_pass.next_pass
+	
+	# Set up nextpass attributes
+	material.render_priority = 0
+	material_layer_2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material_layer_2.render_priority = 1
+	material_layer_3.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material_layer_3.render_priority = 2
 	return material
 
 
