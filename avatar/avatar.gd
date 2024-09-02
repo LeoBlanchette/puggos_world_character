@@ -56,7 +56,34 @@ var is_running:bool:
 		return animation_tree.is_running
 #endregion 
 
-#region
+#region animation
+func get_character_animation_library()->AnimationLibrary:
+	return animation_tree.get_animation_library("Character") 
+
+## Adds an animation to the Character animation library from it's path.
+## Useful for modding.
+func add_animation(path:String):
+	var animation_library:AnimationLibrary = get_character_animation_library()
+	if not FileAccess.file_exists(path):
+		print("Animation does not exist at: %s"%path)
+		return	
+	var animation:Animation = load(path)
+	if not animation_library.has_animation(animation.resource_name):
+		animations.append(animation.resource_name)
+		animation_library.add_animation(animation.resource_name, animation)
+
+## Removes an animation from avatar according to it's rsource path
+func remove_animation_by_path(path:String):
+	var animation:Animation = load(path)
+	var animation_name:String = animation.resource_name
+	remove_animation(animation_name)
+
+## Removes an animation from avatar according to it's name
+func remove_animation(animation_name:String):
+	animations.erase(animation_name)
+	var animation_library:AnimationLibrary = get_character_animation_library()
+	animation_library.remove_animation(animation_name)
+
 ## Plays a custom animation, not a base movement (builtin).
 func play_animation(animation_name:String, body_region:String = "NONE", loop:bool = false)->void:
 	animation_tree.play_animation(animation_name, body_region, loop)
@@ -65,5 +92,4 @@ func play_animation(animation_name:String, body_region:String = "NONE", loop:boo
 #region appearance
 func equip(slot:String, path:String, meta=null):
 	character_appearance.equip_slot(slot, path, meta)
-
 #endregion
