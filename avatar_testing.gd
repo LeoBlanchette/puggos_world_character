@@ -33,6 +33,8 @@ func _ready() -> void:
 		instance = self
 	else:
 		queue_free()
+		
+	load_animations()
 	populate_test_animations()
 	populate_slot_option_buttons()
 	populate_test_appearance_skins()
@@ -43,7 +45,12 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	if instance != null:
 		instance = null
-
+		
+func load_animations():
+	var animations:Array = get_all_files("res://addons/puggos_world_character/character/animations/")
+	for anim in animations:
+		avatar.add_animation(anim)
+		
 func populate_slot_option_buttons():
 	for child in v_box_container_appearance.get_children():
 		if child.name.to_lower().contains("slot_"):
