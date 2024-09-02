@@ -92,5 +92,4 @@ func play_animation(animation_name:String, body_region:String = "NONE", loop:boo
 #region appearance
 func equip(slot:String, path:String, meta=null):
 	character_appearance.equip_slot(slot, path, meta)
-
 #endregion

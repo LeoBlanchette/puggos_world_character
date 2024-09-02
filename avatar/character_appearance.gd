@@ -103,7 +103,6 @@ enum Equippable{
 	
 	#OTHER
 	SLOT_35,
-	SLOT_36,
 	SLOT_37,
 	SLOT_38,
 	SLOT_39,
@@ -261,7 +260,7 @@ func equip_slot(slot:String, path:String, meta=null):
 func equip_slot_texture(slot:Equippable, path:String):
 	var original_material:StandardMaterial3D = character_mesh.get_surface_override_material(0)
 	var new_material:StandardMaterial3D = get_material_template()
-
+	
 	new_material.albedo_texture = original_material.albedo_texture	
 	new_material.next_pass.albedo_texture = original_material.next_pass.albedo_texture 
 	new_material.next_pass.next_pass.albedo_texture = original_material.next_pass.next_pass.albedo_texture 
@@ -283,8 +282,6 @@ func equip_slot_texture(slot:Equippable, path:String):
 			new_material.next_pass.next_pass.albedo_texture = load(path) as CompressedTexture2D	
 	character_mesh.set_surface_override_material(0,new_material)
 
-## This generates a new material with the 2 extra nextpass layers with necessary 
-## transparencies and render priorities.
 func get_material_template()->StandardMaterial3D:
 	# Set up materials and nextpasses
 	var material:StandardMaterial3D = StandardMaterial3D.new()
@@ -383,93 +380,3 @@ func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
 func clear_anchor(anchor:Node3D):
 	for child in anchor.get_children():
 		child.queue_free()
-
-
-#region misc
-static func get_slot_description(slot:Equippable)->String:
-	var description:String = ""
-	match slot:
-		Equippable.SLOT_0:
-			description = "Unassigned"
-		Equippable.SLOT_1:
-			description = "Skin base layer"
-		Equippable.SLOT_2:
-			description = "Skin Markings / Art / Tattoos"
-		Equippable.SLOT_3:
-			description = "Skin temporary effects"
-		Equippable.SLOT_4:
-			description = "Face"
-		Equippable.SLOT_5:
-			description = "Mask"
-		Equippable.SLOT_6:
-			description = "Hat / Helmet"
-		Equippable.SLOT_7:
-			description = "Hair / Decos"
-		Equippable.SLOT_8:
-			description = "Shirt"
-		Equippable.SLOT_9:
-			description = "Jacket"
-		Equippable.SLOT_10:
-			description = "Vest"
-		Equippable.SLOT_11:
-			description = "Backpack"
-		Equippable.SLOT_12:
-			description = "Accessories"
-		Equippable.SLOT_13:
-			description = "Arm Armor Left"
-		Equippable.SLOT_14:
-			description = "Arm Armor Right"
-		Equippable.SLOT_15:
-			description = "Glove Left"
-		Equippable.SLOT_16:
-			description = "Glove Right"
-		Equippable.SLOT_17:
-			description = "Arm Accessory Left"
-		Equippable.SLOT_18:
-			description = "Arm Accessory Right"
-		Equippable.SLOT_19:
-			description = "Belt"
-		Equippable.SLOT_20:
-			description = "Pants"
-		Equippable.SLOT_21:
-			description = "Leg Armor Left"
-		Equippable.SLOT_22:
-			description = "Leg Armor Right"
-		Equippable.SLOT_23:
-			description = "Footwear Left"
-		Equippable.SLOT_24:
-			description = "Footwear Right"
-		Equippable.SLOT_25:
-			description = "Leg Accessory Left"
-		Equippable.SLOT_26:
-			description = "Leg Accessory Right"
-		Equippable.SLOT_27:
-			description = "Back Left [Anchor_Slot_27]"
-		Equippable.SLOT_28:
-			description = "Back Right [Anchor_Slot_28]"
-		Equippable.SLOT_29:
-			description = "Hip Left [Anchor_Slot_29]"
-		Equippable.SLOT_30:
-			description = "Hip Left [Anchor_Slot_30]"
-		Equippable.SLOT_31:
-			description = "Chest Left [Anchor_Slot_31]"
-		Equippable.SLOT_32:
-			description = "Chest Right [Anchor_Slot_32]"
-		Equippable.SLOT_33:
-			description = "Hand Left [Anchor_Slot_33]"
-		Equippable.SLOT_34:
-			description = "Hand Right [Anchor_Slot_34]"
-		Equippable.SLOT_35:
-			description = "Other"
-		Equippable.SLOT_36:
-			description = "Other"
-		Equippable.SLOT_37:
-			description = "Other"
-		Equippable.SLOT_38:
-			description = "Other"
-		Equippable.SLOT_39:
-			description = "Other"
-		_:
-			description = "This is not a slot."
-	return description
-#endregion
