@@ -289,18 +289,26 @@ func equip_slot_texture(slot:Equippable, path:String):
 
 func get_material_template()->StandardMaterial3D:
 	# Set up materials and nextpasses
-	var material:StandardMaterial3D = StandardMaterial3D.new()
-	material.next_pass = StandardMaterial3D.new()
-	var material_layer_2:StandardMaterial3D = material.next_pass
-	material.next_pass.next_pass = StandardMaterial3D.new()
-	var material_layer_3:StandardMaterial3D = material.next_pass.next_pass
+	# SLOT 1
+	var slot_1_material:StandardMaterial3D = StandardMaterial3D.new()
+	slot_1_material.render_priority = 0
 	
-	# Set up nextpass attributes
-	material.render_priority = 0
-	material_layer_2.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material_layer_2.render_priority = 1
-	material_layer_3.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material_layer_3.render_priority = 2
+	# SLOT 2
+	var slot_2_material:StandardMaterial3D = StandardMaterial3D.new()
+	slot_2_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	slot_2_material.render_priority = 1
+	
+	#SLOT 3
+	var slot_3_material:StandardMaterial3D = StandardMaterial3D.new()
+	slot_3_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	slot_3_material.render_priority = 2
+	
+	# JOIN the material
+	var material:StandardMaterial3D = slot_1_material
+	material.next_pass = slot_2_material
+	material.next_pass.next_pass =slot_3_material
+	
+	# Ship the product and hope it doesn't break.
 	return material
 
 
