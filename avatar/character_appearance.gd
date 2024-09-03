@@ -127,9 +127,13 @@ var slot_objects:Dictionary = {}
 
 
 func _ready() -> void:
+	populate_slot_objects_dictionary()
+
+func populate_slot_objects_dictionary():
+	if not slot_objects.is_empty():
+		return
 	for x:int in range(Equippable.keys().size()):
 		slot_objects["SLOT_%s"%str(x)] = null
-
 
 ## Main entry point for equiping visible items. 
 ## Provide Slot number and Path to resource. Meta is optional arbitrary information you
@@ -304,9 +308,11 @@ func get_material_template()->StandardMaterial3D:
 ## from something like a sword or ax because it is rigged to the body and the 
 ## after the mod is loaded, processed, and remapped to the body skeleton. 
 func equip_rigged_object(slot:Equippable, path:String):
+	populate_slot_objects_dictionary()
 	# Construct a string that will map to the slot_ variables above.
 	var slot_var:String = Equippable.keys()[slot]
 	# First, remove the old item before adding the new one.
+	
 	if slot_objects[slot_var] != null:
 		slot_objects[slot_var].queue_free()
 	slot_objects[slot_var]=null
@@ -351,6 +357,7 @@ func equip_rigged_object(slot:Equippable, path:String):
 
 
 func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
+	populate_slot_objects_dictionary()
 	# Construct a string that will map to the slot_ variables above.
 	var slot_var:String = Equippable.keys()[slot]
 	# First, remove the old item before adding the new one.
