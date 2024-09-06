@@ -14,42 +14,42 @@ class_name  CharacterAppearance
 signal pre_slot_equiped(slot:Equippable, meta)
 signal post_slot_equiped(slot:Equippable, meta)
 
-signal slot_0_equipped(meta)
-signal slot_1_equipped(meta)
-signal slot_2_equipped(meta)
-signal slot_3_equipped(meta)
-signal slot_4_equipped(meta)
-signal slot_5_equipped(meta)
-signal slot_6_equipped(meta)
-signal slot_7_equipped(meta)
-signal slot_8_equipped(meta)
-signal slot_9_equipped(meta)
-signal slot_10_equipped(meta)
-signal slot_11_equipped(meta)
-signal slot_12_equipped(meta)
-signal slot_13_equipped(meta)
-signal slot_14_equipped(meta)
-signal slot_15_equipped(meta)
-signal slot_16_equipped(meta)
-signal slot_17_equipped(meta)
-signal slot_18_equipped(meta)
-signal slot_19_equipped(meta)
-signal slot_20_equipped(meta)
-signal slot_21_equipped(meta)
-signal slot_22_equipped(meta)
-signal slot_23_equipped(meta)
-signal slot_24_equipped(meta)
-signal slot_25_equipped(meta)
-signal slot_26_equipped(meta)
-signal slot_27_equipped(meta)
-signal slot_28_equipped(meta)
-signal slot_29_equipped(meta)
-signal slot_30_equipped(meta)
-signal slot_31_equipped(meta)
-signal slot_32_equipped(meta)
-signal slot_33_equipped(meta)
-signal slot_34_equipped(meta)
-signal no_slot_equipped(meta)
+signal slot_0_equipped(meta:Dictionary)
+signal slot_1_equipped(meta:Dictionary)
+signal slot_2_equipped(meta:Dictionary)
+signal slot_3_equipped(meta:Dictionary)
+signal slot_4_equipped(meta:Dictionary)
+signal slot_5_equipped(meta:Dictionary)
+signal slot_6_equipped(meta:Dictionary)
+signal slot_7_equipped(meta:Dictionary)
+signal slot_8_equipped(meta:Dictionary)
+signal slot_9_equipped(meta:Dictionary)
+signal slot_10_equipped(meta:Dictionary)
+signal slot_11_equipped(meta:Dictionary)
+signal slot_12_equipped(meta:Dictionary)
+signal slot_13_equipped(meta:Dictionary)
+signal slot_14_equipped(meta:Dictionary)
+signal slot_15_equipped(meta:Dictionary)
+signal slot_16_equipped(meta:Dictionary)
+signal slot_17_equipped(meta:Dictionary)
+signal slot_18_equipped(meta:Dictionary)
+signal slot_19_equipped(meta:Dictionary)
+signal slot_20_equipped(meta:Dictionary)
+signal slot_21_equipped(meta:Dictionary)
+signal slot_22_equipped(meta:Dictionary)
+signal slot_23_equipped(meta:Dictionary)
+signal slot_24_equipped(meta:Dictionary)
+signal slot_25_equipped(meta:Dictionary)
+signal slot_26_equipped(meta:Dictionary)
+signal slot_27_equipped(meta:Dictionary)
+signal slot_28_equipped(meta:Dictionary)
+signal slot_29_equipped(meta:Dictionary)
+signal slot_30_equipped(meta:Dictionary)
+signal slot_31_equipped(meta:Dictionary)
+signal slot_32_equipped(meta:Dictionary)
+signal slot_33_equipped(meta:Dictionary)
+signal slot_34_equipped(meta:Dictionary)
+signal no_slot_equipped(meta:Dictionary)
 
 enum Equippable{
 	#HAIR 
@@ -141,7 +141,7 @@ func populate_slot_objects_dictionary():
 ## concerning an eqiupped item.
 ## Path (res://...) is obtained from character controller via ID and provided to character
 ## avatar. Character avatar relays request to this function.
-func equip_slot(slot:String, path:String, meta=null):	
+func equip_slot(slot:String, path:String, meta:Dictionary={}):	
 	slot = slot.to_upper()
 	var equip_slot:Equippable
 	var slot_found:bool = false
@@ -264,6 +264,7 @@ func equip_slot(slot:String, path:String, meta=null):
 ## Equips a texture to the skin layers.
 func equip_slot_texture(slot:Equippable, path:String):
 	var original_material:StandardMaterial3D = character_mesh.get_surface_override_material(0)
+	
 	var new_material:StandardMaterial3D = get_material_template()
 	
 	new_material.albedo_texture = original_material.albedo_texture	
