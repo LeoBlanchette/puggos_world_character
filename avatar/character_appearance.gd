@@ -125,7 +125,7 @@ var slot_objects:Dictionary = {}
 @export var anchor_slot_33: Node3D #Hand Left
 @export var anchor_slot_34: Node3D #Hand Right
 
-
+	
 func _ready() -> void:
 	populate_slot_objects_dictionary()
 
@@ -263,6 +263,7 @@ func equip_slot(slot:String, path:String, meta:Dictionary={}):
 
 ## Equips a texture to the skin layers.
 func equip_slot_texture(slot:Equippable, path:String):
+	print(path)
 	var original_material:StandardMaterial3D = character_mesh.get_surface_override_material(0)
 	
 	var new_material:StandardMaterial3D = get_material_template()
@@ -287,6 +288,7 @@ func equip_slot_texture(slot:Equippable, path:String):
 				path = blank_texture_path
 			new_material.next_pass.next_pass.albedo_texture = load(path) as CompressedTexture2D	
 	character_mesh.set_surface_override_material(0,new_material)
+
 
 func get_material_template()->StandardMaterial3D:
 	# Set up materials and nextpasses
@@ -352,6 +354,9 @@ func equip_rigged_object(slot:Equippable, path:String):
 		return
 	var mesh:MeshInstance3D = child
 	
+	## A fixer function for the binding operation.
+	mesh = fix_skin_binds(mesh, skeleton_3d)
+	
 	# Reparent the mesh to the character skeleton.
 	mesh.reparent(skeleton_3d)
 	
@@ -364,7 +369,41 @@ func equip_rigged_object(slot:Equippable, path:String):
 	# Cleanup. Remove the original instantiated object.
 	ob_instantiated.queue_free()
 
-
+## In some instances bones of the original mesh / skin are not available in the 
+## new target skeleton. Attempting to fix here. It seems to get fixed by simply adding new bones.
+## Original error that prompted this fixer function:
+## E 0:00:01:0994   _notification: Skin bind #52 contains named bind 'Leg_1_PoleTarget_R' but Skeleton3D has no bone by that name.
+##  <C++ Source>   scene/3d/skeleton_3d.cpp:377 @ _notification()
+func fix_skin_binds(mesh_to_reparent:MeshInstance3D, target_skeleton:Skeleton3D )->MeshInstance3D:
+	if mesh_to_reparent == null:
+		return mesh_to_reparent
+	if mesh_to_reparent.get_skin_reference() == null:
+		return mesh_to_reparent
+	if mesh_to_reparent.get_skin_reference().get_skin() == null:
+		return mesh_to_reparent
+	
+	var target_skeleton_bones:Array[String] = []
+	var mesh_to_reparent_skin:Skin = mesh_to_reparent.get_skin_reference().get_skin()
+	
+	for x in target_skeleton.get_bone_count():
+		target_skeleton_bones.append(target_skeleton.get_bone_name(x))
+	
+	var mesh_to_reparent_binds:Dictionary = {}
+	var binds_to_add:Dictionary
+	
+	for x in mesh_to_reparent_skin.get_bind_count():		
+		var bind_name:String = mesh_to_reparent_skin.get_bind_name(x)
+		var bind_pose = mesh_to_reparent_skin.get_bind_pose(x)
+		if bind_name in target_skeleton_bones:
+			mesh_to_reparent_binds[bind_name] = bind_pose
+		else:
+			binds_to_add[bind_name] = bind_pose
+	
+	for key in binds_to_add:
+		skeleton_3d.add_bone(key)
+		
+	return mesh_to_reparent
+	
 func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
 	populate_slot_objects_dictionary()
 	# Construct a string that will map to the slot_ variables above.
@@ -388,9 +427,6 @@ func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
 	
 	anchor.add_child(ob_instantiated)
 	
-	#ob_instantiated.position = Vector3.ZERO
-	#ob_instantiated.rotation_degrees = Vector3.ZERO
-	print(ob_instantiated.get_parent())
 	# Set the variable to future tracking and management.
 	slot_objects[slot_var]=ob_instantiated
 

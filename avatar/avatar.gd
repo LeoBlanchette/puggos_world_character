@@ -65,7 +65,9 @@ func get_character_animation_library()->AnimationLibrary:
 func add_animation(path:String):
 	var animation_library:AnimationLibrary = get_character_animation_library()
 	if not FileAccess.file_exists(path):
-		print("Animation does not exist at: %s"%path)
+		if path.is_empty():
+			path = "<no path provided>"
+		print_rich("[color=yellow]Animation does not exist at: %s (was the animation named properly? Animation name must match the directory name that it is in, case senstive.)[/color]"%path)
 		return	
 	var animation:Animation = load(path)
 	if not animation_library.has_animation(animation.resource_name):
