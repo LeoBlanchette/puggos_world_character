@@ -115,6 +115,7 @@ var slot_objects:Dictionary = {}
 
 @export var character_mesh: MeshInstance3D 
 @export var skeleton_3d: Skeleton3D 
+var character_material:StandardMaterial3D
 
 @export var anchor_slot_27: Node3D #Back Left 
 @export var anchor_slot_28: Node3D #Back Right
@@ -127,6 +128,7 @@ var slot_objects:Dictionary = {}
 
 	
 func _ready() -> void:
+	character_material = character_mesh.get_surface_override_material(0)
 	populate_slot_objects_dictionary()
 
 func populate_slot_objects_dictionary():
@@ -262,58 +264,26 @@ func equip_slot(slot:String, path:String, meta:Dictionary={}):
 		post_slot_equiped.emit(equip_slot, meta)
 
 ## Equips a texture to the skin layers.
-func equip_slot_texture(slot:Equippable, path:String):
-	print(path)
-	var original_material:StandardMaterial3D = character_mesh.get_surface_override_material(0)
-	
-	var new_material:StandardMaterial3D = get_material_template()
-	
-	new_material.albedo_texture = original_material.albedo_texture	
-	new_material.next_pass.albedo_texture = original_material.next_pass.albedo_texture 
-	new_material.next_pass.next_pass.albedo_texture = original_material.next_pass.next_pass.albedo_texture 
-	
+func equip_slot_texture(slot:Equippable, path:String):	
+	if not is_node_ready():
+		await ready
+	if not character_mesh.is_node_ready():
+		await character_mesh.ready
 	var blank_texture_path:String = "res://addons/puggos_world_character/base_textures/_blank.png" 
 	var default_texture_path:String = "res://addons/puggos_world_character/test_objects/slot_1/tan.png"
 	match slot:
 		Equippable.SLOT_1:
 			if path.is_empty():
 				path = default_texture_path
-			new_material.albedo_texture = load(path) as CompressedTexture2D	
+			character_material.albedo_texture = load(path) as Texture2D
 		Equippable.SLOT_2:
 			if path.is_empty():
 				path = blank_texture_path
-			new_material.next_pass.albedo_texture = load(path) as CompressedTexture2D	
+			character_material.next_pass.albedo_texture = load(path) as Texture2D	
 		Equippable.SLOT_3:
 			if path.is_empty():
 				path = blank_texture_path
-			new_material.next_pass.next_pass.albedo_texture = load(path) as CompressedTexture2D	
-	character_mesh.set_surface_override_material(0,new_material)
-
-
-func get_material_template()->StandardMaterial3D:
-	# Set up materials and nextpasses
-	# SLOT 1
-	var slot_1_material:StandardMaterial3D = StandardMaterial3D.new()
-	slot_1_material.render_priority = 0
-	
-	# SLOT 2
-	var slot_2_material:StandardMaterial3D = StandardMaterial3D.new()
-	slot_2_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	slot_2_material.render_priority = 1
-	
-	#SLOT 3
-	var slot_3_material:StandardMaterial3D = StandardMaterial3D.new()
-	slot_3_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	slot_3_material.render_priority = 2
-	
-	# JOIN the material
-	var material:StandardMaterial3D = slot_1_material
-	material.next_pass = slot_2_material
-	material.next_pass.next_pass =slot_3_material
-	
-	# Ship the product and hope it doesn't break.
-	return material
-
+			character_material.next_pass.next_pass.albedo_texture = load(path) as Texture2D	
 
 ## A general function to equip a rigged object. This object mouting is distinct 
 ## from something like a sword or ax because it is rigged to the body and the 
