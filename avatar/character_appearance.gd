@@ -14,42 +14,42 @@ class_name  CharacterAppearance
 signal pre_slot_equiped(slot:Equippable, meta)
 signal post_slot_equiped(slot:Equippable, meta)
 
-signal slot_0_equipped(meta)
-signal slot_1_equipped(meta)
-signal slot_2_equipped(meta)
-signal slot_3_equipped(meta)
-signal slot_4_equipped(meta)
-signal slot_5_equipped(meta)
-signal slot_6_equipped(meta)
-signal slot_7_equipped(meta)
-signal slot_8_equipped(meta)
-signal slot_9_equipped(meta)
-signal slot_10_equipped(meta)
-signal slot_11_equipped(meta)
-signal slot_12_equipped(meta)
-signal slot_13_equipped(meta)
-signal slot_14_equipped(meta)
-signal slot_15_equipped(meta)
-signal slot_16_equipped(meta)
-signal slot_17_equipped(meta)
-signal slot_18_equipped(meta)
-signal slot_19_equipped(meta)
-signal slot_20_equipped(meta)
-signal slot_21_equipped(meta)
-signal slot_22_equipped(meta)
-signal slot_23_equipped(meta)
-signal slot_24_equipped(meta)
-signal slot_25_equipped(meta)
-signal slot_26_equipped(meta)
-signal slot_27_equipped(meta)
-signal slot_28_equipped(meta)
-signal slot_29_equipped(meta)
-signal slot_30_equipped(meta)
-signal slot_31_equipped(meta)
-signal slot_32_equipped(meta)
-signal slot_33_equipped(meta)
-signal slot_34_equipped(meta)
-signal no_slot_equipped(meta)
+signal slot_0_equipped(meta:Dictionary)
+signal slot_1_equipped(meta:Dictionary)
+signal slot_2_equipped(meta:Dictionary)
+signal slot_3_equipped(meta:Dictionary)
+signal slot_4_equipped(meta:Dictionary)
+signal slot_5_equipped(meta:Dictionary)
+signal slot_6_equipped(meta:Dictionary)
+signal slot_7_equipped(meta:Dictionary)
+signal slot_8_equipped(meta:Dictionary)
+signal slot_9_equipped(meta:Dictionary)
+signal slot_10_equipped(meta:Dictionary)
+signal slot_11_equipped(meta:Dictionary)
+signal slot_12_equipped(meta:Dictionary)
+signal slot_13_equipped(meta:Dictionary)
+signal slot_14_equipped(meta:Dictionary)
+signal slot_15_equipped(meta:Dictionary)
+signal slot_16_equipped(meta:Dictionary)
+signal slot_17_equipped(meta:Dictionary)
+signal slot_18_equipped(meta:Dictionary)
+signal slot_19_equipped(meta:Dictionary)
+signal slot_20_equipped(meta:Dictionary)
+signal slot_21_equipped(meta:Dictionary)
+signal slot_22_equipped(meta:Dictionary)
+signal slot_23_equipped(meta:Dictionary)
+signal slot_24_equipped(meta:Dictionary)
+signal slot_25_equipped(meta:Dictionary)
+signal slot_26_equipped(meta:Dictionary)
+signal slot_27_equipped(meta:Dictionary)
+signal slot_28_equipped(meta:Dictionary)
+signal slot_29_equipped(meta:Dictionary)
+signal slot_30_equipped(meta:Dictionary)
+signal slot_31_equipped(meta:Dictionary)
+signal slot_32_equipped(meta:Dictionary)
+signal slot_33_equipped(meta:Dictionary)
+signal slot_34_equipped(meta:Dictionary)
+signal no_slot_equipped(meta:Dictionary)
 
 enum Equippable{
 	#HAIR 
@@ -103,6 +103,7 @@ enum Equippable{
 	
 	#OTHER
 	SLOT_35,
+	SLOT_36,
 	SLOT_37,
 	SLOT_38,
 	SLOT_39,
@@ -114,6 +115,7 @@ var slot_objects:Dictionary = {}
 
 @export var character_mesh: MeshInstance3D 
 @export var skeleton_3d: Skeleton3D 
+var character_material:StandardMaterial3D
 
 @export var anchor_slot_27: Node3D #Back Left 
 @export var anchor_slot_28: Node3D #Back Right
@@ -124,11 +126,16 @@ var slot_objects:Dictionary = {}
 @export var anchor_slot_33: Node3D #Hand Left
 @export var anchor_slot_34: Node3D #Hand Right
 
-
+	
 func _ready() -> void:
+	character_material = character_mesh.get_surface_override_material(0)
+	populate_slot_objects_dictionary()
+
+func populate_slot_objects_dictionary():
+	if not slot_objects.is_empty():
+		return
 	for x:int in range(Equippable.keys().size()):
 		slot_objects["SLOT_%s"%str(x)] = null
-
 
 ## Main entry point for equiping visible items. 
 ## Provide Slot number and Path to resource. Meta is optional arbitrary information you
@@ -136,7 +143,7 @@ func _ready() -> void:
 ## concerning an eqiupped item.
 ## Path (res://...) is obtained from character controller via ID and provided to character
 ## avatar. Character avatar relays request to this function.
-func equip_slot(slot:String, path:String, meta=null):	
+func equip_slot(slot:String, path:String, meta:Dictionary={}):	
 	slot = slot.to_upper()
 	var equip_slot:Equippable
 	var slot_found:bool = false
@@ -257,34 +264,36 @@ func equip_slot(slot:String, path:String, meta=null):
 		post_slot_equiped.emit(equip_slot, meta)
 
 ## Equips a texture to the skin layers.
-func equip_slot_texture(slot:Equippable, path:String):
-	var material:StandardMaterial3D
+func equip_slot_texture(slot:Equippable, path:String):	
+	if not is_node_ready():
+		await ready
+	if not character_mesh.is_node_ready():
+		await character_mesh.ready
 	var blank_texture_path:String = "res://addons/puggos_world_character/base_textures/_blank.png" 
 	var default_texture_path:String = "res://addons/puggos_world_character/test_objects/slot_1/tan.png"
 	match slot:
 		Equippable.SLOT_1:
-			material = character_mesh.get_surface_override_material(0)
 			if path.is_empty():
 				path = default_texture_path
+			character_material.albedo_texture = load(path) as Texture2D
 		Equippable.SLOT_2:
-			material = character_mesh.get_surface_override_material(0).next_pass
 			if path.is_empty():
 				path = blank_texture_path
+			character_material.next_pass.albedo_texture = load(path) as Texture2D	
 		Equippable.SLOT_3:
-			material = character_mesh.get_surface_override_material(0).next_pass.next_pass
 			if path.is_empty():
 				path = blank_texture_path
-				
-	var texture:Texture2D = load(path)
-	material.albedo_texture = texture
+			character_material.next_pass.next_pass.albedo_texture = load(path) as Texture2D	
 
 ## A general function to equip a rigged object. This object mouting is distinct 
 ## from something like a sword or ax because it is rigged to the body and the 
 ## after the mod is loaded, processed, and remapped to the body skeleton. 
 func equip_rigged_object(slot:Equippable, path:String):
+	populate_slot_objects_dictionary()
 	# Construct a string that will map to the slot_ variables above.
 	var slot_var:String = Equippable.keys()[slot]
 	# First, remove the old item before adding the new one.
+	
 	if slot_objects[slot_var] != null:
 		slot_objects[slot_var].queue_free()
 	slot_objects[slot_var]=null
@@ -315,6 +324,9 @@ func equip_rigged_object(slot:Equippable, path:String):
 		return
 	var mesh:MeshInstance3D = child
 	
+	## A fixer function for the binding operation.
+	mesh = fix_skin_binds(mesh, skeleton_3d)
+	
 	# Reparent the mesh to the character skeleton.
 	mesh.reparent(skeleton_3d)
 	
@@ -327,8 +339,43 @@ func equip_rigged_object(slot:Equippable, path:String):
 	# Cleanup. Remove the original instantiated object.
 	ob_instantiated.queue_free()
 
-
+## In some instances bones of the original mesh / skin are not available in the 
+## new target skeleton. Attempting to fix here. It seems to get fixed by simply adding new bones.
+## Original error that prompted this fixer function:
+## E 0:00:01:0994   _notification: Skin bind #52 contains named bind 'Leg_1_PoleTarget_R' but Skeleton3D has no bone by that name.
+##  <C++ Source>   scene/3d/skeleton_3d.cpp:377 @ _notification()
+func fix_skin_binds(mesh_to_reparent:MeshInstance3D, target_skeleton:Skeleton3D )->MeshInstance3D:
+	if mesh_to_reparent == null:
+		return mesh_to_reparent
+	if mesh_to_reparent.get_skin_reference() == null:
+		return mesh_to_reparent
+	if mesh_to_reparent.get_skin_reference().get_skin() == null:
+		return mesh_to_reparent
+	
+	var target_skeleton_bones:Array[String] = []
+	var mesh_to_reparent_skin:Skin = mesh_to_reparent.get_skin_reference().get_skin()
+	
+	for x in target_skeleton.get_bone_count():
+		target_skeleton_bones.append(target_skeleton.get_bone_name(x))
+	
+	var mesh_to_reparent_binds:Dictionary = {}
+	var binds_to_add:Dictionary
+	
+	for x in mesh_to_reparent_skin.get_bind_count():		
+		var bind_name:String = mesh_to_reparent_skin.get_bind_name(x)
+		var bind_pose = mesh_to_reparent_skin.get_bind_pose(x)
+		if bind_name in target_skeleton_bones:
+			mesh_to_reparent_binds[bind_name] = bind_pose
+		else:
+			binds_to_add[bind_name] = bind_pose
+	
+	for key in binds_to_add:
+		skeleton_3d.add_bone(key)
+		
+	return mesh_to_reparent
+	
 func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
+	populate_slot_objects_dictionary()
 	# Construct a string that will map to the slot_ variables above.
 	var slot_var:String = Equippable.keys()[slot]
 	# First, remove the old item before adding the new one.
@@ -350,12 +397,97 @@ func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
 	
 	anchor.add_child(ob_instantiated)
 	
-	#ob_instantiated.position = Vector3.ZERO
-	#ob_instantiated.rotation_degrees = Vector3.ZERO
-	print(ob_instantiated.get_parent())
 	# Set the variable to future tracking and management.
 	slot_objects[slot_var]=ob_instantiated
 
 func clear_anchor(anchor:Node3D):
 	for child in anchor.get_children():
 		child.queue_free()
+#region misc
+static func get_slot_description(slot:Equippable)->String:
+	var description:String = ""
+	match slot:
+		Equippable.SLOT_0:
+			description = "Unassigned"
+		Equippable.SLOT_1:
+			description = "Skin base layer"
+		Equippable.SLOT_2:
+			description = "Skin Markings / Art / Tattoos"
+		Equippable.SLOT_3:
+			description = "Skin temporary effects"
+		Equippable.SLOT_4:
+			description = "Face"
+		Equippable.SLOT_5:
+			description = "Mask"
+		Equippable.SLOT_6:
+			description = "Hat / Helmet"
+		Equippable.SLOT_7:
+			description = "Hair / Decos"
+		Equippable.SLOT_8:
+			description = "Shirt"
+		Equippable.SLOT_9:
+			description = "Jacket"
+		Equippable.SLOT_10:
+			description = "Vest"
+		Equippable.SLOT_11:
+			description = "Backpack"
+		Equippable.SLOT_12:
+			description = "Accessories"
+		Equippable.SLOT_13:
+			description = "Arm Armor Left"
+		Equippable.SLOT_14:
+			description = "Arm Armor Right"
+		Equippable.SLOT_15:
+			description = "Glove Left"
+		Equippable.SLOT_16:
+			description = "Glove Right"
+		Equippable.SLOT_17:
+			description = "Arm Accessory Left"
+		Equippable.SLOT_18:
+			description = "Arm Accessory Right"
+		Equippable.SLOT_19:
+			description = "Belt"
+		Equippable.SLOT_20:
+			description = "Pants"
+		Equippable.SLOT_21:
+			description = "Leg Armor Left"
+		Equippable.SLOT_22:
+			description = "Leg Armor Right"
+		Equippable.SLOT_23:
+			description = "Footwear Left"
+		Equippable.SLOT_24:
+			description = "Footwear Right"
+		Equippable.SLOT_25:
+			description = "Leg Accessory Left"
+		Equippable.SLOT_26:
+			description = "Leg Accessory Right"
+		Equippable.SLOT_27:
+			description = "Back Left [Anchor_Slot_27]"
+		Equippable.SLOT_28:
+			description = "Back Right [Anchor_Slot_28]"
+		Equippable.SLOT_29:
+			description = "Hip Left [Anchor_Slot_29]"
+		Equippable.SLOT_30:
+			description = "Hip Left [Anchor_Slot_30]"
+		Equippable.SLOT_31:
+			description = "Chest Left [Anchor_Slot_31]"
+		Equippable.SLOT_32:
+			description = "Chest Right [Anchor_Slot_32]"
+		Equippable.SLOT_33:
+			description = "Hand Left [Anchor_Slot_33]"
+		Equippable.SLOT_34:
+			description = "Hand Right [Anchor_Slot_34]"
+		Equippable.SLOT_35:
+			description = "Other"
+		Equippable.SLOT_36:
+			description = "Other"
+		Equippable.SLOT_37:
+			description = "Other"
+		Equippable.SLOT_38:
+			description = "Other"
+		Equippable.SLOT_39:
+			description = "Other"
+		_:
+			description = "This is not a slot."
+	return description
+#endregion

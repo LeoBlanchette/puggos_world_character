@@ -223,7 +223,9 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE",
 		animation_timer = get_tree().create_timer(length)
 		await animation_timer.timeout
 		animation_merger.body_region = AnimationMerger.BodyRegion.NONE
-
+	else:
+		print("Animation not found.")
+		
 func stop_animation():
 	if animation_timer != null:
 		animation_timer.time_left = 0

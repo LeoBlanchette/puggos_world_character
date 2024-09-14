@@ -1,10 +1,9 @@
-[gd_scene load_steps=278 format=4 uid="uid://c4bj48um6sbj6"]
+[gd_scene load_steps=247 format=4 uid="uid://c4bj48um6sbj6"]
 
 [ext_resource type="Script" path="res://addons/puggos_world_character/avatar/avatar.gd" id="1_mbnbw"]
 [ext_resource type="PackedScene" uid="uid://l2tpk6ukl3o" path="res://addons/puggos_world_character/character/gltf/Character.gltf" id="2_qgfac"]
 [ext_resource type="Animation" uid="uid://cija1uc5unjvo" path="res://addons/puggos_world_character/character/animations/Loop_Craft.res" id="3_pty7w"]
 [ext_resource type="Script" path="res://addons/puggos_world_character/avatar/animation_merger.gd" id="3_t8pkx"]
-[ext_resource type="Material" uid="uid://dqkthq0lor5eh" path="res://addons/puggos_world_character/character/base_materials/slot_1_base_material.tres" id="3_yblxu"]
 [ext_resource type="Animation" uid="uid://p6f3gbal0kun" path="res://addons/puggos_world_character/character/animations/Loop_Idle_Combat_RangedPistol.res" id="4_evflh"]
 [ext_resource type="Animation" uid="uid://iqyemkhy0q3f" path="res://addons/puggos_world_character/character/animations/Loop_Idle_Combat_RangedRifle.res" id="5_4mi4j"]
 [ext_resource type="Animation" uid="uid://c0sv1ssmp0533" path="res://addons/puggos_world_character/character/animations/Loop_Idle_Default.res" id="6_6yhwi"]
@@ -30,30 +29,6 @@
 [ext_resource type="Animation" uid="uid://uqnx8d0hamaa" path="res://addons/puggos_world_character/character/animations/Loop_TwoHandedBludgeon_Idle_Combat.res" id="26_uydxy"]
 [ext_resource type="Animation" uid="uid://dvd4umtbmxd3p" path="res://addons/puggos_world_character/character/animations/Loop_TwoHandedBludgeon_Idle_Injured.res" id="27_xxmsa"]
 [ext_resource type="Animation" uid="uid://ij2pxlylau1p" path="res://addons/puggos_world_character/character/animations/Loop_Unwrap_Ramen.res" id="28_wwgk0"]
-[ext_resource type="Animation" uid="uid://p1yev0cy438i" path="res://addons/puggos_world_character/character/animations/OneShot_Eat.res" id="29_tffw2"]
-[ext_resource type="Animation" uid="uid://b42ldk5xdjslr" path="res://addons/puggos_world_character/character/animations/OneShot_Idle_Default_To_Sneak.res" id="30_0my5a"]
-[ext_resource type="Animation" uid="uid://cp03yohx601af" path="res://addons/puggos_world_character/character/animations/OneShot_Jump.res" id="31_wxekc"]
-[ext_resource type="Animation" uid="uid://c6ymm3nmdauyq" path="res://addons/puggos_world_character/character/animations/OneShot_Kick_Left.res" id="32_a7xfq"]
-[ext_resource type="Animation" uid="uid://i0qpy4kefga5" path="res://addons/puggos_world_character/character/animations/OneShot_Kick_Right.res" id="33_5clcw"]
-[ext_resource type="Animation" uid="uid://pjdymkebac0u" path="res://addons/puggos_world_character/character/animations/OneShot_Land.res" id="34_1vx60"]
-[ext_resource type="Animation" uid="uid://bi868n6a2h14g" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_Criss-Cross_Jab.res" id="35_5wn44"]
-[ext_resource type="Animation" uid="uid://cfwdxts7o1urm" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_Criss-Cross_Slice_Heavy.res" id="36_hovt7"]
-[ext_resource type="Animation" uid="uid://bw1mlyho5hbsw" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_Criss-Cross_Slice_Light.res" id="37_gjk8c"]
-[ext_resource type="Animation" uid="uid://bhhaokd61y20k" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_DoubleJab.res" id="38_vah0i"]
-[ext_resource type="Animation" uid="uid://dcl2nven1ysv1" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_LeftSlash.res" id="39_dc8ht"]
-[ext_resource type="Animation" uid="uid://boc7c3fnms346" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_RightSlash.res" id="40_54o0d"]
-[ext_resource type="Animation" uid="uid://c4rfgh6ohieqx" path="res://addons/puggos_world_character/character/animations/OneShot_OneHandedSharp_Stab.res" id="41_aqwx2"]
-[ext_resource type="Animation" uid="uid://c8mt1bgoaav4b" path="res://addons/puggos_world_character/character/animations/OneShot_Open_Soda_Can.res" id="42_174cr"]
-[ext_resource type="Animation" uid="uid://eq01um2jkqx0" path="res://addons/puggos_world_character/character/animations/OneShot_Punch-Left_Cross.res" id="43_38rjq"]
-[ext_resource type="Animation" uid="uid://d4kllojinwx73" path="res://addons/puggos_world_character/character/animations/OneShot_Punch-Right_Cross.res" id="44_nwhuo"]
-[ext_resource type="Animation" uid="uid://581ha1rrdan2" path="res://addons/puggos_world_character/character/animations/OneShot_RangedPistol_Idle_To_Sneak.res" id="45_3l53y"]
-[ext_resource type="Animation" uid="uid://dk3tmcfre1ysx" path="res://addons/puggos_world_character/character/animations/OneShot_RangedRifle_Idle_To_Sneak.res" id="46_a38pg"]
-[ext_resource type="Animation" uid="uid://cdkl6l1yer0fn" path="res://addons/puggos_world_character/character/animations/OneShot_Sleeping.res" id="47_1c6ru"]
-[ext_resource type="Animation" uid="uid://8wrdp60hinqr" path="res://addons/puggos_world_character/character/animations/OneShot_Take_Damage.res" id="48_n64gp"]
-[ext_resource type="Animation" uid="uid://2e6fis8sq5ct" path="res://addons/puggos_world_character/character/animations/OneShot_TwoHandedBludgeon_IdleToSneak.res" id="49_quqb8"]
-[ext_resource type="Animation" uid="uid://bu7xb78lqkwnl" path="res://addons/puggos_world_character/character/animations/OneShot_TwoHandedBludgeon_Idle_To_Sneak.res" id="50_jwd8b"]
-[ext_resource type="Animation" uid="uid://cttxr4ea1raac" path="res://addons/puggos_world_character/character/animations/OneShot_TwoHandedBludgeon_Knock.res" id="51_fatss"]
-[ext_resource type="Animation" uid="uid://fpuxtsbopycx" path="res://addons/puggos_world_character/character/animations/OneShot_TwoHandedBludgeon_Swing.res" id="52_ecq4w"]
 [ext_resource type="Animation" uid="uid://dd56h387u42q1" path="res://addons/puggos_world_character/character/animations/Sneak_Default_BackLeft.res" id="53_entp5"]
 [ext_resource type="Animation" uid="uid://eaey5ggg2bid" path="res://addons/puggos_world_character/character/animations/Sneak_Default_BackRight.res" id="54_fjrdf"]
 [ext_resource type="Animation" uid="uid://jw25qvi2qdwt" path="res://addons/puggos_world_character/character/animations/Sneak_Default_Backwards.res" id="55_qxs50"]
@@ -125,6 +100,7 @@
 [ext_resource type="Animation" uid="uid://dn52lco8w3prb" path="res://addons/puggos_world_character/character/animations/WalkCycle_RangedRifle_Backward.res" id="120_3im7r"]
 [ext_resource type="Animation" uid="uid://kwb1ul8fonp8" path="res://addons/puggos_world_character/character/animations/WalkCycle_RangedRifle_BackwardLeft.res" id="121_fpq5i"]
 [ext_resource type="Animation" uid="uid://co5en1swdajlw" path="res://addons/puggos_world_character/character/animations/WalkCycle_RangedRifle_BackwardRight.res" id="122_fxnkq"]
+[ext_resource type="Material" uid="uid://cr7j0a4j77oaw" path="res://addons/puggos_world_character/materials/material_slot_1.tres" id="122_sess4"]
 [ext_resource type="Animation" uid="uid://eaaadufxqh0w" path="res://addons/puggos_world_character/character/animations/WalkCycle_RangedRifle_ForwardLeft.res" id="123_g5kpg"]
 [ext_resource type="Animation" uid="uid://jwes801en7w4" path="res://addons/puggos_world_character/character/animations/WalkCycle_RangedRifle_ForwardRight.res" id="124_iuv0e"]
 [ext_resource type="Animation" uid="uid://b55hut8ynsuse" path="res://addons/puggos_world_character/character/animations/WalkCycle_RangedRifle_StrafeLeft.res" id="125_mm1ou"]
@@ -144,14 +120,7 @@
 [ext_resource type="Animation" uid="uid://wm7qy2c5iehc" path="res://addons/puggos_world_character/character/animations/RunCycle_ForwardRight.res" id="139_b5np1"]
 [ext_resource type="Animation" uid="uid://xikfyoilw4sj" path="res://addons/puggos_world_character/character/animations/RunCycle_StrafeLeft.res" id="140_8a11r"]
 [ext_resource type="Animation" uid="uid://c24okryi3dj3k" path="res://addons/puggos_world_character/character/animations/RunCycle_StrafeRight.res" id="141_dciyh"]
-[ext_resource type="Animation" uid="uid://yscy1ddq5xns" path="res://addons/puggos_world_character/character/animations/Personality_PreMadonna.res" id="144_5x2w6"]
 [ext_resource type="Script" path="res://addons/puggos_world_character/avatar/character_appearance.gd" id="144_qburh"]
-[ext_resource type="Animation" uid="uid://cehs3t757y853" path="res://addons/puggos_world_character/character/animations/Personality_Simpleton.res" id="145_7pmsg"]
-[ext_resource type="Animation" uid="uid://kdx7etf1sevd" path="res://addons/puggos_world_character/character/animations/Personality_Stoic.res" id="146_kbh8m"]
-[ext_resource type="Animation" uid="uid://dce460rwjx2ey" path="res://addons/puggos_world_character/character/animations/Personality_TechnoNut.res" id="147_1nj4e"]
-[ext_resource type="Animation" uid="uid://bwluu4c30ee40" path="res://addons/puggos_world_character/character/animations/Personality_TypicalSurvivor.res" id="148_eqrkb"]
-[ext_resource type="Animation" uid="uid://bwpd6uhfun1cs" path="res://addons/puggos_world_character/character/animations/Personality_Bravado.res" id="149_endgo"]
-[ext_resource type="Animation" uid="uid://jouiemsrgpre" path="res://addons/puggos_world_character/character/animations/Personality_Sifu.res" id="150_ymuva"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0hxb"]
 diffuse_mode = 3
@@ -278,37 +247,6 @@ _data = {
 "Loop_TwoHandedBludgeon_Idle_Combat": ExtResource("26_uydxy"),
 "Loop_TwoHandedBludgeon_Idle_Injured": ExtResource("27_xxmsa"),
 "Loop_Unwrap_Ramen": ExtResource("28_wwgk0"),
-"OneShot_Eat": ExtResource("29_tffw2"),
-"OneShot_Idle_Default_To_Sneak": ExtResource("30_0my5a"),
-"OneShot_Jump": ExtResource("31_wxekc"),
-"OneShot_Kick_Left": ExtResource("32_a7xfq"),
-"OneShot_Kick_Right": ExtResource("33_5clcw"),
-"OneShot_Land": ExtResource("34_1vx60"),
-"OneShot_OneHandedSharp_Criss-Cross_Jab": ExtResource("35_5wn44"),
-"OneShot_OneHandedSharp_Criss-Cross_Slice_Heavy": ExtResource("36_hovt7"),
-"OneShot_OneHandedSharp_Criss-Cross_Slice_Light": ExtResource("37_gjk8c"),
-"OneShot_OneHandedSharp_DoubleJab": ExtResource("38_vah0i"),
-"OneShot_OneHandedSharp_LeftSlash": ExtResource("39_dc8ht"),
-"OneShot_OneHandedSharp_RightSlash": ExtResource("40_54o0d"),
-"OneShot_OneHandedSharp_Stab": ExtResource("41_aqwx2"),
-"OneShot_Open_Soda_Can": ExtResource("42_174cr"),
-"OneShot_Punch-Left_Cross": ExtResource("43_38rjq"),
-"OneShot_Punch-Right_Cross": ExtResource("44_nwhuo"),
-"OneShot_RangedPistol_Idle_To_Sneak": ExtResource("45_3l53y"),
-"OneShot_RangedRifle_Idle_To_Sneak": ExtResource("46_a38pg"),
-"OneShot_Sleeping": ExtResource("47_1c6ru"),
-"OneShot_Take_Damage": ExtResource("48_n64gp"),
-"OneShot_TwoHandedBludgeon_IdleToSneak": ExtResource("49_quqb8"),
-"OneShot_TwoHandedBludgeon_Idle_To_Sneak": ExtResource("50_jwd8b"),
-"OneShot_TwoHandedBludgeon_Knock": ExtResource("51_fatss"),
-"OneShot_TwoHandedBludgeon_Swing": ExtResource("52_ecq4w"),
-"Personality_Bravado": ExtResource("149_endgo"),
-"Personality_PreMadonna": ExtResource("144_5x2w6"),
-"Personality_Sifu": ExtResource("150_ymuva"),
-"Personality_Simpleton": ExtResource("145_7pmsg"),
-"Personality_Stoic": ExtResource("146_kbh8m"),
-"Personality_TechnoNut": ExtResource("147_1nj4e"),
-"Personality_TypicalSurvivor": ExtResource("148_eqrkb"),
 "RunCycle_Backward": ExtResource("134_eptpl"),
 "RunCycle_BackwardLeft": ExtResource("135_fx7o3"),
 "RunCycle_BackwardRight": ExtResource("136_wot5y"),
@@ -974,6 +912,7 @@ input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yfl8a"]
+graph_offset = Vector2(-591.712, -117.772)
 nodes/AlteredMotionBlend/node = SubResource("AnimationNodeBlend2_f2vry")
 nodes/AlteredMotionBlend/position = Vector2(1040, 300)
 nodes/AlteredMotionStates/node = SubResource("AnimationNodeTransition_s3ovf")
@@ -1026,78 +965,79 @@ metadata/avatar = true
 [node name="Character" parent="." instance=ExtResource("2_qgfac")]
 
 [node name="Skeleton3D" parent="Character/Armature" index="0"]
-bones/0/position = Vector3(-0.120547, 0.00186166, 0.152961)
-bones/0/rotation = Quaternion(-0.704713, 0, 0, 0.709492)
-bones/1/rotation = Quaternion(-0.861449, 3.83412e-08, 6.50376e-08, 0.507844)
+animate_physical_bones = false
+bones/0/position = Vector3(-0.12104, 0.00186167, 0.0533471)
+bones/0/rotation = Quaternion(-0.654944, -0.261898, -0.260134, 0.659385)
+bones/1/rotation = Quaternion(-0.768056, 4.42263e-08, 5.45785e-08, 0.640383)
 bones/1/scale = Vector3(1, 1, 1)
-bones/2/rotation = Quaternion(1, -1.18447e-17, -7.54979e-08, -1.11759e-07)
-bones/3/position = Vector3(0.120547, 0.00186166, 0.152961)
-bones/3/rotation = Quaternion(-0.704713, 0, 0, 0.709492)
-bones/4/rotation = Quaternion(-0.654963, 5.70508e-08, 4.94483e-08, 0.755661)
+bones/2/rotation = Quaternion(1, -9.75718e-10, -7.75379e-08, -1.11343e-07)
+bones/3/position = Vector3(0.0308207, 0.00186167, 0.196231)
+bones/3/rotation = Quaternion(-0.654944, -0.261898, -0.260134, 0.659385)
+bones/4/rotation = Quaternion(-0.798794, 4.20993e-08, 6.06688e-08, 0.601605)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/rotation = Quaternion(1, -1.70987e-16, -7.54979e-08, -1.04308e-07)
-bones/6/position = Vector3(0.00332176, 0.699048, 0.000730049)
-bones/6/rotation = Quaternion(-2.8104e-08, 0.0239753, 8.8531e-10, 0.999713)
-bones/7/rotation = Quaternion(0.0167526, -0.000111474, -0.00624333, 0.99984)
-bones/8/rotation = Quaternion(0.0274272, -0.00390465, -0.000880765, 0.999616)
-bones/9/rotation = Quaternion(-0.0139735, -0.00516274, -0.00978762, 0.999841)
-bones/10/rotation = Quaternion(0.0248284, -0.0164739, -0.0699023, 0.997109)
-bones/11/rotation = Quaternion(-0.0795433, -0.017133, 0.0889314, 0.992709)
+bones/5/rotation = Quaternion(1, -2.94671e-09, -7.24155e-08, -9.47175e-08)
+bones/6/position = Vector3(0.0477777, 0.728912, 0.0325765)
+bones/6/rotation = Quaternion(-2.61936e-08, -0.374312, -1.34147e-08, 0.927303)
+bones/7/rotation = Quaternion(0.0276325, 0.099298, 0.0159528, 0.994546)
+bones/8/rotation = Quaternion(0.0273072, 0.0613383, 0.00678893, 0.99772)
+bones/9/rotation = Quaternion(-0.0510412, -0.0513097, -0.0324715, 0.996849)
+bones/10/rotation = Quaternion(0.0342272, -0.00959089, -0.137415, 0.989876)
+bones/11/rotation = Quaternion(-0.11074, 0.37172, 0.118309, 0.914092)
 bones/11/scale = Vector3(1, 1, 1)
-bones/12/rotation = Quaternion(0.591278, -0.382022, 0.598126, 0.383008)
+bones/12/rotation = Quaternion(0.608392, -0.340016, 0.627486, 0.347146)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.373367, -0.304392, 0.149663, 0.863449)
+bones/13/rotation = Quaternion(0.243531, -0.278166, 0.234616, 0.899039)
 bones/13/scale = Vector3(1, 1, 1)
-bones/14/rotation = Quaternion(0.00187683, 0.00199735, -0.325336, 0.945594)
-bones/15/rotation = Quaternion(-0.211715, 0.11545, 0.0536787, 0.969003)
+bones/14/rotation = Quaternion(0.0112359, 0.00540319, -0.563225, 0.826209)
+bones/15/rotation = Quaternion(-0.211147, 0.114289, 0.0228635, 0.97048)
 bones/16/rotation = Quaternion(-0.0733102, 0.639536, 0.581954, -0.496939)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/rotation = Quaternion(0.199294, 0.459286, 0.360411, 0.787046)
-bones/18/position = Vector3(-1.36481e-05, 0.0896975, -0.00767391)
-bones/18/rotation = Quaternion(0.210335, -0.678693, -0.174697, 0.681628)
+bones/18/position = Vector3(-1.36338e-05, 0.0896975, -0.00767389)
+bones/18/rotation = Quaternion(0.176566, -0.669956, -0.151576, 0.704988)
 bones/18/scale = Vector3(1, 1, 1)
-bones/19/rotation = Quaternion(0.0267239, -0.00513378, -0.0413339, 0.998775)
-bones/20/position = Vector3(-0.0715746, 0.093437, -0.00579486)
-bones/20/rotation = Quaternion(0.211121, -0.678462, -0.175444, 0.681423)
-bones/21/rotation = Quaternion(0.0266972, -0.00510482, -0.0402087, 0.998822)
-bones/22/rotation = Quaternion(0.211121, -0.678462, -0.175444, 0.681423)
-bones/23/rotation = Quaternion(0.0266972, -0.00510484, -0.0402087, 0.998822)
-bones/24/rotation = Quaternion(-0.577264, -0.414753, 0.575267, -0.404739)
+bones/19/rotation = Quaternion(0.0164548, 0.014825, -0.0002623, 0.999755)
+bones/20/position = Vector3(-0.0715745, 0.093437, -0.00579485)
+bones/20/rotation = Quaternion(0.177341, -0.669765, -0.152351, 0.704808)
+bones/21/rotation = Quaternion(0.016404, 0.014845, 0.000863204, 0.999755)
+bones/22/rotation = Quaternion(0.177341, -0.669764, -0.152351, 0.704809)
+bones/23/rotation = Quaternion(0.016404, 0.014845, 0.000863188, 0.999755)
+bones/24/rotation = Quaternion(-0.573925, -0.422818, 0.569957, -0.408636)
 bones/24/scale = Vector3(1, 1, 1)
-bones/25/rotation = Quaternion(0.406667, -0.0296316, 0.208451, 0.888984)
+bones/25/rotation = Quaternion(0.430005, 0.148598, -0.129648, 0.881025)
 bones/25/scale = Vector3(1, 1, 1)
-bones/26/rotation = Quaternion(-0.000867378, -0.00096785, 0.225321, 0.974284)
-bones/27/rotation = Quaternion(-0.0209697, -0.126225, 0.10247, 0.986472)
+bones/26/rotation = Quaternion(0.00298751, -0.00221313, 0.349947, 0.936762)
+bones/27/rotation = Quaternion(-0.0976706, -0.0698572, -0.0255754, 0.992435)
 bones/28/position = Vector3(-0.0438188, 0.0267054, 0.0369255)
 bones/28/rotation = Quaternion(0.0733102, 0.639536, 0.581954, 0.496939)
 bones/28/scale = Vector3(1, 1, 1)
 bones/29/rotation = Quaternion(0.199294, -0.459286, -0.360411, 0.787046)
-bones/30/rotation = Quaternion(0.242868, 0.666055, 0.225394, 0.668269)
+bones/30/rotation = Quaternion(0.263099, 0.651424, 0.255146, 0.664324)
 bones/30/scale = Vector3(1, 1, 1)
-bones/31/rotation = Quaternion(0.0162467, 0.00532582, 0.103568, 0.994476)
-bones/32/rotation = Quaternion(0.24364, 0.66578, 0.226125, 0.668015)
+bones/31/rotation = Quaternion(0.0070034, 0.00231296, 0.141108, 0.989967)
+bones/32/rotation = Quaternion(0.263855, 0.651128, 0.255872, 0.664035)
 bones/32/scale = Vector3(1, 1, 1)
-bones/33/rotation = Quaternion(0.0162199, 0.00531119, 0.102446, 0.994592)
-bones/34/rotation = Quaternion(0.24364, 0.665781, 0.226125, 0.668014)
+bones/33/rotation = Quaternion(0.00699605, 0.00229973, -0.0433896, 0.999031)
+bones/34/rotation = Quaternion(0.263855, 0.651128, 0.255872, 0.664035)
 bones/34/scale = Vector3(1, 1, 1)
-bones/35/rotation = Quaternion(0.0162199, 0.00531107, 0.102447, 0.994592)
-bones/36/rotation = Quaternion(-0.034843, 0.25935, 0.965024, 0.015894)
-bones/37/rotation = Quaternion(-0.228904, 0.0166975, -0.00989703, 0.973256)
+bones/35/rotation = Quaternion(0.00697401, 0.00230959, 0.139992, 0.990125)
+bones/36/rotation = Quaternion(-0.00199681, 0.297622, 0.954633, 0.00963216)
+bones/37/rotation = Quaternion(-0.438227, 0.0154155, -0.0189475, 0.898532)
 bones/37/scale = Vector3(1, 1, 1)
-bones/38/rotation = Quaternion(-0.0215968, 0.957004, 0.288026, 0.0268091)
+bones/38/rotation = Quaternion(-0.0204095, 0.990248, 0.13409, 0.0318279)
 bones/38/scale = Vector3(1, 1, 1)
-bones/39/rotation = Quaternion(-0.506636, 3.9152e-06, -1.40711e-05, 0.86216)
-bones/40/rotation = Quaternion(-0.0187225, -0.0026726, 0.999806, -0.00552744)
-bones/41/rotation = Quaternion(-0.317766, -0.0162629, 0.0137391, 0.94793)
+bones/39/rotation = Quaternion(-0.638196, 7.88879e-06, -2.13364e-05, 0.769874)
+bones/40/rotation = Quaternion(0.00890534, 0.152111, 0.988317, -0.00352795)
+bones/41/rotation = Quaternion(-0.256965, -0.0165766, 0.0111103, 0.966215)
 bones/41/scale = Vector3(1, 1, 1)
-bones/42/rotation = Quaternion(0.0155764, 0.967557, 0.251013, -0.0241437)
+bones/42/rotation = Quaternion(0.0136854, 0.961864, 0.272441, -0.0201829)
 bones/42/scale = Vector3(1, 1, 1)
-bones/43/rotation = Quaternion(-0.753981, 1.24283e-06, 3.06256e-07, 0.656896)
+bones/43/rotation = Quaternion(-0.599272, 3.19608e-06, -6.61884e-06, 0.800545)
 bones/43/scale = Vector3(1, 1, 1)
 
 [node name="Character" parent="Character/Armature/Skeleton3D" index="0"]
 mesh = SubResource("ArrayMesh_b0m8v")
-surface_material_override/0 = ExtResource("3_yblxu")
+surface_material_override/0 = ExtResource("122_sess4")
 
 [node name="AnimationMerger" type="SkeletonModifier3D" parent="Character/Armature/Skeleton3D" index="1" node_paths=PackedStringArray("animation_player", "character_animation_tree")]
 _import_path = NodePath("")
@@ -1125,15 +1065,12 @@ torso = Array[String](["Arm_1_R", "Arm_1_L", "Arm_2_R", "Arm_2_L", "Arm_3_R", "A
 legs = Array[String](["Leg_1_R", "Leg_1_L", "Leg_2_R", "Leg_2_L", "Leg_3_R", "Leg_3_L", "Leg_4_R", "Leg_4_L", "Spine_1"])
 
 [node name="AnchorNodeBackLeft" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.998895, 0.0368076, 0.029241, -0.0350022, 0.997583, -0.060022, -0.0313796, 0.0589321, 0.997769, 0.00776558, 1.0915, 0.017845)
+transform = Transform3D(0.854041, 0.00811547, -0.520142, -0.0100104, 0.99995, -0.000834905, 0.520109, 0.00591987, 0.854079, 0.0259539, 1.12076, 0.0451484)
 bone_name = "Spine_4"
 bone_idx = 9
 
-[node name="Anchor_Slot_27" type="Node3D" parent="Character/Armature/Skeleton3D/AnchorNodeBackLeft"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.2)
-
 [node name="AnchorNodeBackRight" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.998895, 0.0368076, 0.029241, -0.0350022, 0.997583, -0.060022, -0.0313796, 0.0589321, 0.997769, 0.00776558, 1.0915, 0.017845)
+transform = Transform3D(0.854041, 0.00811547, -0.520142, -0.0100104, 0.99995, -0.000834905, 0.520109, 0.00591987, 0.854079, 0.0259539, 1.12076, 0.0451484)
 bone_name = "Spine_4"
 bone_idx = 9
 
@@ -1141,7 +1078,7 @@ bone_idx = 9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, -0.2)
 
 [node name="AnchorNodeHipLeft" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.99885, -3.11771e-09, 0.0479368, 4.22507e-10, 1, 5.62343e-08, -0.0479368, -5.61494e-08, 0.99885, 0.00332176, 0.699048, 0.000730049)
+transform = Transform3D(0.719781, 4.44882e-08, -0.694201, -5.2698e-09, 1, 5.86214e-08, 0.694201, -3.85363e-08, 0.719781, 0.0477777, 0.728912, 0.0325765)
 bone_name = "Spine_1"
 bone_idx = 6
 
@@ -1149,7 +1086,7 @@ bone_idx = 6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
 
 [node name="AnchorNodeHipRight" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.99885, -3.11771e-09, 0.0479368, 4.22507e-10, 1, 5.62343e-08, -0.0479368, -5.61494e-08, 0.99885, 0.00332176, 0.699048, 0.000730049)
+transform = Transform3D(0.719781, 4.44882e-08, -0.694201, -5.2698e-09, 1, 5.86214e-08, 0.694201, -3.85363e-08, 0.719781, 0.0477777, 0.728912, 0.0325765)
 bone_name = "Spine_1"
 bone_idx = 6
 
@@ -1157,7 +1094,7 @@ bone_idx = 6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
 
 [node name="AnchorNodeChestLeft" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.998895, 0.0368076, 0.029241, -0.0350022, 0.997583, -0.060022, -0.0313796, 0.0589321, 0.997769, 0.00776558, 1.0915, 0.017845)
+transform = Transform3D(0.854041, 0.00811547, -0.520142, -0.0100104, 0.99995, -0.000834905, 0.520109, 0.00591987, 0.854079, 0.0259539, 1.12076, 0.0451484)
 bone_name = "Spine_4"
 bone_idx = 9
 
@@ -1165,7 +1102,7 @@ bone_idx = 9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0.2)
 
 [node name="AnchorNodeChestRight" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.998895, 0.0368076, 0.029241, -0.0350022, 0.997583, -0.060022, -0.0313796, 0.0589321, 0.997769, 0.00776558, 1.0915, 0.017845)
+transform = Transform3D(0.854041, 0.00811547, -0.520142, -0.0100104, 0.99995, -0.000834905, 0.520109, 0.00591987, 0.854079, 0.0259539, 1.12076, 0.0451484)
 bone_name = "Spine_4"
 bone_idx = 9
 
@@ -1173,14 +1110,14 @@ bone_idx = 9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0.2)
 
 [node name="AnchorNodeHandLeft" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.110384, 0.173256, -0.978671, -0.828314, -0.528161, -0.186926, -0.549283, 0.831281, 0.0852098, 0.336059, 0.838305, 0.219069)
+transform = Transform3D(0.566857, 0.221378, -0.793514, -0.267991, -0.861275, -0.431725, -0.779009, 0.457381, -0.428892, 0.335415, 0.84066, 0.204104)
 bone_name = "Hand_1_L"
 bone_idx = 27
 
 [node name="Anchor_Slot_34" type="Node3D" parent="Character/Armature/Skeleton3D/AnchorNodeHandLeft"]
 
 [node name="AnchorNodeHandRight" type="BoneAttachment3D" parent="Character/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.198126, -0.589149, 0.783358, -0.0530781, -0.804476, -0.591608, 0.978739, 0.0756338, -0.190659, -0.340001, 0.819187, -0.0782689)
+transform = Transform3D(-0.23696, -0.696336, 0.677471, 0.46026, -0.694573, -0.552928, 0.855577, 0.18079, 0.485081, -0.249035, 0.862519, -0.15593)
 bone_name = "Hand_1_R"
 bone_idx = 15
 
@@ -1192,6 +1129,9 @@ libraries = {
 "Character": SubResource("AnimationLibrary_vo0a0")
 }
 
+[node name="Anchor_Slot_27" type="Node3D" parent="Character"]
+transform = Transform3D(0.998549, 0.0293323, 0.045158, -0.0251263, 0.99553, -0.091042, -0.0476266, 0.0897753, 0.994823, 0.103862, 1.13134, -0.185476)
+
 [node name="CharacterAnimationTree" type="AnimationTree" parent="Character" node_paths=PackedStringArray("animation_player", "animation_merger")]
 tree_root = SubResource("AnimationNodeBlendTree_yfl8a")
 anim_player = NodePath("../AnimationPlayer")
@@ -1202,7 +1142,7 @@ parameters/AlteredMotionStates/current_index = 0
 parameters/DefaultRunTransition/current_state = "default"
 parameters/DefaultRunTransition/transition_request = ""
 parameters/DefaultRunTransition/current_index = 0
-parameters/MovementDefault/blend_position = Vector2(0, 1)
+parameters/MovementDefault/blend_position = Vector2(0.75, 0.787234)
 parameters/MovementDefaultSneak/blend_position = Vector2(0.00626302, 0.976)
 parameters/MovementOneHandedSharp/blend_position = Vector2(0, 1)
 parameters/MovementOneHandedSharpBlend/blend_amount = 0.0
@@ -1230,7 +1170,7 @@ movement_lerp_speed = 3.0
 script = ExtResource("144_qburh")
 character_mesh = NodePath("../Armature/Skeleton3D/Character")
 skeleton_3d = NodePath("../Armature/Skeleton3D")
-anchor_slot_27 = NodePath("../Armature/Skeleton3D/AnchorNodeBackLeft/Anchor_Slot_27")
+anchor_slot_27 = NodePath("../Anchor_Slot_27")
 anchor_slot_28 = NodePath("../Armature/Skeleton3D/AnchorNodeBackRight/Anchor_Slot_28")
 anchor_slot_29 = NodePath("../Armature/Skeleton3D/AnchorNodeHipLeft/Anchor_Slot_29")
 anchor_slot_30 = NodePath("../Armature/Skeleton3D/AnchorNodeHipRight/Anchor_Slot_30")

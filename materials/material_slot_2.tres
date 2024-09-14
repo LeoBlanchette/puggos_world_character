@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://jt5s0yabqqlg"]
+
+[ext_resource type="Texture2D" uid="uid://dgmfued2wy5q6" path="res://addons/puggos_world_character/base_textures/_blank.png" id="1_6uyak"]
+[ext_resource type="Material" uid="uid://bdowxi3a7u87" path="res://addons/puggos_world_character/materials/material_slot_3.tres" id="1_rehtg"]
+
+[resource]
+resource_local_to_scene = true
+next_pass = ExtResource("1_rehtg")
+transparency = 1
+albedo_texture = ExtResource("1_6uyak")
