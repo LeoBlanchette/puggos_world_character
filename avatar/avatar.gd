@@ -94,4 +94,7 @@ func play_animation(animation_name:String, body_region:String = "NONE", loop:boo
 #region appearance
 func equip(slot:String, path:String, meta:Dictionary={}):
 	character_appearance.equip_slot(slot, path, meta)
+	
+func get_character_appearance() -> CharacterAppearance:
+	return character_appearance
 #endregion
