@@ -315,6 +315,7 @@ func equip_rigged_object(slot:Equippable, path:String):
 	
 	if skel == null:
 		print("Object does not have a skeleton. Cannot be fit to rig.")
+		ob_instantiated.queue_free()
 		return
 	
 	# Get only the first child. Multiple meshes are not allowed.
@@ -403,6 +404,14 @@ func equip_anchorable_object(slot:Equippable, path:String, anchor:Node3D):
 func clear_anchor(anchor:Node3D):
 	for child in anchor.get_children():
 		child.queue_free()
+
+func get_slot_object(_slot:int)->Node3D:
+	var key:String = "SLOT_%s"%_slot
+	if not slot_objects.has(key):
+		return null
+	return slot_objects[key]
+	
+
 #region misc
 static func get_slot_description(slot:Equippable)->String:
 	var description:String = ""
