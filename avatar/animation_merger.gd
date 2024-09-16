@@ -25,6 +25,7 @@ enum BodyRegion{
 	HEAD,
 	TORSO,
 	LEGS,
+	HEAD_TORSO,
 }
 ## currently affected body region
 var body_region:BodyRegion = BodyRegion.NONE:
@@ -75,7 +76,7 @@ func set_temporary_track_index(animation:Animation):
 			if bone_name in bone_list:
 				temporary_track_index[bone_name] = i
 
-func set_affected_body_region(region:BodyRegion = BodyRegion.FULL):
+func set_affected_body_region(region:BodyRegion = BodyRegion.FULL, trim:BodyRegion = BodyRegion.NONE):
 
 	match region:
 		BodyRegion.NONE:
@@ -88,6 +89,8 @@ func set_affected_body_region(region:BodyRegion = BodyRegion.FULL):
 			affected_body_region = torso
 		BodyRegion.LEGS:
 			affected_body_region = legs
+		BodyRegion.HEAD_TORSO:
+			affected_body_region = head+torso
 
 func merge_current_running_animation(skeleton: Skeleton3D, animation:Animation):
 	var time:float = animation_player.current_animation_position

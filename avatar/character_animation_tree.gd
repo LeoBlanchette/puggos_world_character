@@ -17,6 +17,8 @@ enum AlteredMotionState{
 	ONE_HANDED_SHARP,
 }
 
+signal play_animation_complete
+
 var animations:Array[String] = []
 
 @export var animation:AnimationNode
@@ -222,6 +224,7 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE",
 			return
 		animation_timer = get_tree().create_timer(length)
 		await animation_timer.timeout
+		play_animation_complete.emit()
 		animation_merger.body_region = AnimationMerger.BodyRegion.NONE
 	else:
 		print("Animation not found.")
