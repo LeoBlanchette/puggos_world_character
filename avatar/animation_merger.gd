@@ -10,6 +10,19 @@ const skel_path:String = "Armature/Skeleton3D:"
 @export var animation_player: AnimationPlayer 
 @export var character_animation_tree: CharacterAnimationTree 
 
+#region influence 
+enum InfluenceFadeMode{
+	NONE,
+	FADE_IN,
+	FADE_OUT,
+}
+signal fade_in_complete()
+signal fade_out_complete()
+var elapsed_fade_time:float = 0
+var fade_time:float = 0.33
+var influence_fade_mode = InfluenceFadeMode.NONE
+#endregion 
+
 #region bone lists
 var bone_list:Array[String]
 @export var head:Array[String]
@@ -41,6 +54,37 @@ var affected_body_region:Array[String]
 func _ready() -> void:
 	populate_bone_list()
 
+func _process(delta: float) -> void:
+	elapsed_fade_time += delta
+	match influence_fade_mode:
+		InfluenceFadeMode.FADE_IN:
+			influence = clampf((1/fade_time)*elapsed_fade_time, 0, 1)
+		InfluenceFadeMode.FADE_OUT:
+			influence = clampf(1-(1/fade_time)*elapsed_fade_time, 0, 1)
+	if elapsed_fade_time >= fade_time:
+		cancel_fade()
+
+func do_influence_fade_in():
+	if influence_fade_mode == InfluenceFadeMode.FADE_IN:
+		return
+	elapsed_fade_time = 0
+	influence_fade_mode = InfluenceFadeMode.FADE_IN
+	set_process(true)
+	
+func do_influence_fade_out(delay:float = 0):
+	if influence_fade_mode == InfluenceFadeMode.FADE_OUT:
+		return
+	await  get_tree().create_timer(delay).timeout
+	elapsed_fade_time = 0
+	influence_fade_mode = InfluenceFadeMode.FADE_OUT
+	set_process(true)
+
+func cancel_fade():
+	elapsed_fade_time = 0
+	influence_fade_mode = InfluenceFadeMode.NONE
+	influence = 1
+	set_process(false)
+
 ## We are using this to merge modded animations into the animation process.
 ## At this time in Godot (Aug 2024) it seems to be the only way.
 ## https://godotengine.org/article/design-of-the-skeleton-modifier-3d/ 
@@ -48,7 +92,7 @@ func _process_modification() -> void:
 	var skeleton: Skeleton3D = get_skeleton()
 	if !skeleton:
 		return # Never happen, but for the safety.
-
+	
 	if not animation_player.current_animation.is_empty():
 		var current_animation = animation_player.current_animation		
 		var animation:Animation = animation_player.get_animation(current_animation)
@@ -76,7 +120,7 @@ func set_temporary_track_index(animation:Animation):
 			if bone_name in bone_list:
 				temporary_track_index[bone_name] = i
 
-func set_affected_body_region(region:BodyRegion = BodyRegion.FULL, trim:BodyRegion = BodyRegion.NONE):
+func set_affected_body_region(region:BodyRegion = BodyRegion.FULL, _trim:BodyRegion = BodyRegion.NONE):
 
 	match region:
 		BodyRegion.NONE:

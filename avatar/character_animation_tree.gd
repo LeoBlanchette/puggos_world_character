@@ -220,8 +220,10 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE",
 			animation.loop_mode = Animation.LOOP_NONE
 		var length:float = animation.length		
 		animation_player.play("Character/%s"%animation_name)
+		animation_merger.do_influence_fade_in()
 		if loop:
 			return
+		animation_merger.do_influence_fade_out(length-animation_merger.fade_time)
 		animation_timer = get_tree().create_timer(length)
 		await animation_timer.timeout
 		play_animation_complete.emit()
@@ -235,3 +237,4 @@ func stop_animation():
 		animation_timer.timeout.emit()
 	animation_player.stop()
 	animation_merger.body_region = AnimationMerger.BodyRegion.NONE
+	animation_merger.cancel_fade()
