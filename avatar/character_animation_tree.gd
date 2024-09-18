@@ -238,3 +238,9 @@ func stop_animation():
 	animation_player.stop()
 	animation_merger.body_region = AnimationMerger.BodyRegion.NONE
 	animation_merger.cancel_fade()
+
+func get_animation_length(animation_name:String)->float:
+	if not animation_player.has_animation("Character/%s"%animation_name):
+		return 0.0
+	var animation:Animation = animation_player.get_animation("Character/%s"%animation_name)
+	return animation.length
