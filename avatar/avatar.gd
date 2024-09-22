@@ -90,6 +90,15 @@ func remove_animation(animation_name:String):
 func play_animation(animation_name:String, body_region:String = "NONE", loop:bool = false)->void:
 	animation_tree.play_animation(animation_name, body_region, loop)
 
+func stop_animation():
+	animation_tree.stop_animation()
+
+func is_playing_animation(animation_name:String)->bool:
+	var playing_animation:String = animation_tree.animation_player.current_animation.replace("Character/", "") 
+	if playing_animation == animation_name:
+		return true
+	return false
+
 func get_animation_tree() -> CharacterAnimationTree:
 	return animation_tree
 

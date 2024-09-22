@@ -50,9 +50,17 @@ var fade_time:float = 0.33
 var influence_fade_mode = InfluenceFadeMode.NONE
 #endregion 
 
+#region head control
+@onready var head_look_at_control: BoneAttachment3D = $"../HeadLookAtControl"
+var head_bone_idx:int = 0
+var neck_bone_idx:int = 0
+#endregion
+
 #region builtins
 func _ready() -> void:
 	populate_bone_list()
+	head_bone_idx = get_skeleton().find_bone("Head")
+	neck_bone_idx = get_skeleton().find_bone("Spine_5")
 
 func _process(delta: float) -> void:
 	process_fade(delta)
@@ -73,6 +81,7 @@ func _process_modification() -> void:
 		merge_current_running_animation(skeleton, animation)
 	else:
 		temporary_track_index.clear()
+	
 #endregion
 
 ## Initially populates relevant bones to check against. We do this because it 
@@ -180,4 +189,21 @@ func cancel_fade():
 	influence_fade_mode = InfluenceFadeMode.NONE
 	influence = 1
 	set_process(false)
+	
 #endregion 
+
+#region head movement
+func enable_head_look(enabled:bool = true):
+	head_look_at_control.override_pose = enabled
+	
+func head_look_at(pos:Vector3):
+	var skeleton: Skeleton3D = get_skeleton()
+	if !skeleton:
+		return # Never happen, but for the safety.
+	var neck_transform:Transform3D = skeleton.get_bone_global_pose(neck_bone_idx)
+	var neck_anchor_point:Vector3 = neck_transform.origin+neck_transform.basis.y * 0.055844 
+	head_look_at_control.position = neck_anchor_point
+	head_look_at_control.look_at(pos, Vector3.UP, true)	
+
+
+#endregion

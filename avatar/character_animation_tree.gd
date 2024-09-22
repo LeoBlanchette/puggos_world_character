@@ -208,6 +208,10 @@ func set_general_motion_state(motion_state:String)->void:
 		altered_motion_state = AlteredMotionState.get(motion_state)
 
 func play_animation(animation_name:String, affected_body_region:String = "NONE", loop:bool = false)->void:
+	if animation_name.is_empty():
+		stop_animation()
+		animation_player.clear_queue()
+		return
 	stop_animation()
 	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.get(affected_body_region.to_upper())
 	if has_animation("Character/%s"%animation_name):
@@ -224,8 +228,9 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE",
 		if loop:
 			return
 		animation_merger.do_influence_fade_out(length-animation_merger.fade_time)
-		animation_timer = get_tree().create_timer(length)
-		await animation_timer.timeout
+
+		await get_tree().create_timer(length).timeout
+		
 		play_animation_complete.emit()
 		animation_merger.body_region = AnimationMerger.BodyRegion.NONE
 	else:
