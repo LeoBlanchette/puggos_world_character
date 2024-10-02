@@ -98,6 +98,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	update_movement_blend_positions(delta)
+
 	
 func populate_animation_list()->void:
 	var lib: AnimationLibrary  = animation_player.get_animation_library("Character")
@@ -209,12 +210,16 @@ func set_general_motion_state(motion_state:String)->void:
 
 func play_animation(animation_name:String, affected_body_region:String = "NONE", loop:bool = false)->void:
 	if animation_name.is_empty():
-		stop_animation()
-		animation_player.clear_queue()
 		return
+	
+	# IMPORTANT DO NOT CHANGE THESE NEXT TWO LINES
 	stop_animation()
+	await get_tree().process_frame
+	# This was a Sunday oF PAIN 9/29/2024 --- upper two lines 
+	
 	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.get(affected_body_region.to_upper())
 	if has_animation("Character/%s"%animation_name):
+
 		animation_merger.body_region = body_region
 		var animation:Animation = get_animation("Character/%s"%animation_name)
 		#Set to loop if needed.
@@ -226,9 +231,9 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE",
 		animation_player.play("Character/%s"%animation_name)
 		animation_merger.do_influence_fade_in()
 		if loop:
+			await get_tree().create_timer(length).timeout
 			return
 		animation_merger.do_influence_fade_out(length-animation_merger.fade_time)
-
 		await get_tree().create_timer(length).timeout
 		
 		play_animation_complete.emit()

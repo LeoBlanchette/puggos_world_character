@@ -64,6 +64,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	process_fade(delta)
+	
 
 ## We are using this to merge modded animations into the animation process.
 ## At this time in Godot (Aug 2024) it seems to be the only way.
@@ -72,7 +73,6 @@ func _process_modification() -> void:
 	var skeleton: Skeleton3D = get_skeleton()
 	if !skeleton:
 		return # Never happen, but for the safety.
-	
 	if not animation_player.current_animation.is_empty():
 		var current_animation = animation_player.current_animation		
 		var animation:Animation = animation_player.get_animation(current_animation)
