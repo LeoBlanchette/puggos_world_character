@@ -215,6 +215,9 @@ func play_animation(animation_name:String, affected_body_region:String = "NONE",
 	# IMPORTANT DO NOT CHANGE THESE NEXT TWO LINES
 	stop_animation()
 	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	# This was a Sunday oF PAIN 9/29/2024 --- upper two lines 
 	
 	var body_region:AnimationMerger.BodyRegion = AnimationMerger.BodyRegion.get(affected_body_region.to_upper())
